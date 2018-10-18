@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:jaxws="http://cxf.apache.org/jaxws"
+      xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+      xsi:schemaLocation="http://www.springframework.org/schema/beans
+							http://www.springframework.org/schema/beans/spring-beans.xsd
+							http://cxf.apache.org/jaxws
+ 							http://cxf.apache.org/schemas/jaxws.xsd
+ 							http://cxf.apache.org/jaxrs
+ 							http://cxf.apache.org/schemas/jaxrs.xsd">
+  <import resource="classpath:META-INF/cxf/cxf.xml" />
+  <import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+  	
+  <bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider" />
+
+  <jaxrs:server name="ProductService" address="http://localhost:8081/product">
+		<jaxrs:serviceBeans>
+			<ref bean="productServiceRest" />
+		</jaxrs:serviceBeans><!--Need to add beans here in jaxrs:serviceBeans and under larger beans. see employeeServieRest below for example-->
+		<jaxrs:providers>
+			<ref bean="jacksonProvider" />
+		</jaxrs:providers> 
+
+		<jaxrs:schemaLocations>
+			<jaxrs:schemaLocation>service.represntation.ProductRequest</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>service.represntation.ProductRepresentation</jaxrs:schemaLocation>
+		</jaxrs:schemaLocations>
+
+  </jaxrs:server>
+  <bean id="productServiceRest" class="service.resource.ProductResource" />
+
+
+  <jaxrs:server name="PartnerService" address="http://localhost:8081/partner">
+		<jaxrs:serviceBeans>
+			<ref bean="partnerServiceRest" />
+		</jaxrs:serviceBeans>
+		<jaxrs:providers>
+			<ref bean="jacksonProvider" />
+		</jaxrs:providers> 
+
+		<jaxrs:schemaLocations>
+			<jaxrs:schemaLocation>service.represntation.PartnerRequest</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>service.represntation.PartnerRepresentation</jaxrs:schemaLocation>
+		</jaxrs:schemaLocations>
+
+  </jaxrs:server>
+  <bean id="partnerServiceRest" class="service.resource.ProductResource" />
+  
+  <jaxrs:server name="CustomerService" address="http://localhost:8081/customer">
+		<jaxrs:serviceBeans>
+			<ref bean="customerServiceRest" />
+		</jaxrs:serviceBeans>
+		<jaxrs:providers>
+			<ref bean="jacksonProvider" />
+		</jaxrs:providers> 
+
+		<jaxrs:schemaLocations>
+			<jaxrs:schemaLocation>service.represntation.CustomerRequest</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>service.represntation.CustomerRepresentation</jaxrs:schemaLocation>
+		</jaxrs:schemaLocations>
+
+  </jaxrs:server>
+  <bean id="customerServiceRest" class="service.resource.CustomerResource" />
+  
+  
+  <jaxrs:server name="OrderService" address="http://localhost:8081/order">
+		<jaxrs:serviceBeans>
+			<ref bean="orderServiceRest" />
+		</jaxrs:serviceBeans>
+		<jaxrs:providers>
+			<ref bean="jacksonProvider" />
+		</jaxrs:providers> 
+
+		<jaxrs:schemaLocations>
+			<jaxrs:schemaLocation>service.represntation.OrderRequest</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>service.represntation.OrderRepresentation</jaxrs:schemaLocation>
+		</jaxrs:schemaLocations>
+
+  </jaxrs:server>
+  <bean id="orderServiceRest" class="service.resource.OrderResource" />
+
+</beans>
