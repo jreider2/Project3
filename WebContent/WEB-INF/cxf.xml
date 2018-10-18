@@ -64,7 +64,7 @@
   <bean id="customerServiceRest" class="service.resource.CustomerResource" />
   
   
-  <jaxrs:server name="OrderService" address="http://localhost:8081/order">
+  <jaxrs:server name="OrderService" address="http://localhost:8081">
 		<jaxrs:serviceBeans>
 			<ref bean="orderServiceRest" />
 		</jaxrs:serviceBeans>
