@@ -14,7 +14,7 @@
   	
   <bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider" />
 
-  <jaxrs:server name="ProductService" address="http://localhost:8081">
+  <jaxrs:server name="ProductService" address="http://localhost:8081/product">
 		<jaxrs:serviceBeans>
 			<ref bean="productServiceRest" />
 		</jaxrs:serviceBeans><!--Need to add beans here in jaxrs:serviceBeans and under larger beans. see employeeServieRest below for example-->
@@ -45,7 +45,7 @@
 		</jaxrs:schemaLocations>
 
   </jaxrs:server>
-  <bean id="partnerServiceRest" class="service.resource.ProductResource" />
+  <bean id="partnerServiceRest" class="service.resource.PartnerResource" />
   
   <jaxrs:server name="CustomerService" address="http://localhost:8081/customer">
 		<jaxrs:serviceBeans>
@@ -79,5 +79,19 @@
 
   </jaxrs:server>
   <bean id="orderServiceRest" class="service.resource.OrderResource" />
+  
+  <jaxrs:server name="CreditCardService" address="http://localhost:8081/creditcard">
+  	<jaxrs:serviceBeans>
+  		<ref bean="creditcardServiceRest" />
+  	</jaxrs:serviceBeans>
+  	<jaxrs:providers>
+  		<ref bean="jacksonProvider" />
+  	</jaxrs:providers>
+  	
+  	<jaxrs:schemaLocations>
+  		<jaxrs:schemaLocation>service.represntation.CreditCardRequest</jaxrs:schemaLocation>
+  		<jaxrs:schemaLocation>service.represntation.CreditCardRepresentation</jaxrs:schemaLocation>
+  	</jaxrs:schemaLocations>
+  </jaxrs:server>
 
 </beans>

@@ -2,7 +2,9 @@ package service.resource;
 
 import java.util.ArrayList;
 
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 
 import service.represntation.OrderRepresentation;
 import service.workflow.OrderActivity;
@@ -16,16 +18,16 @@ public class OrderResource implements OrderService {
 		oA = new OrderActivity();
 	}
 	
-	//@POST with customer number
-	//@Path("/orders")
-	//@Produces({"application/xml" , "application/json"})
+	@POST
+	@Produces({"application/xml" , "application/json"})
+	@Path("/orders")
 	public ArrayList<OrderRepresentation> getOrders(String customerNumber) {
 		return oA.getOrders(customerNumber);
 	}
 		
-	//@POST with order number
-	//@Path ("/order")
-	//@Produces({"application/xml" , "application/json"})
+	@POST
+	@Produces({"application/xml" , "application/json"})
+	@Path ("/order")
 	public OrderRepresentation getOrder(String orderNo) {
 		return oA.getOrder(orderNo);
 	}		
