@@ -13,10 +13,6 @@ import javax.ws.rs.core.Response;
 import service.represntation.ProductRepresentation;
 import service.represntation.ProductRequest;
 
-/**
- * @author julianareider
- *
- */
 @WebService
 public interface ProductService {
 	

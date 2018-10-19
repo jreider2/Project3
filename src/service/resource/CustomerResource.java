@@ -29,7 +29,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.CacheControl;
 
-@Path("/employeeservice/")
+@Path("/customerservice/")
 public class CustomerResource implements CustomerService {
 
 	public CustomerResource() {
