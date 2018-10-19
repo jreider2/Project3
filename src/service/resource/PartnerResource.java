@@ -23,9 +23,7 @@ import javax.ws.rs.core.CacheControl;
 @Path("/partnerService/")
 public class PartnerResource implements PartnerService {
 
-	public PartnerResource() {
-		// TODO Auto-generated constructor stub
-	}
+	public PartnerResource() {	}
 	
 	/**
 	 * Get existing partners
@@ -35,6 +33,7 @@ public class PartnerResource implements PartnerService {
 	@Path("/partner")
 	//@Cacheable(cc="public, maxAge=3600") example for caching
 	public Set<PartnerRepresentation> getPartner() {
+		//TODO Incomplete. Not implemented in the PartnerDAO object. 
 		System.out.println("GET METHOD Request for all partners .............");
 		PartnerActivity partnerActivity = new PartnerActivity();
 		return partnerActivity.getPartners();
