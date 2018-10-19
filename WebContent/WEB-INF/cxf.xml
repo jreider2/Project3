@@ -93,5 +93,6 @@
   		<jaxrs:schemaLocation>service.represntation.CreditCardRepresentation</jaxrs:schemaLocation>
   	</jaxrs:schemaLocations>
   </jaxrs:server>
+  <bean id="creditcardServiceRest" class="service.resource.CreditCardResource" />
 
 </beans>
