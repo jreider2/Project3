@@ -47,7 +47,7 @@ public class CustomerResource implements CustomerService {
 	
 	@GET
 	@Produces({"application/xml" , "application/json"})
-	@Path("/employee/{customerId}")
+	@Path("/customer/{customerId}")
 	public CustomerRepresentation getCustomer(@PathParam("customerId") String id) { 
 		System.out.println("GET METHOD Request from Client with employeeRequest String ............." + id);
 		CustomerActivity empActivity = new CustomerActivity();
@@ -59,7 +59,7 @@ public class CustomerResource implements CustomerService {
 	 */
 	@POST
 	@Produces({"application/xml" , "application/json"})
-	@Path("/employee")
+	@Path("/customer")
 	public CustomerRepresentation createCustomer(CustomerRequest  customerRequest) {
 		System.out.println("POST METHOD Request from Client with ............." + customerRequest.getFirstName() + "  " + customerRequest.getLastName());
 		CustomerActivity customerActivity = new CustomerActivity();
@@ -68,7 +68,7 @@ public class CustomerResource implements CustomerService {
 	
 	@DELETE
 	@Produces({"application/xml" , "application/json"})
-	@Path("/employee/{customerId}")
+	@Path("/customer/{customerId}")
 	public Response deleteCustomer(@PathParam("customerId") String id) {
 		
 		//TODO Edit 
