@@ -62,6 +62,37 @@
 
   </jaxrs:server>
   <bean id="customerServiceRest" class="service.resource.CustomerResource" />
- 
+  
+  
+  <jaxrs:server name="OrderService" address="http://localhost:8081/order">
+		<jaxrs:serviceBeans>
+			<ref bean="orderServiceRest" />
+		</jaxrs:serviceBeans>
+		<jaxrs:providers>
+			<ref bean="jacksonProvider" />
+		</jaxrs:providers> 
+
+		<jaxrs:schemaLocations>
+			<jaxrs:schemaLocation>service.represntation.OrderRequest</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>service.represntation.OrderRepresentation</jaxrs:schemaLocation>
+		</jaxrs:schemaLocations>
+
+  </jaxrs:server>
+  <bean id="orderServiceRest" class="service.resource.OrderResource" />
+  
+  <jaxrs:server name="CreditCardService" address="http://localhost:8081/creditcard">
+  	<jaxrs:serviceBeans>
+  		<ref bean="creditcardServiceRest" />
+  	</jaxrs:serviceBeans>
+  	<jaxrs:providers>
+  		<ref bean="jacksonProvider" />
+  	</jaxrs:providers>
+  	
+  	<jaxrs:schemaLocations>
+  		<jaxrs:schemaLocation>service.represntation.CreditCardRequest</jaxrs:schemaLocation>
+  		<jaxrs:schemaLocation>service.represntation.CreditCardRepresentation</jaxrs:schemaLocation>
+  	</jaxrs:schemaLocations>
+  </jaxrs:server>
+  <bean id="creditcardServiceRest" class="service.resource.CreditCardResource" />
 
 </beans>
