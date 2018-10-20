@@ -17,27 +17,9 @@ public class CustomerManager {
 	
 	private static CustomerDAO dao = new CustomerDAO();
 	
-	/**
-	 * 
-	 */
 	public CustomerManager() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	public void addCustomer(String firstName, String lastname, String usrName, String password) {
-		//TODO create new customer
-	}
-	
-	public void loginCustomer(String firstName, String lastname) {
-		//TODO Login customer// or find error in information given 
-		isValid("", ""); // use this method
-	}
-	
-	private boolean isValid(String userName, String password) {
-		//TODO validate user
-		return false;
-	}
-	
 	
 	public Set<Customer> getAllCustomers(){
 		return dao.getAllCustomers();
