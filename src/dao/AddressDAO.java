@@ -48,6 +48,7 @@ public class AddressDAO {
 	        rs.close();
 	        insertStatement.close();
 
+	       //return generated key
 	       return resultKey.toString();
 	        
 			

@@ -55,7 +55,7 @@ public class PartnerActivity {
 	
 	public PartnerRepresentation registerPartner(String companyName, String userName, String password) {
 		
-		int defaultAddressID = 0; //TODO Do we need to create a registerNewPartner method in partnerManager that doesn't require addressID? 
+		int defaultAddressID = 1; //TODO Do we need to create a registerNewPartner method in partnerManager that doesn't require addressID? 
 		Partner p = partnerManager.registerNewPartner(companyName, userName, password, defaultAddressID);
 		
 		PartnerRepresentation partnerRepresentation = new PartnerRepresentation();
