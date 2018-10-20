@@ -116,6 +116,7 @@ public class Partner implements Serializable {
 	
 	public void recievePayment() {
 		System.out.println(this.getCompanyName() + " recieved payment for order");
+		//System.out.println("Company with ID " + this.getId() + " recieved payment for order");
 	}
 
 	/* (non-Javadoc)

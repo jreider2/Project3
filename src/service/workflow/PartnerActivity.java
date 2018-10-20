@@ -95,9 +95,6 @@ public class PartnerActivity {
 	}
 	
 	public boolean pushOrderToPartner(OrderRequest oR) {
-		
-		//TODO test this method
-		
 		//the order only needs it's order Id and products attributes filled
 		Order o = new Order();
 		//set order ID
@@ -106,9 +103,15 @@ public class PartnerActivity {
 		for (ProductRequest p : oR.getProducts()) {
 			//each product object needs productOwner attribute filled 
 			Product currP = new Product();
+			currP.setName(p.getName());  //TODO should i just get products from Productmanager??
 			//create partner with proper ID
-			Partner currPartner = new Partner();
-			currPartner.setId(oR.getPartnerRep().getId());
+			
+			//TODO FIX ME
+			Partner currPartner = partnerManager.getPartner(p.getProductOwnerID());
+			
+			//currPartner.setId(p.getProductOwnerID()); // .setID(oR.getPartnerRep().getId());
+			//String companyName = .getCompanyName();
+			//currPartner.setCompanyName(currPartner.getCompanyName());
 			//set the product owner in the product
 			currP.setProductOwner(currPartner);
 			//add to the order

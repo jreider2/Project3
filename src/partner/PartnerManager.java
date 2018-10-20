@@ -34,17 +34,6 @@ public class PartnerManager {
 		return addPartner(companyName, userName, password, addressID);
 	}
 	
-	public boolean loginPartner(String companyName, String id) {
-		//TODO Login partner// or find error in information given 
-		return isValid(companyName, ""); // use this method
-	}
-	
-	private boolean isValid(String companyName, String id) {
-		//TODO validate user
-		return false;
-	}
-	
-	
 	public Set<Partner> getAllPartners(){
 		return dao.getAllPartners();
 	}

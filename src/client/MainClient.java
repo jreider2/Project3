@@ -1,3 +1,4 @@
+package client;
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -77,6 +78,7 @@ public class MainClient {
 		CustomerManager cm = new CustomerManager();
 		boolean custRegistered = cm.registerNewCustomer("Randy", "Johnson", "4562589499", "RJRJ", "randyspass", "RJRJ@gmail.com", "321 Test Loop", "Apt 432", "Denver", "45698", "Colorado");
 		System.out.println(custRegistered);
+		
 		//*****************Create order FUNCTIONALITY*********************************************
 		OrderManager orderManager = new OrderManager();
 		ArrayList<String> myProductIDs = new ArrayList<>();
@@ -103,8 +105,6 @@ public class MainClient {
 							//		partManager.pushOrderToPartner(order1);
 		PartnerManager pm = new PartnerManager();
 		pm.pushOrderToPartner(o2);
-		
-		
 		
 		//*****************Provide ORDER status; Provide status of orders in progress FUNCTIONALITY*********************************************
 		String orderID = myGoggleOrder.getId();

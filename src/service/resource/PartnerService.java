@@ -17,7 +17,7 @@ public interface PartnerService {
 	public PartnerRepresentation getPartner(String partnerId);
 	public PartnerRepresentation createPartner(PartnerRequest  partnerRequest);
 	public PartnerRepresentation addProductToPartner(String partnerID, ProductRequest productRequest);
-	public PartnerRepresentation pushOrderToPartner(String partnerID, OrderRequest orderRequest);
+	public boolean pushOrderToPartner(String partnerID, OrderRequest orderRequest);
 	public Response deletePartner(String partnerId);
 	
 }

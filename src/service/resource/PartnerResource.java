@@ -85,15 +85,12 @@ public class PartnerResource implements PartnerService {
 	@PUT
 	@Produces({"application/xml" , "application/json"})
 	@Path("/partner/{partnerId}/pushOrder")
-	public PartnerRepresentation pushOrderToPartner(@PathParam("partnerId") String partnerID, OrderRequest orderRequest) { // TODO ADD THIS BACK IN @PathParam("partnerId") String partnerID
+	public boolean pushOrderToPartner(@PathParam("partnerId") String partnerID, OrderRequest orderRequest) { // TODO ADD THIS BACK IN @PathParam("partnerId") String partnerID
 		//TODO add partner name to system output 
 		System.out.println("PUT METHOD Request to update Partner .... Push Order .............order ID: " + orderRequest.getId());
 		PartnerActivity partnerActivity = new PartnerActivity();
-		
-		//TODO FIX ME:
-		
-		//return partnerActivity.pushOrderToPartner(orderRequest);
-		return new PartnerRepresentation();
+		return partnerActivity.pushOrderToPartner(orderRequest);
+		//return new PartnerRepresentation();
 	}
 	
 	/**
