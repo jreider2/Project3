@@ -44,11 +44,11 @@ public class MainClient {
 		
 		//*****************ADD NEW ADDRESS FUNCTIONALITY*************************************************
 		AddressDAO adDao = new AddressDAO();
-		String newAddress = adDao.addAddress("5", "Melrose", "Boystown", "Ohio", "20987");
+		String newAddressID = adDao.addAddress("5", "Melrose", "Boystown", "Ohio", "20987");
 		
 		//*****************REGISTER NEW PARTNER FUNCTIONALITY*********************************************
 		PartnerManager partManager = new PartnerManager();
-		Partner partner1 = partManager.registerNewPartner("Books a Million", "BAM username","BAM password", Integer.parseInt(newAddress));
+		Partner partner1 = partManager.registerNewPartner("Books a Million", "BAM username","BAM password", Integer.parseInt(newAddressID));
 		System.out.println("Partner added to Database = " + partner1.toString());
 		System.out.println(partner1.getCompanyName() + "'s ID = " + partner1.getId());
 		
