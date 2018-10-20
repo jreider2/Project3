@@ -98,16 +98,44 @@ public final class Project3Main {
         String putRequestHeaders = putClient.getHeaders().toString();
         System.out.println("Client POST METHOD Request Headers:  " + putRequestHeaders);
         
-        //TODO FIX ME -- not enough information to add the new partner to the DATABASE 
         ProductRequest productReq = new ProductRequest();
-//        partnerReq.setId("0");
-//        partnerReq.setCompanyName("Sony");
-//        partnerReq.setUserName("sonyUsername");
-//        partnerReq.setPassword("sonysPassword");
-//        
-//     	String responsePost =  putClient.post(partnerReq, String.class);
-//     	System.out.println("POST MEDTHOD Response ........." + responsePost);
-         
+        productReq.setId("0");
+        productReq.setName("swim suit");
+        productReq.setDescription("mens racing suit");
+        productReq.setPrice(50.00);
+        productReq.setProductOwnerID("13");
+        
+     	String responsePut =  putClient.put(productReq, String.class); 
+     	System.out.println("POST MEDTHOD Response ........." + responsePut);
+     	
+     	/*****************************************************************************************
+         * GET METHOD : Get all items in database that match a search term (goggles)
+         *****************************************************************************************/
+        System.out.println("GET METHOD .........................................................");
+        WebClient getSearchClient = WebClient.create("http://localhost:8081", providers);
+        
+        //Configuring the CXF logging intercepter for the outgoing message
+        WebClient.getConfig(getSearchClient).getOutInterceptors().add(new LoggingOutInterceptor());
+        //Configuring the CXF logging intercepter for the incoming response
+        WebClient.getConfig(getSearchClient).getInInterceptors().add(new LoggingInInterceptor());
+        
+        // set Accept and ContentType headers 
+        // set path with search term = goggles
+        getSearchClient = getSearchClient.accept("application/json").type("application/json").path("/product/productservice/product/search/goggles");
+        
+        //The following lines are to show how to log messages without the CXF interceptors
+        String getSearchRequestURI = getSearchClient.getCurrentURI().toString();
+        System.out.println("Client GET METHOD Request URI:  " + getSearchRequestURI);
+        String getSearchRequestHeaders = getSearchClient.getHeaders().toString();
+        System.out.println("Client GET METHOD Request Headers:  " + getSearchRequestHeaders);
+        
+        //to see as raw XML/json
+        String searchResponse = getSearchClient.get(String.class);
+  
+        System.out.println("Results for product search of'googles'.");
+        System.out.println("GET METHOD Response: ...." + searchResponse);
+        
+               
 
 
 	}
