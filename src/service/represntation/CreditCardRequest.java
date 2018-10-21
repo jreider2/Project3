@@ -13,7 +13,9 @@ public class CreditCardRequest {
 	private String ccHolder;
 	private String ccExpirationDate;
 	private String ccSecurityCode;
-	
+	private String ccCustomerNo;
+
+
 	public CreditCardRequest() {}
 	
 	public String getCcNum() {
@@ -39,6 +41,13 @@ public class CreditCardRequest {
 	}
 	public void setCcSecurityCode(String ccSecurityCode) {
 		this.ccSecurityCode = ccSecurityCode;
+	}	
+	public String getCcCustomerNo() {
+		return ccCustomerNo;
+	}
+
+	public void setCcCustomerNo(String ccCustomerNo) {
+		this.ccCustomerNo = ccCustomerNo;
 	}
 	
 	
