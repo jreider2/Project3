@@ -8,6 +8,7 @@ import javax.xml.ws.Response;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 
+import service.represntation.OrderRequest;
 import service.represntation.PartnerRequest;
 import service.represntation.ProductRequest;
 
@@ -27,7 +28,7 @@ public final class Project3Main {
          /*****************************************************************************************
           * GET METHOD : Get an existing Partner
           *****************************************************************************************/
-         System.out.println("GET METHOD .........................................................");
+         System.out.println("GET METHOD ......................................Get partner with id 17");
          WebClient getClient = WebClient.create("http://localhost:8081", providers);
          
          //Configuring the CXF logging intercepter for the outgoing message
@@ -58,7 +59,7 @@ public final class Project3Main {
          /*****************************************************************************************
           * POST METHOD Register a new Partner
          *****************************************************************************************/
-         System.out.println("POST METHOD .........................................................");
+         System.out.println("POST METHOD ........................................Register new Partner");
          WebClient postClient = WebClient.create("http://localhost:8081", providers);
          WebClient.getConfig(postClient).getOutInterceptors().add(new LoggingOutInterceptor());
          WebClient.getConfig(postClient).getInInterceptors().add(new LoggingInInterceptor());
@@ -82,9 +83,9 @@ public final class Project3Main {
         System.out.println("POST MEDTHOD Response ........." + responsePost);
         
         /*****************************************************************************************
-         * PUT METHOD Push Product to Partner
+         * PUT METHOD Push Product to Partner (add to marketPlace) 
         *****************************************************************************************/
-        System.out.println("PUT METHOD .........................................................");
+        System.out.println("PUT METHOD ...................................Partner adds new Product to MarketPlace");
         WebClient putClient = WebClient.create("http://localhost:8081", providers);
         WebClient.getConfig(putClient).getOutInterceptors().add(new LoggingOutInterceptor());
         WebClient.getConfig(putClient).getInInterceptors().add(new LoggingInInterceptor());
@@ -135,8 +136,55 @@ public final class Project3Main {
         System.out.println("Results for product search of'googles'.");
         System.out.println("GET METHOD Response: ...." + searchResponse);
         
-               
-
+        /*****************************************************************************************
+         * PUT METHOD   Push ORDER to Partner
+        *****************************************************************************************/
+        System.out.println("PUT METHOD .........................................................");
+        WebClient pushOrderPutClient = WebClient.create("http://localhost:8081", providers);
+        WebClient.getConfig(pushOrderPutClient).getOutInterceptors().add(new LoggingOutInterceptor());
+        WebClient.getConfig(pushOrderPutClient).getInInterceptors().add(new LoggingInInterceptor());
+                 
+        // set Accept and ContentType headers
+        pushOrderPutClient = pushOrderPutClient.accept("application/xml").type("application/xml").path("partner/partnerService/partner/pushOrder");
+     	
+        String pushOrderPutRequestURI = pushOrderPutClient.getCurrentURI().toString();
+        System.out.println("Client POST METHOD Request URI:  " + pushOrderPutRequestURI);
+        String pushOrderPutRequestHeaders = pushOrderPutClient.getHeaders().toString();
+        System.out.println("Client POST METHOD Request Headers:  " + pushOrderPutRequestHeaders);
+        
+        ProductRequest productReqForOrderReq = new ProductRequest();
+        productReqForOrderReq.setId("13");
+        productReqForOrderReq.setName("swim suit");
+        productReqForOrderReq.setDescription("mens racing suit");
+        productReqForOrderReq.setPrice(50.00);
+        productReqForOrderReq.setProductOwnerID("15");
+        
+        ArrayList<ProductRequest> items = new ArrayList<>();
+        items.add(productReqForOrderReq);
+        //items.add(productReqForOrderReq);
+        
+        OrderRequest orderReq = new OrderRequest();
+        orderReq.setId("4");
+        orderReq.setProducts(items);
+        
+     	String responsePushOrderPut =  pushOrderPutClient.put(orderReq, String.class); 
+     	System.out.println("POST MEDTHOD Response ........." + responsePushOrderPut);
+     	
+     	/*****************************************************************************************
+         * GET METHOD : Get all items in database that match a search term (goggles)
+         *****************************************************************************************/
+     	
+     	/*****************************************************************************************
+         * GET METHOD : Get all items in database that match a search term (goggles)
+         *****************************************************************************************/
+     	
+     	/*****************************************************************************************
+         * GET METHOD : Get all items in database that match a search term (goggles)
+         *****************************************************************************************/
+     	
+     	/*****************************************************************************************
+         * GET METHOD : Get all items in database that match a search term (goggles)
+         *****************************************************************************************/
 
 	}
 
