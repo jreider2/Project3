@@ -117,6 +117,7 @@ public class ProductDAO {
 			Statement selectStatement = connection.createStatement();
 			
 			String selectQuery = "SELECT * from Product";
+			
 			ResultSet resultSet = selectStatement.executeQuery(selectQuery);
 			
 			while(resultSet.next()) {
