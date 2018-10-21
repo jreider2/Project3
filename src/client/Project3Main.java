@@ -19,6 +19,13 @@ public final class Project3Main {
 
 	public static void main(String[] args) throws Exception {
 		
+		
+		
+		//TODO 
+			//see unfinished functionalities at the bottom
+		
+		
+		
 		//Providers
 		 List<Object> providers = new ArrayList<Object>();
          JacksonJsonProvider provider = new JacksonJsonProvider();
@@ -28,6 +35,7 @@ public final class Project3Main {
          /*****************************************************************************************
           * GET METHOD : Get an existing Partner
           *****************************************************************************************/
+         
          System.out.println("GET METHOD ......................................Get partner with id 17");
          WebClient getClient = WebClient.create("http://localhost:8081", providers);
          
@@ -59,6 +67,7 @@ public final class Project3Main {
          /*****************************************************************************************
           * POST METHOD Register a new Partner
          *****************************************************************************************/
+         
          System.out.println("POST METHOD ........................................Register new Partner");
          WebClient postClient = WebClient.create("http://localhost:8081", providers);
          WebClient.getConfig(postClient).getOutInterceptors().add(new LoggingOutInterceptor());
@@ -85,6 +94,7 @@ public final class Project3Main {
         /*****************************************************************************************
          * PUT METHOD Push Product to Partner (add to marketPlace) 
         *****************************************************************************************/
+        
         System.out.println("PUT METHOD ...................................Partner adds new Product to MarketPlace");
         WebClient putClient = WebClient.create("http://localhost:8081", providers);
         WebClient.getConfig(putClient).getOutInterceptors().add(new LoggingOutInterceptor());
@@ -112,6 +122,7 @@ public final class Project3Main {
      	/*****************************************************************************************
          * GET METHOD : Get all items in database that match a search term (goggles)
          *****************************************************************************************/
+     	
         System.out.println("GET METHOD .........................................................");
         WebClient getSearchClient = WebClient.create("http://localhost:8081", providers);
         
@@ -139,6 +150,7 @@ public final class Project3Main {
         /*****************************************************************************************
          * PUT METHOD   Push ORDER to Partner
         *****************************************************************************************/
+        
         System.out.println("PUT METHOD .........................................................");
         WebClient pushOrderPutClient = WebClient.create("http://localhost:8081", providers);
         WebClient.getConfig(pushOrderPutClient).getOutInterceptors().add(new LoggingOutInterceptor());
@@ -171,20 +183,63 @@ public final class Project3Main {
      	System.out.println("POST MEDTHOD Response ........." + responsePushOrderPut);
      	
      	/*****************************************************************************************
-         * GET METHOD : Get all items in database that match a search term (goggles)
+         * GET METHOD : Get Acknowledgement of fulfillment  
          *****************************************************************************************/
      	
-     	/*****************************************************************************************
-         * GET METHOD : Get all items in database that match a search term (goggles)
-         *****************************************************************************************/
      	
      	/*****************************************************************************************
-         * GET METHOD : Get all items in database that match a search term (goggles)
+         * POST METHOD : create new order // accept buy order
          *****************************************************************************************/
      	
+     	
      	/*****************************************************************************************
-         * GET METHOD : Get all items in database that match a search term (goggles)
+         * POST METHOD : Accept credit card payment
          *****************************************************************************************/
+     	
+     	
+     	/*****************************************************************************************
+         * PUT METHOD : Ship Orders
+         *****************************************************************************************/
+     	
+     	
+     	/*****************************************************************************************
+         * GET METHOD : Provide Order Status
+         *****************************************************************************************/
+     	
+     	
+     	/*****************************************************************************************
+         * PUT METHOD : Cancel Order
+         *****************************************************************************************/
+     	
+     	
+     	/*****************************************************************************************
+         * ERROR Handling
+         *****************************************************************************************/
+         
+     	
+     	/*****************************************************************************************
+         * EXCEPTION Handling
+         *****************************************************************************************/
+     	
+     	
+     	/*****************************************************************************************
+         * Fix the two aspects of the domain layer TA mentioned in his email about our Project2
+         *****************************************************************************************/
+     	/**
+     	 * "Moving forward, make sure the domain layer of your project can handle things such as 
+     	 * 1) Order confirmations, 
+     	 * 2) checking availability of products before placing an order and so forth."
+     	 */
+     	
+     	/*****************************************************************************************
+         * POST METHOD : Add Address
+         *****************************************************************************************/
+     	//optional but maybe useful for our next layer
+     	
+     	/*****************************************************************************************
+         * POST METHOD : Register Customer
+         *****************************************************************************************/
+     	//optional but maybe useful for our next layer
 
 	}
 
