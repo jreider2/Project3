@@ -39,6 +39,17 @@ public class OrderActivity {
 	public Order submitOrder(String customerID, ArrayList<String> productIDs, String CreditCardNo) {
 		return oM.addOrder(customerID, productIDs, CreditCardNo);
 	}
+
+	public String getAcknowledgeFulfillment(String orderId) {
+		
+		String status = oM.getOrderStatus(orderId);
+		
+		if (status.equalsIgnoreCase("fulfilled")) {
+			return "OK";
+		} 
+		//order not fulfilled
+		return "Not OK";
+	}
 	
 	
 }

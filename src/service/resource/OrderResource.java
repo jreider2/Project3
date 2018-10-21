@@ -2,10 +2,15 @@ package service.resource;
 
 import java.util.ArrayList;
 
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
+import service.represntation.CustomerRepresentation;
 import service.represntation.OrderRepresentation;
 import service.workflow.OrderActivity;
 
@@ -30,5 +35,20 @@ public class OrderResource implements OrderService {
 	@Path ("/order")
 	public OrderRepresentation getOrder(String orderNo) {
 		return oA.getOrder(orderNo);
-	}		
+	}
+	
+	@GET
+	@Produces({"application/xml" , "application/json"})
+	@Path("/order/acknowledgeFulfillment/{orderId}")
+	public Response getAcknowledgeFulfillment(@PathParam("orderId") String orderId) { 
+		System.out.println("GET METHOD Request Order ID: ............." + orderId);
+		OrderActivity orderActivity = new OrderActivity();
+		String res = orderActivity.getAcknowledgeFulfillment(orderId);
+		if (res.equals("OK")) {
+			return Response.status(Status.OK).build();
+		}
+		return null;
+	}
+	
+	
 }

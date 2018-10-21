@@ -128,8 +128,6 @@ public class MainClient {
 		//*****************Get Acknowledgment of Order fulfillment by partner FUNCTIONALITY*********************************************
 		//with the getAckwlegment function, if order status is shipped/fulfilled, then boolean yes it is fulfilled
 		
-		//partner TODO
-		//+ AccknowledgeShippment
 		System.out.println("This is your order status: " + orderManager.getOrderStatus(o2.getId()));
 		
 		

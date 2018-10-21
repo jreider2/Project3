@@ -186,6 +186,28 @@ public final class Project3Main {
          * GET METHOD : Get Acknowledgement of fulfillment  
          *****************************************************************************************/
      	
+     	 System.out.println("GET METHOD ......................................Get Acknowledgement of Order fulfillment Order ID 5 ");
+         WebClient getAcknowledgmentClient = WebClient.create("http://localhost:8081", providers);
+         
+         //Configuring the CXF logging intercepter for the outgoing message
+         WebClient.getConfig(getAcknowledgmentClient).getOutInterceptors().add(new LoggingOutInterceptor());
+         //Configuring the CXF logging intercepter for the incoming response
+         WebClient.getConfig(getAcknowledgmentClient).getInInterceptors().add(new LoggingInInterceptor());
+         
+         // set Accept and ContentType headers 
+         // set path with Order ID = 5
+         getAcknowledgmentClient = getAcknowledgmentClient.accept("application/json").type("application/json").path("/order/orderService/order/acknowledgeFulfillment/5");
+         
+         //log messages without the CXF interceptors
+         String getAcknowledgementRequestURI = getAcknowledgmentClient.getCurrentURI().toString();
+         System.out.println("Client GET METHOD Request URI:  " + getAcknowledgementRequestURI);
+         String getAcknowledgementRequestHeaders = getAcknowledgmentClient.getHeaders().toString();
+         System.out.println("Client GET METHOD Request Headers:  " + getAcknowledgementRequestHeaders);
+         
+         //to see as raw XML/json
+         String acknowledgementResponse = getAcknowledgmentClient.get(String.class);
+         System.out.println("GET METHOD Response: ...." + acknowledgementResponse + "OK");
+        
      	
      	/*****************************************************************************************
          * POST METHOD : create new order // accept buy order
@@ -221,10 +243,16 @@ public final class Project3Main {
          * EXCEPTION Handling
          *****************************************************************************************/
      	
+         
      	/*****************************************************************************************
-         * Check remaining requirements on Project 3
+         * Remaining requirements on Project 3
          *****************************************************************************************/
-     	//deploy to AWS? ???
+         
+         // 1) Detailed documentation of your architecture and implementation. 
+         // 2) Email source code and configuration files OR point me to the repository you of your solution.
+         
+         //Project Due Date:
+         //- EOD Oct 28th, 2018 
      	
      	
      	
