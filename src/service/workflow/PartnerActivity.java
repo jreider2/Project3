@@ -153,6 +153,7 @@ public class PartnerActivity {
 	
 	
 	public String deletePartner(String id) {
+		//TODO Fix me in the DAO layer. 
 		
 		partnerManager.deletePartner(id);
 		

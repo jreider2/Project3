@@ -21,11 +21,7 @@ public class ProductManager {
 	 * 
 	 */
 	public ProductManager() {
-		// TODO Auto-generated constructor stub
 	}
-	
-	//TODO method to searchForProduct 
-	
 
 	/**
 	 * View all products
@@ -60,6 +56,7 @@ public class ProductManager {
 	}
 
 	public void deleteProduct(String id) {
+		//TODO Fix me in the DAO layer. 
 		dao.deleteProduct(id);
 	}
 

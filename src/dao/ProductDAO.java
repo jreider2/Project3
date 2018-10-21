@@ -108,7 +108,6 @@ public class ProductDAO {
 		return product;
 	}
 	
-	/** Note to partner: I have NOT completed this method */
 	public Set<Product> getAllProducts() {
 		
 		Connection connection = DBConnect.getDatabaseConnection();
