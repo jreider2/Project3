@@ -17,7 +17,9 @@ public class OrderRepresentation {
 	private String orderStatus;
 	private ArrayList<Product> productsOnOrder;
 	
-	public OrderRepresentation() {}
+	public OrderRepresentation() {
+		productsOnOrder = new ArrayList<>();
+	}
 	
 	public String getOrderNo() {
 		return orderNo;
@@ -37,6 +39,8 @@ public class OrderRepresentation {
 	public void setProductsOnOrder(ArrayList<Product> productsOnOrder) {
 		this.productsOnOrder = productsOnOrder;
 	}
-	
+	public void addProduct(Product p) {
+		this.productsOnOrder.add(p);
+	}
 
 }
