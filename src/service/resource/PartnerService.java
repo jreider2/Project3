@@ -9,6 +9,7 @@ import service.represntation.OrderRequest;
 import service.represntation.PartnerRepresentation;
 import service.represntation.PartnerRequest;
 import service.represntation.ProductRequest;
+import service.represntation.OrderRepresentation;
 
 @WebService
 public interface PartnerService {
@@ -17,7 +18,7 @@ public interface PartnerService {
 	public PartnerRepresentation getPartner(String partnerId);
 	public PartnerRepresentation createPartner(PartnerRequest  partnerRequest);
 	public PartnerRepresentation addProductToPartner(String partnerID, ProductRequest productRequest);
-	public boolean pushOrderToPartner(String partnerID, OrderRequest orderRequest);
+	public OrderRepresentation pushOrderToPartner(OrderRequest orderRequest);
 	public Response deletePartner(String partnerId);
 	
 }

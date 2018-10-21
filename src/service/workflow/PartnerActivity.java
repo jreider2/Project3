@@ -8,6 +8,7 @@ import order.Order;
 import partner.Partner;
 import partner.PartnerManager;
 import product.Product;
+import service.represntation.OrderRepresentation;
 import service.represntation.OrderRequest;
 import service.represntation.PartnerRepresentation;
 import service.represntation.ProductRequest;
@@ -94,32 +95,62 @@ public class PartnerActivity {
 		return partnerRepresentation;
 	}
 	
-	public boolean pushOrderToPartner(OrderRequest oR) {
-		//the order only needs it's order Id and products attributes filled
-		Order o = new Order();
+	public OrderRepresentation pushOrderToPartner(OrderRequest oR) {
+		//the order needs orderId and products attributes filled
+		
 		//set order ID
+		Order o = new Order();
 		o.setId(oR.getId());
+		
 		//set the products in the order
 		for (ProductRequest p : oR.getProducts()) {
+			
 			//each product object needs productOwner attribute filled 
 			Product currP = new Product();
-			currP.setName(p.getName());  //TODO should i just get products from Productmanager??
+			currP.setName(p.getName());
+			
 			//create partner with proper ID
-			
-			//TODO FIX ME
 			Partner currPartner = partnerManager.getPartner(p.getProductOwnerID());
+			//currPartner.setId(p.getProductOwnerID()); // .setID(oR.getPartnerRep().getId()); //String companyName = .getCompanyName();  //currPartner.setCompanyName(currPartner.getCompanyName());
 			
-			//currPartner.setId(p.getProductOwnerID()); // .setID(oR.getPartnerRep().getId());
-			//String companyName = .getCompanyName();
-			//currPartner.setCompanyName(currPartner.getCompanyName());
 			//set the product owner in the product
 			currP.setProductOwner(currPartner);
+			
 			//add to the order
 			o.addProduct(currP);
 		}
-		//let partnerManager push order and return status of success or failure
-		return partnerManager.pushOrderToPartner(o);
+		
+		//partnerManager pushes order and returns status of success or failure
+		partnerManager.pushOrderToPartner(o);
+		return createOrderRepresentation(oR);
 	}
+	
+	private OrderRepresentation createOrderRepresentation(OrderRequest oR) {
+		//set order ID
+		OrderRepresentation orderRep = new OrderRepresentation();
+		orderRep.setOrderNo(oR.getId());
+		
+		//set the products in the order
+		for (ProductRequest p : oR.getProducts()) {
+			
+			//each product object needs productOwner attribute filled 
+			Product currP = new Product();
+			currP.setName(p.getName());
+			
+			//create partner with proper ID
+			Partner currPartner = partnerManager.getPartner(p.getProductOwnerID());
+			//currPartner.setId(p.getProductOwnerID()); // .setID(oR.getPartnerRep().getId()); //String companyName = .getCompanyName();  //currPartner.setCompanyName(currPartner.getCompanyName());
+			
+			//set the product owner in the product
+			currP.setProductOwner(currPartner);
+			
+			//add to the order
+			orderRep.addProduct(currP);
+		}
+		
+		return orderRep;
+	}
+	
 	
 	public String deletePartner(String id) {
 		

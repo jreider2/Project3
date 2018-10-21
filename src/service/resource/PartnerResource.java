@@ -2,6 +2,7 @@ package service.resource;
 
 import java.util.Set;
 
+import service.represntation.OrderRepresentation;
 import service.represntation.OrderRequest;
 import service.represntation.PartnerRepresentation;
 import service.represntation.PartnerRequest;
@@ -84,14 +85,12 @@ public class PartnerResource implements PartnerService {
 	 */
 	@PUT
 	@Produces({"application/xml" , "application/json"})
-	@Path("/partner/{partnerId}/pushOrder")
-	public boolean pushOrderToPartner(@PathParam("partnerId") String partnerID, OrderRequest orderRequest) { // TODO ADD THIS BACK IN @PathParam("partnerId") String partnerID
-		//TODO add partner name to system output 
+	@Path("/partner/pushOrder")
+	public OrderRepresentation pushOrderToPartner(OrderRequest orderRequest) { // old param: @PathParam("partnerId") String partnerID
 		System.out.println("PUT METHOD Request to update Partner .... Push Order .............order ID: " + orderRequest.getId());
 		PartnerActivity partnerActivity = new PartnerActivity();
 		return partnerActivity.pushOrderToPartner(orderRequest);
-		//return new PartnerRepresentation();
-	}
+	}//TODO add partner name to system output 
 	
 	/**
 	 * Delete existing partner
