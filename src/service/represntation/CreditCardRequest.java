@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlAccessorType()
 @XmlType(name = "")
 public class CreditCardRequest {
 	private String ccNum;
@@ -14,7 +14,6 @@ public class CreditCardRequest {
 	private String ccExpirationDate;
 	private String ccSecurityCode;
 	private String ccCustomerNo;
-
 
 	public CreditCardRequest() {}
 	

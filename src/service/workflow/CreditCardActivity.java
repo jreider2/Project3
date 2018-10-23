@@ -14,22 +14,25 @@ public class CreditCardActivity {
 		
 	}
 	
-	public CreditCardRepresentation GetCreditCard(String ccId) {
-		CreditCard cc = ccManager.getCreditCard(ccId);
-				
+	private CreditCardRepresentation GetCreditCard(CreditCard cc) {
 		CreditCardRepresentation ccR = new CreditCardRepresentation();
 		ccR.setCcNo(cc.getCreditCardNumber());
 		ccR.setExpDate(cc.getExpDate());
 		ccR.setNameOncc(cc.getCardHolderName());
 		return ccR;
-		
+	}
+	
+	//overload for APIs that send a credit card number that is available to other classes.
+	public CreditCardRepresentation GetCreditCard(String ccNo) {
+		CreditCard cc = ccManager.getCreditCard(ccNo);
+		return GetCreditCard(cc);
 	}
 
 	public ArrayList<CreditCardRepresentation> GetCreditCards(String customerNumber){
 		ArrayList<CreditCard> arCC = ccManager.getAllCreditCardsforCustomer(customerNumber);
 		ArrayList<CreditCardRepresentation> arCCRep = new ArrayList<>();
 		for(CreditCard cc : arCC) {
-			arCCRep.add(GetCreditCard(cc.getId()));
+			arCCRep.add(GetCreditCard(cc));
 		}
 		return arCCRep;
 	}
