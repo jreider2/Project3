@@ -237,19 +237,24 @@ public final class Project3Main {
      	/*****************************************************************************************
          * ERROR Handling
          *****************************************************************************************/
+         // business errors 
+         		//such as item not available
          
      	
      	/*****************************************************************************************
          * EXCEPTION Handling
          *****************************************************************************************/
-     	
+     	//handle java exceptions 
+         // java null pointer exceptions... 
          
      	/*****************************************************************************************
          * Remaining requirements on Project 3
          *****************************************************************************************/
          
+         // Note to self: reform URIs (no verbs)
          // 1) Detailed documentation of your architecture and implementation. 
          // 2) Email source code and configuration files OR point me to the repository you of your solution.
+         
          
          //Project Due Date:
          //- EOD Oct 28th, 2018 
@@ -261,7 +266,7 @@ public final class Project3Main {
          *****************************************************************************************/
      	/**
      	 * "Moving forward, make sure the domain layer of your project can handle things such as 
-     	 * 1) Order confirmations, 
+     	 * 1) Order confirmations, -- when make an order, respond with confirmation object. 
      	 * 2) checking availability of products before placing an order and so forth."
      	 */
      	
