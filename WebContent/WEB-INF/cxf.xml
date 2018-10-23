@@ -47,7 +47,7 @@
   </jaxrs:server>
   <bean id="partnerServiceRest" class="service.resource.PartnerResource" />
   
-  <jaxrs:server name="CustomerService" address="http://localhost:8081/customer">
+  <jaxrs:server name="CustomerService" address="http://localhost:8081/customerservice">
 		<jaxrs:serviceBeans>
 			<ref bean="customerServiceRest" />
 		</jaxrs:serviceBeans>

@@ -20,12 +20,6 @@ public final class Project3Main {
 	public static void main(String[] args) throws Exception {
 		
 		
-		
-		//TODO 
-			//see unfinished functionalities at the bottom
-		
-		
-		
 		//Providers
 		 List<Object> providers = new ArrayList<Object>();
          JacksonJsonProvider provider = new JacksonJsonProvider();

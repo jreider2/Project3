@@ -16,7 +16,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.CacheControl;
 
-@Path("/customerservice/")
+@Path("/")
 public class CustomerResource implements CustomerService {
 
 	public CustomerResource() {
@@ -24,7 +24,7 @@ public class CustomerResource implements CustomerService {
 	
 	@GET
 	@Produces({"application/xml" , "application/json"})
-	@Path("/customer")
+	@Path("/customers")
 	////@Cacheable(cc="public, maxAge=3600") example for caching
 	public Set<CustomerRepresentation> getCustomers() {
 		System.out.println("GET METHOD Request for all employees .............");
@@ -34,7 +34,7 @@ public class CustomerResource implements CustomerService {
 	
 	@GET
 	@Produces({"application/xml" , "application/json"})
-	@Path("/customer/{customerId}")
+	@Path("/customers/{customerId}")
 	public CustomerRepresentation getCustomer(@PathParam("customerId") String id) { 
 		System.out.println("GET METHOD Request from Client with employeeRequest String ............." + id);
 		CustomerActivity empActivity = new CustomerActivity();
@@ -46,7 +46,7 @@ public class CustomerResource implements CustomerService {
 	 */
 	@POST
 	@Produces({"application/xml" , "application/json"})
-	@Path("/customer")
+	@Path("/customers")
 	public CustomerRepresentation createCustomer(CustomerRequest  customerRequest) {
 		System.out.println("POST METHOD Request from Client with ............." + customerRequest.getFirstName() + "  " + customerRequest.getLastName());
 		CustomerActivity customerActivity = new CustomerActivity();
@@ -55,7 +55,7 @@ public class CustomerResource implements CustomerService {
 	
 	@DELETE
 	@Produces({"application/xml" , "application/json"})
-	@Path("/customer/{customerId}")
+	@Path("/customers/{customerId}")
 	public Response deleteCustomer(@PathParam("customerId") String id) {
 		
 		//TODO Edit 
