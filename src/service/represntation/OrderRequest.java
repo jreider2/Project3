@@ -17,7 +17,42 @@ public class OrderRequest {
 	private String id;
 	private ArrayList <ProductRequest> items;
 	private PartnerRepresentation partnerRep;
+	private String customerId;
+	private String orderStatus;
+	private String ccNo;
 	
+	public ArrayList<ProductRequest> getItems() {
+		return items;
+	}
+
+	public void setItems(ArrayList<ProductRequest> items) {
+		this.items = items;
+	}
+
+	public String getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
+	}
+
+	public String getOrderStatus() {
+		return orderStatus;
+	}
+
+	public void setOrderStatus(String orderStatus) {
+		this.orderStatus = orderStatus;
+	}
+
+	public String getCcNo() {
+		return ccNo;
+	}
+
+	public void setCcNo(String ccNo) {
+		this.ccNo = ccNo;
+	}
+
 	public OrderRequest() {
 		items = new ArrayList<>();
 	}

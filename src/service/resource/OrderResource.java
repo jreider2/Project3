@@ -14,6 +14,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import service.represntation.OrderRepresentation;
+import service.represntation.OrderRequest;
 import service.workflow.OrderActivity;
 
 @Path("/orderService/")
@@ -70,6 +71,15 @@ public class OrderResource implements OrderService {
 	public boolean cancelOrder(@QueryParam("orderID") String orderID) {
 		OrderActivity oA = new OrderActivity();
 		return oA.cancelOrder(orderID);
+	}
+	
+	@POST
+	@Produces({"application/json", "application/xml"})
+	@Consumes({"application/json", "application/xml"})
+	@Path("/order/neworder")
+	public OrderRepresentation createOrder(OrderRequest oR) {
+		OrderActivity oA = new OrderActivity();
+		return oA.submitOrder(oR.getCcNo(), oR.getProducts(), oR.getCcNo());
 	}
 	
 }

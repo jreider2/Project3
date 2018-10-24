@@ -16,7 +16,16 @@ public class OrderRepresentation {
 	private String orderNo;
 	private String orderStatus;
 	private ArrayList<Product> productsOnOrder;
+	private String customerID;
 	
+	public String getCustomerID() {
+		return customerID;
+	}
+
+	public void setCustomerID(String customerID) {
+		this.customerID = customerID;
+	}
+
 	public OrderRepresentation() {
 		productsOnOrder = new ArrayList<>();
 	}

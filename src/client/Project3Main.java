@@ -221,13 +221,15 @@ public final class Project3Main {
      	/*****************************************************************************************
          * GET METHOD : Provide Order Status
          *****************************************************************************************/
-     	
-     	
+        getAcknowledgmentClient = getAcknowledgmentClient.accept("application/json").type("application/json").path("/order/orderService/order/status?orderID=10");
+        acknowledgementResponse = getAcknowledgmentClient.get(String.class);
+        System.out.println("GET Method response: ...." + acknowledgementResponse);
      	/*****************************************************************************************
-         * PUT METHOD : Cancel Order
+         * DELETE METHOD : Cancel Order
          *****************************************************************************************/
-     	
-     	
+        getAcknowledgmentClient = getAcknowledgmentClient.accept("application/json").type("application/json").path("/order/orderService/order/cancelledorder?orderID=10");
+        acknowledgementResponse = getAcknowledgmentClient.get(String.class);
+        System.out.println("DELETE Method response: ...." + acknowledgementResponse);
      	/*****************************************************************************************
          * ERROR Handling
          *****************************************************************************************/
