@@ -25,28 +25,28 @@ public class CreditCardResource implements CreditCardService {
 	}
 	
 	@GET
-	@Path("/getcards")
+	@Path("/customercards")
 	@Produces({"application/xml" , "application/json"})
 	public ArrayList<CreditCardRepresentation> getCreditCards(@QueryParam("customerID") String customerNumber) {
 		return ccA.GetCreditCards(customerNumber);
 	}
 	
 	@GET
-	@Path ("/getcard")
+	@Path ("/customercard")
 	@Produces({"application/xml" , "application/json"})
 	public CreditCardRepresentation getCreditCard(@QueryParam("ccNo") String ccNo) {
 		return ccA.GetCreditCard(ccNo);
 	}
 	
 	@DELETE
-	@Path ("/delete")
+	@Path ("/creditcard")
 	@Produces({"application/xml" , "application/json"})
 	public boolean deleteCreditCard(@QueryParam("ccNo") String ccNo) {
 		return ccA.removeCreditCard(ccNo);
 	}
 	
 	@POST
-	@Path("/add")
+	@Path("/newcreditcard")
 	@Produces({"application/xml" , "application/json"})
 	@Consumes({"application/xml" , "application/json"})
 	public boolean addCreditCard(CreditCardRequest ccR) {

@@ -2,11 +2,13 @@ package service.resource;
 
 import java.util.ArrayList;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
@@ -23,17 +25,18 @@ public class OrderResource implements OrderService {
 		oA = new OrderActivity();
 	}
 	
-	@POST
+	@GET
 	@Produces({"application/xml" , "application/json"})
+	@Consumes({"application/xml", "application/json"})
 	@Path("/orders")
-	public ArrayList<OrderRepresentation> getOrders(String customerNumber) {
+	public ArrayList<OrderRepresentation> getOrders(@QueryParam("customerID") String customerNumber) {
 		return oA.getOrders(customerNumber);
 	}
 		
-	@POST
+	@GET
 	@Produces({"application/xml" , "application/json"})
 	@Path ("/order")
-	public OrderRepresentation getOrder(String orderNo) {
+	public OrderRepresentation getOrder(@QueryParam("orderID") String orderNo) {
 		return oA.getOrder(orderNo);
 	}
 	
