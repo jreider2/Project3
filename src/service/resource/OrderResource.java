@@ -42,7 +42,7 @@ public class OrderResource implements OrderService {
 	
 	@GET
 	@Produces({"application/xml" , "application/json"})
-	@Path("/order/acknowledgeFulfillment/{orderId}")
+	@Path("/order/fulfillmentAcknowledgement/{orderId}")
 	public Response getAcknowledgeFulfillment(@PathParam("orderId") String orderId) { 
 		System.out.println("GET METHOD Request Order ID: ............." + orderId);
 		OrderActivity orderActivity = new OrderActivity();

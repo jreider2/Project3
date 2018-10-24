@@ -18,14 +18,14 @@ import javax.ws.rs.core.Response.Status;
 
 import javax.ws.rs.core.CacheControl;
 
-@Path("/productservice/")
+@Path("/")
 public class ProductResource implements ProductService {
 
 	public ProductResource() {	}
  
 	@GET
 	@Produces({"application/xml" , "application/json"})
-	@Path("/product")
+	@Path("/products")
 	public Set<ProductRepresentation> getProducts() {
 		System.out.println("GET METHOD Request for all products .............");
 		ProductActivity pActivity = new ProductActivity();
@@ -34,7 +34,7 @@ public class ProductResource implements ProductService {
 	
 	@GET
 	@Produces({"application/xml" , "application/json"})
-	@Path("/product/{productId}")
+	@Path("/products/{productId}")
 	public ProductRepresentation getProduct(@PathParam("productId") String id ) { 
 		System.out.println("GET METHOD Request from Client with productRequest String ............." + id);
 		ProductActivity pActivity = new ProductActivity();
@@ -43,7 +43,7 @@ public class ProductResource implements ProductService {
 	
 	@GET
 	@Produces({"application/xml" , "application/json"})
-	@Path("/product/search/{searchterm}")
+	@Path("/products/searchresults/{searchterm}")
 	public ArrayList<ProductRepresentation> searchProducts(@PathParam("searchterm") String searchTerm) {
 		System.out.println("GET METHOD Request for all products .............");
 		ProductActivity pActivity = new ProductActivity();
@@ -52,7 +52,7 @@ public class ProductResource implements ProductService {
 	
 	@POST
 	@Produces({"application/xml" , "application/json"})
-	@Path("/product")
+	@Path("/products")
 	public ProductRepresentation createProduct(ProductRequest  productRequest) {
 		System.out.println("POST METHOD Request from Client with ............." + productRequest.getName() + "  " + productRequest.getDescription());
 		ProductActivity pActivity = new ProductActivity();
@@ -62,7 +62,7 @@ public class ProductResource implements ProductService {
 //	TODO finish method 
   @DELETE
 	@Produces({"application/xml" , "application/json"})
-	@Path("/product/{productId}")
+	@Path("/products/{productId}")
 	public Response deleteProduct(@PathParam("productId") String id) {
 		System.out.println("Delete METHOD Request from Client with productRequest String ............." + id);
 		ProductActivity pActivity = new ProductActivity();

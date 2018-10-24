@@ -21,7 +21,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.CacheControl;
 
-@Path("/partnerService/")
+@Path("/")
 public class PartnerResource implements PartnerService {
 
 	public PartnerResource() {	}
@@ -31,7 +31,7 @@ public class PartnerResource implements PartnerService {
 	 */
 	@GET
 	@Produces({"application/xml" , "application/json"})
-	@Path("/partner")
+	@Path("/partners")
 	//@Cacheable(cc="public, maxAge=3600") example for caching
 	public Set<PartnerRepresentation> getPartner() {
 		//TODO Incomplete. Not implemented in the PartnerDAO object. 
@@ -45,7 +45,7 @@ public class PartnerResource implements PartnerService {
 	 */
 	@GET
 	@Produces({"application/xml" , "application/json"})
-	@Path("/partner/{partnerId}")
+	@Path("/partners/{partnerId}")
 	public PartnerRepresentation getPartner(@PathParam("partnerId") String id) { // TODO ADD THIS BACK IN @PathParam("partnerId") String id
 		System.out.println("GET METHOD Request from Client with partnerRequest String ............." + id);
 		PartnerActivity pActivity = new PartnerActivity();
@@ -58,7 +58,7 @@ public class PartnerResource implements PartnerService {
 	 */
 	@POST
 	@Produces({"application/xml" , "application/json"})
-	@Path("/partner")
+	@Path("/partners")
 	public PartnerRepresentation createPartner(PartnerRequest  partnerRequest) {
 		System.out.println("POST METHOD Request from Client with ............." + partnerRequest.getCompanyName());
 		PartnerActivity partnerActivity = new PartnerActivity();
@@ -71,7 +71,7 @@ public class PartnerResource implements PartnerService {
 	 */
 	@PUT
 	@Produces({"application/xml" , "application/json"})
-	@Path("/partner/{partnerId}/newProduct")
+	@Path("/partners/{partnerId}/newProduct")
 	public PartnerRepresentation addProductToPartner(@PathParam("partnerId") String partnerID, ProductRequest productRequest) {
 		
 		//TODO add partner name to system output 
@@ -85,7 +85,7 @@ public class PartnerResource implements PartnerService {
 	 */
 	@PUT
 	@Produces({"application/xml" , "application/json"})
-	@Path("/partner/pushOrder")
+	@Path("/partners/orderNotification")
 	public OrderRepresentation pushOrderToPartner(OrderRequest orderRequest) { // old param: @PathParam("partnerId") String partnerID
 		System.out.println("PUT METHOD Request to update Partner .... Push Order .............order ID: " + orderRequest.getId());
 		PartnerActivity partnerActivity = new PartnerActivity();
@@ -97,7 +97,7 @@ public class PartnerResource implements PartnerService {
 	 */
 	@DELETE
 	@Produces({"application/xml" , "application/json"})
-	@Path("/partner/{partnerId}")
+	@Path("/partners/{partnerId}")
 	public Response deletePartner(@PathParam("partnerId") String id) { // TODO ADD THIS as parameterlist @PathParam("partnerId") String id
 		System.out.println("Delete METHOD Request from Client with employeeRequest String ............." + id);
 		PartnerActivity partnerActivity = new PartnerActivity();

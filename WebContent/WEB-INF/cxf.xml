@@ -14,7 +14,7 @@
   	
   <bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider" />
 
-  <jaxrs:server name="ProductService" address="http://localhost:8081/product">
+  <jaxrs:server name="ProductService" address="http://localhost:8081/productservice">
 		<jaxrs:serviceBeans>
 			<ref bean="productServiceRest" />
 		</jaxrs:serviceBeans><!--Need to add beans here in jaxrs:serviceBeans and under larger beans. see employeeServieRest below for example-->
@@ -31,7 +31,7 @@
   <bean id="productServiceRest" class="service.resource.ProductResource" />
 
 
-  <jaxrs:server name="PartnerService" address="http://localhost:8081/partner">
+  <jaxrs:server name="PartnerService" address="http://localhost:8081/partnerservice">
 		<jaxrs:serviceBeans>
 			<ref bean="partnerServiceRest" />
 		</jaxrs:serviceBeans>

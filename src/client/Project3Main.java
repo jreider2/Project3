@@ -40,7 +40,7 @@ public final class Project3Main {
          
          // set Accept and ContentType headers 
          // set path with Partner ID = 17
-         getClient = getClient.accept("application/json").type("application/json").path("/partner/partnerService/partner/17");
+         getClient = getClient.accept("application/json").type("application/json").path("/partnerservice/partners/17");
          
          //The following lines are to show how to log messages without the CXF interceptors
          String getRequestURI = getClient.getCurrentURI().toString();
@@ -68,7 +68,7 @@ public final class Project3Main {
          WebClient.getConfig(postClient).getInInterceptors().add(new LoggingInInterceptor());
                   
          // set Accept and ContentType headers 
-         postClient = postClient.accept("application/json").type("application/json").path("/partner/partnerService/partner");
+         postClient = postClient.accept("application/json").type("application/json").path("/partnerservice/partners");
       	
          String postRequestURI = postClient.getCurrentURI().toString();
          System.out.println("Client POST METHOD Request URI:  " + postRequestURI);
@@ -86,7 +86,7 @@ public final class Project3Main {
         System.out.println("POST MEDTHOD Response ........." + responsePost);
         
         /*****************************************************************************************
-         * PUT METHOD Push Product to Partner (add to marketPlace) 
+         * PUT METHOD Add new Product to Partner (add to marketPlace) 
         *****************************************************************************************/
         
         System.out.println("PUT METHOD ...................................Partner adds new Product to MarketPlace");
@@ -96,7 +96,7 @@ public final class Project3Main {
                  
         // set Accept and ContentType headers 
         // set path with Partner ID = 13 
-        putClient = putClient.accept("application/json").type("application/json").path("partner/partnerService/partner/13/newProduct");
+        putClient = putClient.accept("application/json").type("application/json").path("partnerservice/partners/13/newProduct");
      	
         String putRequestURI = putClient.getCurrentURI().toString();
         System.out.println("Client POST METHOD Request URI:  " + putRequestURI);
@@ -127,7 +127,7 @@ public final class Project3Main {
         
         // set Accept and ContentType headers 
         // set path with search term = goggles
-        getSearchClient = getSearchClient.accept("application/json").type("application/json").path("/product/productservice/product/search/goggles");
+        getSearchClient = getSearchClient.accept("application/json").type("application/json").path("/productservice/products/searchresults/goggles");
         
         //The following lines are to show how to log messages without the CXF interceptors
         String getSearchRequestURI = getSearchClient.getCurrentURI().toString();
@@ -151,7 +151,7 @@ public final class Project3Main {
         WebClient.getConfig(pushOrderPutClient).getInInterceptors().add(new LoggingInInterceptor());
                  
         // set Accept and ContentType headers
-        pushOrderPutClient = pushOrderPutClient.accept("application/xml").type("application/xml").path("partner/partnerService/partner/pushOrder");
+        pushOrderPutClient = pushOrderPutClient.accept("application/xml").type("application/xml").path("partnerservice/partners/orderNotification");
      	
         String pushOrderPutRequestURI = pushOrderPutClient.getCurrentURI().toString();
         System.out.println("Client POST METHOD Request URI:  " + pushOrderPutRequestURI);
@@ -190,7 +190,7 @@ public final class Project3Main {
          
          // set Accept and ContentType headers 
          // set path with Order ID = 5
-         getAcknowledgmentClient = getAcknowledgmentClient.accept("application/json").type("application/json").path("/order/orderService/order/acknowledgeFulfillment/5");
+         getAcknowledgmentClient = getAcknowledgmentClient.accept("application/json").type("application/json").path("/order/orderService/order/fulfillmentAcknowledgement/5");
          
          //log messages without the CXF interceptors
          String getAcknowledgementRequestURI = getAcknowledgmentClient.getCurrentURI().toString();
