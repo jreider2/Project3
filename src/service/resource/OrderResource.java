@@ -12,6 +12,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import order.Order;
 import service.represntation.CustomerRepresentation;
 import service.represntation.OrderRepresentation;
 import service.workflow.OrderActivity;
@@ -53,5 +54,15 @@ public class OrderResource implements OrderService {
 		return null;
 	}
 	
+	@GET
+	@Produces({"application/xml", "application/json"})
+	@Path("/order/status")
+	public String getOrderStatus(@QueryParam("orderID") String orderID) {
+		OrderActivity oA = new OrderActivity();
+		OrderRepresentation oR = oA.getOrder(orderID);
+		
+		System.out.println("GET Method for order status:.........." + oR.getOrderStatus());
+		return oR.getOrderStatus();
+	}
 	
 }
