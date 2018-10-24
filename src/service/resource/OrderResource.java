@@ -12,8 +12,6 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import order.Order;
-import service.represntation.CustomerRepresentation;
 import service.represntation.OrderRepresentation;
 import service.workflow.OrderActivity;
 
@@ -61,7 +59,7 @@ public class OrderResource implements OrderService {
 		OrderActivity oA = new OrderActivity();
 		OrderRepresentation oR = oA.getOrder(orderID);
 		
-		System.out.println("GET Method for order status:.........." + oR.getOrderStatus());
+		System.out.println("GET Method for order status:.........." + oR.getOrderNo() + ": " + oR.getOrderStatus());
 		return oR.getOrderStatus();
 	}
 	
