@@ -127,7 +127,7 @@ public final class Project3Main {
         
         // set Accept and ContentType headers 
         // set path with search term = goggles
-        getSearchClient = getSearchClient.accept("application/json").type("application/json").path("/productservice/productservice/product/search/goggles");
+        getSearchClient = getSearchClient.accept("application/json").type("application/json").path("/productservice/products/searchresults/goggles");
         
         //The following lines are to show how to log messages without the CXF interceptors
         String getSearchRequestURI = getSearchClient.getCurrentURI().toString();
@@ -190,7 +190,7 @@ public final class Project3Main {
          
          // set Accept and ContentType headers 
          // set path with Order ID = 5
-         getAcknowledgmentClient = getAcknowledgmentClient.accept("application/json").type("application/json").path("/order/orderService/order/acknowledgeFulfillment/5");
+         getAcknowledgmentClient = getAcknowledgmentClient.accept("application/json").type("application/json").path("/order/orderService/order/fulfillmentAcknowledgement/5");
          
          //log messages without the CXF interceptors
          String getAcknowledgementRequestURI = getAcknowledgmentClient.getCurrentURI().toString();
