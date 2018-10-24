@@ -3,6 +3,7 @@ package service.resource;
 import java.util.ArrayList;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -61,6 +62,14 @@ public class OrderResource implements OrderService {
 		
 		System.out.println("GET Method for order status:.........." + oR.getOrderNo() + ": " + oR.getOrderStatus());
 		return oR.getOrderStatus();
+	}
+	
+	@DELETE
+	@Produces({"application/xml", "application/json"})
+	@Path("/order/cancelledorder")
+	public boolean cancelOrder(@QueryParam("orderID") String orderID) {
+		OrderActivity oA = new OrderActivity();
+		return oA.cancelOrder(orderID);
 	}
 	
 }

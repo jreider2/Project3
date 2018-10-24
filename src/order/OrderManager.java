@@ -57,12 +57,9 @@ public class OrderManager {
 	/**
 	 * @return current Order status. Shipped if shipped, other status if failed to ship it
 	 */
-	public String cancelOrder(String orderID) {
-		boolean isCanceled = false;
+	public boolean cancelOrder(String orderID) {
 		//cancel by updating status
-		isCanceled = dao.updateOrderStatus(orderID,"canceled");
-		//return the current status of the order
-		return dao.getOrderStatus(orderID);
+		return dao.updateOrderStatus(orderID,"canceled");
 	}
 
 }

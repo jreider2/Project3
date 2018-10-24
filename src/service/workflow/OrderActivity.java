@@ -51,5 +51,9 @@ public class OrderActivity {
 		return "Not OK";
 	}
 	
+	public boolean cancelOrder(String orderID) {
+		return oM.cancelOrder(orderID);
+	}
+	
 	
 }
