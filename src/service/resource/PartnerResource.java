@@ -1,5 +1,6 @@
 package service.resource;
 
+import java.sql.SQLException;
 import java.util.Set;
 
 import service.represntation.OrderRepresentation;
@@ -10,6 +11,7 @@ import service.represntation.ProductRepresentation;
 import service.represntation.ProductRequest;
 import service.workflow.PartnerActivity;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -20,10 +22,13 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.CacheControl;
+import javax.ws.rs.core.Context;
 
 @Path("/")
 public class PartnerResource implements PartnerService {
 
+	@Context private HttpServletResponse response;
+	
 	public PartnerResource() {	}
 	
 	/**
@@ -46,10 +51,23 @@ public class PartnerResource implements PartnerService {
 	@GET
 	@Produces({"application/xml" , "application/json"})
 	@Path("/partners/{partnerId}")
-	public PartnerRepresentation getPartner(@PathParam("partnerId") String id) { // TODO ADD THIS BACK IN @PathParam("partnerId") String id
+	public PartnerRepresentation getPartner(@PathParam("partnerId") String id)  { //TODO throws SQLException
 		System.out.println("GET METHOD Request from Client with partnerRequest String ............." + id);
 		PartnerActivity pActivity = new PartnerActivity();
 		return pActivity.getPartner(id);
+//		try {
+//			return pActivity.getPartner(id);
+//		}catch(SQLException se){
+//		      //Handle errors for JDBC
+//		      se.printStackTrace();
+//		}catch(Exception e){
+//		      //Handle errors for Class.forName
+//		      e.printStackTrace();
+//		}finally{
+//			response.setStatus(Response.Status.BAD_REQUEST.getStatusCode());
+//			return new PartnerRepresentation();
+//		}
+		
 	}
 	
 	
@@ -73,8 +91,7 @@ public class PartnerResource implements PartnerService {
 	@Produces({"application/xml" , "application/json"})
 	@Path("/partners/{partnerId}/newProduct")
 	public PartnerRepresentation addProductToPartner(@PathParam("partnerId") String partnerID, ProductRequest productRequest) {
-		
-		//TODO add partner name to system output 
+	
 		System.out.println("PUT METHOD Request to update Partner ............." + productRequest.getName());
 		PartnerActivity partnerActivity = new PartnerActivity();
 		return partnerActivity.addProductToPartner(productRequest.getName(), productRequest.getDescription(), (int) productRequest.getPrice(), partnerID);
