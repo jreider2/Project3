@@ -103,9 +103,10 @@ public class OrderDAO {
 			rs.next();
 
 			ord.setId(rs.getString("OrderID"));
-			ord.setOrderStatus("orderStatus");
-			ord.setCustomerID("CustomerID");
-			
+			ord.setOrderStatus(rs.getString("orderStatus"));
+			ord.setCustomerID(rs.getString("CustomerID"));
+			ord.setOrderTotal(new BigDecimal(rs.getString("OrderTotal")));
+			ord.setCreditCardNo(rs.getString("CreditCardNo"));
 			
 			return ord;
 			
@@ -125,7 +126,7 @@ public class OrderDAO {
 	
 	
 	/** Note to partner: this method is considered complete */
-	public Order addOrder(String customerID, ArrayList<String> productIDs, String ccNo, BigDecimal orderTotal) {
+	public Order placeOrder(String customerID, ArrayList<String> productIDs, String ccNo, BigDecimal orderTotal) {
 		Integer resultKey = -1;
 		Connection connection = DBConnect.getDatabaseConnection();
 		String status = "ordered";

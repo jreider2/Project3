@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import dao.OrderDAO;
 import product.Product;
+import java.math.BigDecimal;
 
 /**
  * @author julianareider
@@ -21,6 +22,24 @@ public class Order implements Serializable {
 	private String orderStatus;
 	private String customerID;
 	private String creditCardNo;
+	
+	public ArrayList<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(ArrayList<Product> products) {
+		this.products = products;
+	}
+
+	public BigDecimal getOrderTotal() {
+		return orderTotal;
+	}
+
+	public void setOrderTotal(BigDecimal orderTotal) {
+		this.orderTotal = orderTotal;
+	}
+
+	private BigDecimal orderTotal;
 
 	/**
 	 * 

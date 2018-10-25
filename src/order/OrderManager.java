@@ -42,7 +42,7 @@ public class OrderManager {
 			
 		}
 		
-		Order order = dao.addOrder(customerID, productIDs, CreditCardNo, orderTotal);
+		Order order = dao.placeOrder(customerID, productIDs, CreditCardNo, orderTotal);
 		
 		return order;
 	}
