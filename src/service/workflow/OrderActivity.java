@@ -4,7 +4,10 @@ import java.util.ArrayList;
 
 import order.Order;
 import order.OrderManager;
+import product.Product;
 import service.represntation.OrderRepresentation;
+import service.represntation.OrderRequest;
+import service.represntation.ProductRequest;
 
 public class OrderActivity {
 	private OrderManager oM;
@@ -19,7 +22,7 @@ public class OrderActivity {
 		
 		oR.setOrderNo(o.getId());
 		oR.setOrderStatus(o.getOrderStatus());
-		oR.setProductsOnOrder(o.getItems());
+		oR.setProductsOnOrder(getProductsOnOrder(o));
 		return oR;
 	}
 	
@@ -30,10 +33,26 @@ public class OrderActivity {
 			OrderRepresentation orTemp = new OrderRepresentation();
 			orTemp.setOrderNo(o.getId());
 			orTemp.setOrderStatus(o.getOrderStatus());
-			orTemp.setProductsOnOrder(o.getItems());
+			
+			orTemp.setProductsOnOrder(getProductsOnOrder(o));
 			arOr.add(orTemp);
 		}
 		return arOr;
+	}
+	
+	private ArrayList<ProductRequest> getProductsOnOrder(Order o){
+		ProductRequest prTemp;
+		ArrayList<ProductRequest> tempProducts = new ArrayList<ProductRequest>();
+		for (Product productOnOrder : o.getItems()) {
+			prTemp = new ProductRequest();
+			prTemp.setDescription(productOnOrder.getDescription());
+			prTemp.setPrice(productOnOrder.getPrice());
+			prTemp.setId(productOnOrder.getId());
+			prTemp.setName(productOnOrder.getName());
+			prTemp.setProductOwnerID(productOnOrder.getProductOwner().getId());
+			tempProducts.add(prTemp);
+		}
+		return tempProducts;
 	}
 	
 	public Order submitOrder(String customerID, ArrayList<String> productIDs, String CreditCardNo) {

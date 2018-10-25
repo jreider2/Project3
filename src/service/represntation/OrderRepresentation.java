@@ -15,7 +15,7 @@ import product.Product;
 public class OrderRepresentation {
 	private String orderNo;
 	private String orderStatus;
-	private ArrayList<Product> productsOnOrder;
+	private ArrayList<ProductRequest> productsOnOrder;
 	private String customerID;
 	
 	public String getCustomerID() {
@@ -45,7 +45,7 @@ public class OrderRepresentation {
 	public ArrayList<Product> getProductsOnOrder() {
 		return productsOnOrder;
 	}
-	public void setProductsOnOrder(ArrayList<Product> productsOnOrder) {
+	public void setProductsOnOrder(ArrayList<ProductRequest> productsOnOrder) {
 		this.productsOnOrder = productsOnOrder;
 	}
 	public void addProduct(Product p) {

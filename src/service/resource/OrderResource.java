@@ -58,7 +58,6 @@ public class OrderResource implements OrderService {
 	@Produces({"application/xml", "application/json"})
 	@Path("/order/status")
 	public String getOrderStatus(@QueryParam("orderID") String orderID) {
-		OrderActivity oA = new OrderActivity();
 		OrderRepresentation oR = oA.getOrder(orderID);
 		
 		System.out.println("GET Method for order status:.........." + oR.getOrderNo() + ": " + oR.getOrderStatus());
@@ -69,7 +68,6 @@ public class OrderResource implements OrderService {
 	@Produces({"application/xml", "application/json"})
 	@Path("/order/cancelledorder")
 	public boolean cancelOrder(@QueryParam("orderID") String orderID) {
-		OrderActivity oA = new OrderActivity();
 		return oA.cancelOrder(orderID);
 	}
 	
@@ -78,7 +76,6 @@ public class OrderResource implements OrderService {
 	@Consumes({"application/json", "application/xml"})
 	@Path("/order/neworder")
 	public OrderRepresentation createOrder(OrderRequest oR) {
-		OrderActivity oA = new OrderActivity();
 		return oA.submitOrder(oR.getCcNo(), oR.getProducts(), oR.getCcNo());
 	}
 	

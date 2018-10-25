@@ -206,7 +206,18 @@ public final class Project3Main {
      	/*****************************************************************************************
          * POST METHOD : create new order // accept buy order
          *****************************************************************************************/
-     	
+         System.out.println("POST METHOD ........................................Create new order");
+         postClient = WebClient.create("http://localhost:8081", providers);
+         WebClient.getConfig(postClient).getOutInterceptors().add(new LoggingOutInterceptor());
+         WebClient.getConfig(postClient).getInInterceptors().add(new LoggingInInterceptor());
+                  
+         // set Accept and ContentType headers 
+         postClient = postClient.accept("application/json").type("application/json").path("/order/orderService/");
+      	
+         String postRequestURI = postClient.getCurrentURI().toString();
+         System.out.println("Client POST METHOD Request URI:  " + postRequestURI);
+         String postRequestHeaders = postClient.getHeaders().toString();
+         System.out.println("Client POST METHOD Request Headers:  " + postRequestHeaders);
      	
      	/*****************************************************************************************
          * POST METHOD : Accept credit card payment
