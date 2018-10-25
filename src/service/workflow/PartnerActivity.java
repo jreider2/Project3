@@ -11,6 +11,7 @@ import product.Product;
 import service.represntation.OrderRepresentation;
 import service.represntation.OrderRequest;
 import service.represntation.PartnerRepresentation;
+import service.represntation.ProductRepresentation;
 import service.represntation.ProductRequest;
 
 
@@ -144,8 +145,22 @@ public class PartnerActivity {
 			//set the product owner in the product
 			currP.setProductOwner(currPartner);
 			
+			ProductRequest pR = new ProductRequest();
+			PartnerRepresentation partRep = new PartnerRepresentation();
+			
+			partRep.setId(currPartner.getId());
+			partRep.setCompanyName(currPartner.getCompanyName());
+			partRep.setPassword(currPartner.getPassword());
+			partRep.setUserName(currPartner.getUserName());
+			
+			pR.setId(currP.getId());
+			pR.setDescription(currP.getDescription());	
+			pR.setName(currP.getName());
+			pR.setPrice(currP.getPrice());
+			pR.setProductOwnerID(currP.getProductOwner().getId());
+			
 			//add to the order
-			orderRep.addProduct(currP);
+			orderRep.addProduct(pR);
 		}
 		
 		return orderRep;
