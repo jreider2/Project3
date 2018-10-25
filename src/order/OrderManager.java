@@ -3,10 +3,12 @@
  */
 package order;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import dao.OrderDAO;
 import product.Product;
+import product.ProductManager;
 
 /**
  * @author julianareider
@@ -29,7 +31,18 @@ public class OrderManager {
 	
 	public Order addOrder(String customerID, ArrayList<String> productIDs, String CreditCardNo) {
 	
-		Order order = dao.addOrder(customerID, productIDs, CreditCardNo);
+		BigDecimal orderTotal = new BigDecimal(0);
+		
+		ProductManager pm = new ProductManager();
+		Product p;
+		for (String pId : productIDs) {
+			p = pm.getProduct(pId);
+			BigDecimal itemPrice = new BigDecimal(p.getPrice());
+			orderTotal = orderTotal.add(itemPrice);
+			
+		}
+		
+		Order order = dao.addOrder(customerID, productIDs, CreditCardNo, orderTotal);
 		
 		return order;
 	}

@@ -3,6 +3,7 @@
  */
 package dao;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -124,7 +125,7 @@ public class OrderDAO {
 	
 	
 	/** Note to partner: this method is considered complete */
-	public Order addOrder(String customerID, ArrayList<String> productsIDs, String ccNo) {
+	public Order addOrder(String customerID, ArrayList<String> productIDs, String ccNo, BigDecimal orderTotal) {
 		Integer resultKey = -1;
 		Connection connection = DBConnect.getDatabaseConnection();
 		String status = "ordered";
@@ -133,7 +134,7 @@ public class OrderDAO {
 		try {
 			Statement insertStatement = connection.createStatement();
 			
-			String insertQuery = "INSERT INTO Orders VALUES (0,'"+status+"','" + customerID + "', '" + ccNo + "')";
+			String insertQuery = "INSERT INTO Orders VALUES (0,'"+ status +"','" + customerID + "', '" + ccNo + "', '" + orderTotal.toString() + "')";
 			insertStatement.executeUpdate(insertQuery, Statement.RETURN_GENERATED_KEYS);
 				
 			//Grab the generated key//get orderID
@@ -144,12 +145,16 @@ public class OrderDAO {
 	        rs.close();
 	        
 	        //add order and Products to product table -- for each product ID
-	        for (String pID : productsIDs) {
+	        for (String pID : productIDs) {
 				
 				insertQuery = "INSERT INTO OrderList (OrderID,ProductID)"
 						+ "VALUES('" + resultKey + "', '" + pID + "')";
 				insertStatement.executeUpdate(insertQuery);
 	        }
+	        
+	        //add record to payment table to record that the order was paid for.
+	        insertQuery = "INSERT INTO Payment VALUES (0, '" + ccNo + "', '" + resultKey.toString() + "', '" + customerID + "')";
+	        insertStatement.executeUpdate(insertQuery);
 			
 	        insertStatement.close();
 		}catch(SQLException se) {
@@ -169,7 +174,7 @@ public class OrderDAO {
 		order.setCreditCardNo(ccNo);
 		
 		//for each product id, get product object from DB and add to new order object
-		for (String pID : productsIDs) {
+		for (String pID : productIDs) {
 			order.addProduct(productDAO.getProduct(pID));
         }
 		
