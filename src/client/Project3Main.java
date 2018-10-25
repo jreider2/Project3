@@ -74,8 +74,7 @@ public final class Project3Main {
          System.out.println("Client POST METHOD Request URI:  " + postRequestURI);
          String postRequestHeaders = postClient.getHeaders().toString();
          System.out.println("Client POST METHOD Request Headers:  " + postRequestHeaders);
-         
-         //TODO FIX ME -- not enough information to add the new partner to the DATABASE 
+          
          PartnerRequest partnerReq = new PartnerRequest();
          partnerReq.setId("0");
          partnerReq.setCompanyName("Sony");
@@ -218,6 +217,10 @@ public final class Project3Main {
          System.out.println("Client POST METHOD Request URI:  " + postRequestURI);
          postRequestHeaders = postClient.getHeaders().toString();
          System.out.println("Client POST METHOD Request Headers:  " + postRequestHeaders);
+         
+         //TODO create an order request complete with products in it 
+         
+         //TOD call the post method on the postClient with the orderRequest as an argument
      	
      	/*****************************************************************************************
          * POST METHOD : Accept credit card payment
@@ -233,14 +236,14 @@ public final class Project3Main {
          * GET METHOD : Provide Order Status
          *****************************************************************************************/
         getAcknowledgmentClient = getAcknowledgmentClient.accept("application/json").type("application/json").path("/order/orderService/order/status?orderID=10");
-        acknowledgementResponse = getAcknowledgmentClient.get(String.class);
-        System.out.println("GET Method response: ...." + acknowledgementResponse);
+//        acknowledgementResponse = getAcknowledgmentClient.get(String.class);
+//        System.out.println("GET Method response: ...." + acknowledgementResponse);
      	/*****************************************************************************************
          * DELETE METHOD : Cancel Order
          *****************************************************************************************/
         getAcknowledgmentClient = getAcknowledgmentClient.accept("application/json").type("application/json").path("/order/orderService/order/cancelledorder?orderID=10");
-        acknowledgementResponse = getAcknowledgmentClient.get(String.class);
-        System.out.println("DELETE Method response: ...." + acknowledgementResponse);
+//        acknowledgementResponse = getAcknowledgmentClient.get(String.class);
+//        System.out.println("DELETE Method response: ...." + acknowledgementResponse);
      	/*****************************************************************************************
          * ERROR Handling
          *****************************************************************************************/
@@ -258,14 +261,12 @@ public final class Project3Main {
          * Remaining requirements on Project 3
          *****************************************************************************************/
          
-         // Note to self: reform URIs (no verbs)
          // 1) Detailed documentation of your architecture and implementation. 
          // 2) Email source code and configuration files OR point me to the repository you of your solution.
          
          
          //Project Due Date:
          //- EOD Oct 28th, 2018 
-     	
      	
      	
      	/*****************************************************************************************
@@ -277,15 +278,6 @@ public final class Project3Main {
      	 * 2) checking availability of products before placing an order and so forth."
      	 */
      	
-     	/*****************************************************************************************
-         * POST METHOD : Add Address
-         *****************************************************************************************/
-     	//optional but maybe useful for our next layer
-     	
-     	/*****************************************************************************************
-         * POST METHOD : Register Customer
-         *****************************************************************************************/
-     	//optional but maybe useful for our next layer
 
 	}
 
