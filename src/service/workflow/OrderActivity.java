@@ -55,8 +55,15 @@ public class OrderActivity {
 		return tempProducts;
 	}
 	
-	public Order submitOrder(String customerID, ArrayList<String> productIDs, String CreditCardNo) {
-		return oM.addOrder(customerID, productIDs, CreditCardNo);
+	public OrderRepresentation submitOrder(String customerID, ArrayList<String> productIDs, String CreditCardNo) {
+		OrderRepresentation oR = new OrderRepresentation();
+		Order newOrder = oM.addOrder(customerID, productIDs, CreditCardNo);
+		
+		oR.setOrderNo(newOrder.getId());
+		oR.setOrderStatus(newOrder.getOrderStatus());
+		oR.setProductsOnOrder(getProductsOnOrder(newOrder));
+		oR.setCustomerID(newOrder.getCustomerID());
+		return oR;
 	}
 
 	public String getAcknowledgeFulfillment(String orderId) {

@@ -214,9 +214,9 @@ public final class Project3Main {
          // set Accept and ContentType headers 
          postClient = postClient.accept("application/json").type("application/json").path("/order/orderService/");
       	
-         String postRequestURI = postClient.getCurrentURI().toString();
+         postRequestURI = postClient.getCurrentURI().toString();
          System.out.println("Client POST METHOD Request URI:  " + postRequestURI);
-         String postRequestHeaders = postClient.getHeaders().toString();
+         postRequestHeaders = postClient.getHeaders().toString();
          System.out.println("Client POST METHOD Request Headers:  " + postRequestHeaders);
      	
      	/*****************************************************************************************

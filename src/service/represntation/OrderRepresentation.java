@@ -42,13 +42,13 @@ public class OrderRepresentation {
 	public void setOrderStatus(String orderStatus) {
 		this.orderStatus = orderStatus;
 	}
-	public ArrayList<Product> getProductsOnOrder() {
+	public ArrayList<ProductRequest> getProductsOnOrder() {
 		return productsOnOrder;
 	}
 	public void setProductsOnOrder(ArrayList<ProductRequest> productsOnOrder) {
 		this.productsOnOrder = productsOnOrder;
 	}
-	public void addProduct(Product p) {
+	public void addProduct(ProductRequest p) {
 		this.productsOnOrder.add(p);
 	}
 
