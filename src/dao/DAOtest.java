@@ -62,7 +62,7 @@ public class DAOtest {
 		OrderManager om = new OrderManager();
 		ArrayList<String> ap = new ArrayList<>();
 		ap.add(p.getId());
-		om.addOrder("1", ap, "1111222233334444");
+		//om.addOrder("1", ap, "1111222233334444");
 		
 		/** Note to partner: This class is just for testing. Main functionalities are DOMOed in mainClient */
 		
