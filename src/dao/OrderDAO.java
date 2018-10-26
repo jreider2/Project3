@@ -24,14 +24,12 @@ import net.shibboleth.utilities.java.support.collection.Pair;
  */
 public class OrderDAO {
 	
-	private ProductDAO productDAO;
+	private ProductManager pm = new ProductManager();
 
 	/**
 	 * 
 	 */
-	public OrderDAO() {
-		productDAO = new ProductDAO();
-	}
+	public OrderDAO() {	}
 
 	public ArrayList<Order> getAllOrders(String customerNo) {
 		Connection conn = DBConnect.getDatabaseConnection();
@@ -41,15 +39,15 @@ public class OrderDAO {
 		try {
 			Statement select = conn.createStatement();
 			
-			String query = "SELECT * FROM Orders WHERE CustomerID=" + "'" + customerNo + "'";  
+			String query = "SELECT * FROM Orders JOIN OrderList on Orders.OrderID = OrderList.OrderID Where Orders.customerID=" + "'" + customerNo + "'";  
 			ResultSet rs = select.executeQuery(query);
 			
-			ProductManager pm = new ProductManager();
 			ArrayList<Product> productsOnOrder = new ArrayList<>();
 			String previousRowOrderID = "";
 			Order o = new Order();
 			while (rs.next()) {
 				
+				//only start a new order object if we have added all products on that order to the order object.
 				if (previousRowOrderID != rs.getString("OrderID")) {
 					o = new Order();
 					o.setId(rs.getString("OrderID"));
@@ -60,12 +58,14 @@ public class OrderDAO {
 					
 					o.setProducts(productsOnOrder);
 				} else {
+					//there are still items on the order to be added to the order object. (one row is selected at a time)
 					productsOnOrder.add(pm.getProduct(rs.getString("ProductID")));
 					o.setProducts(productsOnOrder);
 				}
 				
 				previousRowOrderID = o.getId();
 				
+				//only add the order to the orderlist returned when we know that we have added all products on the order to the object.
 				if (previousRowOrderID != rs.getString("OrderID")) {
 					arOrd.add(o);
 				}
@@ -122,7 +122,7 @@ public class OrderDAO {
 		try {
 			Statement select = conn.createStatement();
 			
-			String query = "SELECT * FROM Orders WHERE OrderID=" + "'" + id + "'";  
+			String query = "SELECT * FROM Orders JOIN OrderList on Orders.OrderID = OrderList.OrderID Where Orders.Orderid=" + "'" + id + "'";  
 			ResultSet rs = select.executeQuery(query);
 			rs.next();
 
@@ -131,6 +131,14 @@ public class OrderDAO {
 			ord.setCustomerID(rs.getString("CustomerID"));
 			ord.setOrderTotal(new BigDecimal(rs.getString("OrderTotal")));
 			ord.setCreditCardNo(rs.getString("CreditCardNo"));
+			ArrayList<Product> prodsOnOrder = new ArrayList<>();
+			prodsOnOrder.add(pm.getProduct(rs.getString("ProductID")));
+			
+			//get all products if multiple rows are returned.
+			while(rs.next()) {
+				prodsOnOrder.add(pm.getProduct(rs.getString("ProductID")));
+			}
+			ord.setProducts(prodsOnOrder);
 			
 			return ord;
 			
@@ -199,8 +207,8 @@ public class OrderDAO {
 		order.setCreditCardNo(ccNo);
 		
 		//for each product id, get product object from DB and add to new order object
-		for (String pID : productIDs) {
-			order.addProduct(productDAO.getProduct(pID));
+		for (Product p : productsOnOrder) {
+			order.addProduct(p);
         }
 		
 		//return that new order object
