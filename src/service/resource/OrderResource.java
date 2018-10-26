@@ -15,7 +15,6 @@ import javax.ws.rs.core.Response.Status;
 
 import service.represntation.OrderRepresentation;
 import service.represntation.OrderRequest;
-import service.represntation.ProductRequest;
 import service.workflow.OrderActivity;
 
 @Path("/orderService/")
