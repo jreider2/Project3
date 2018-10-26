@@ -16,9 +16,7 @@ public class OrderRequest {
 	
 	private String id;
 	private ArrayList <ProductRequest> items;
-	private PartnerRepresentation partnerRep;
 	private String customerId;
-	private String orderStatus;
 	private String ccNo;
 	
 	public ArrayList<ProductRequest> getItems() {
@@ -36,15 +34,7 @@ public class OrderRequest {
 	public void setCustomerId(String customerId) {
 		this.customerId = customerId;
 	}
-
-	public String getOrderStatus() {
-		return orderStatus;
-	}
-
-	public void setOrderStatus(String orderStatus) {
-		this.orderStatus = orderStatus;
-	}
-
+	
 	public String getCcNo() {
 		return ccNo;
 	}
@@ -67,14 +57,6 @@ public class OrderRequest {
 
 	public void setProducts(ArrayList<ProductRequest> items) {
 		this.items = items;
-	}
-
-	public PartnerRepresentation getPartnerRep() {
-		return this.partnerRep;
-	}
-
-	public void setPartnerRep(PartnerRepresentation partnerRep) {
-		this.partnerRep = partnerRep;
 	}
 
 	public void setId(String id) {
