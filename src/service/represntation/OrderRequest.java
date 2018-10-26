@@ -14,7 +14,6 @@ import partner.Partner;
 @XmlType(name = "")
 public class OrderRequest {
 	
-	private String id;
 	private ArrayList <ProductRequest> items;
 	private String customerId;
 	private String ccNo;
@@ -46,11 +45,7 @@ public class OrderRequest {
 	public OrderRequest() {
 		items = new ArrayList<>();
 	}
-
-	public String getId() {
-		return this.id;
-	}
-
+	
 	public ArrayList<ProductRequest> getProducts() {
 		return this.items;
 	}
@@ -59,8 +54,5 @@ public class OrderRequest {
 		this.items = items;
 	}
 
-	public void setId(String id) {
-		this.id = id;
-	}
 
 }
