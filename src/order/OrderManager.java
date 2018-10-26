@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import dao.OrderDAO;
 import product.Product;
 import product.ProductManager;
+import service.represntation.ProductRepresentation;
 
 /**
  * @author julianareider
@@ -29,20 +30,18 @@ public class OrderManager {
 		return dao.getOrder(id);
 	}
 	
-	public Order addOrder(String customerID, ArrayList<String> productIDs, String CreditCardNo) {
+	public Order addOrder(String customerID, ArrayList<ProductRepresentation> products, String CreditCardNo) {
 	
 		BigDecimal orderTotal = new BigDecimal(0);
+		ArrayList<Product> arProducts = new ArrayList<>();
+		Product p = new Product();
 		
-		ProductManager pm = new ProductManager();
-		Product p;
-		for (String pId : productIDs) {
-			p = pm.getProduct(pId);
-			BigDecimal itemPrice = new BigDecimal(p.getPrice());
-			orderTotal = orderTotal.add(itemPrice);
-			
+		for(ProductRepresentation pR : products) {
+			p.initialize(pR);
+			arProducts.add(p);
 		}
 		
-		Order order = dao.placeOrder(customerID, productIDs, CreditCardNo, orderTotal);
+		Order order = dao.placeOrder(customerID, arProducts, CreditCardNo, orderTotal);
 		
 		return order;
 	}

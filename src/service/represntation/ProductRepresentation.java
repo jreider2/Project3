@@ -16,7 +16,14 @@ public class ProductRepresentation {
 	private double price;
 	private String productOwnerID;
 	private PartnerRepresentation partnerRep;
+	private String quantityOnOrder;
 	
+	public String getQuantityOnOrder() {
+		return quantityOnOrder;
+	}
+	public void setQuantityOnOrder(String quantityOnOrder) {
+		this.quantityOnOrder = quantityOnOrder;
+	}
 	public String getId() {
 		return id; 
 	}

@@ -15,6 +15,7 @@ import order.Order;
 import partner.Partner;
 import product.Product;
 import dao.PartnerDAO;
+import net.shibboleth.utilities.java.support.collection.Pair;
 
 /**
  * @author julianareider
@@ -44,6 +45,8 @@ public class OrderDAO {
 
 			while (rs.next()) {
 				String ordId = rs.getString("OrderID");
+				Order o = new Order();
+				o.setId(rs.getString("OrderID"));
 				arOrd.add(getOrder(ordId));
 			}
 			
@@ -126,7 +129,7 @@ public class OrderDAO {
 	
 	
 	/** Note to partner: this method is considered complete */
-	public Order placeOrder(String customerID, ArrayList<String> productIDs, String ccNo, BigDecimal orderTotal) {
+	public Order placeOrder(String customerID, ArrayList<Product> productsOnOrder, String ccNo, BigDecimal orderTotal) {
 		Integer resultKey = -1;
 		Connection connection = DBConnect.getDatabaseConnection();
 		String status = "ordered";
@@ -146,10 +149,10 @@ public class OrderDAO {
 	        rs.close();
 	        
 	        //add order and Products to product table -- for each product ID
-	        for (String pID : productIDs) {
+	        for (Pair p : productIDs) {
 				
-				insertQuery = "INSERT INTO OrderList (OrderID,ProductID)"
-						+ "VALUES('" + resultKey + "', '" + pID + "')";
+				insertQuery = "INSERT INTO OrderList (OrderID,ProductID,Qty)"
+						+ "VALUES('" + resultKey + "', '" + pID + "', '" +  + "')";
 				insertStatement.executeUpdate(insertQuery);
 	        }
 	        
