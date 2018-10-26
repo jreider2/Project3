@@ -76,14 +76,8 @@ public class OrderResource implements OrderService {
 	@Produces({"application/json", "application/xml"})
 	@Consumes({"application/json", "application/xml"})
 	@Path("/order/neworder")
-	public OrderRepresentation createOrder(OrderRequest oR) {
-		ArrayList<String> productList = new ArrayList<>();
-		
-		for (ProductRequest pr : oR.getProducts()) {
-			productList.add(pr.getId());
-		}
-		
-		return oA.submitOrder(oR.getCcNo(), productList, oR.getCcNo());
+	public OrderRepresentation placeOrder(OrderRequest oR) {
+		return oA.submitOrder(oR.getCcNo(), oR.getProducts(), oR.getCcNo());
 	}
 	
 }
