@@ -14,6 +14,7 @@ import customer.CreditCard;
 import order.Order;
 import partner.Partner;
 import product.Product;
+import product.ProductManager;
 import dao.PartnerDAO;
 import net.shibboleth.utilities.java.support.collection.Pair;
 
@@ -42,12 +43,32 @@ public class OrderDAO {
 			
 			String query = "SELECT * FROM Orders WHERE CustomerID=" + "'" + customerNo + "'";  
 			ResultSet rs = select.executeQuery(query);
-
+			
+			ProductManager pm = new ProductManager();
+			ArrayList<Product> productsOnOrder = new ArrayList<>();
+			String previousRowOrderID = "";
+			Order o = new Order();
 			while (rs.next()) {
-				String ordId = rs.getString("OrderID");
-				Order o = new Order();
-				o.setId(rs.getString("OrderID"));
-				arOrd.add(getOrder(ordId));
+				
+				if (previousRowOrderID != rs.getString("OrderID")) {
+					o = new Order();
+					o.setId(rs.getString("OrderID"));
+					o.setCreditCardNo(rs.getString("CreditCardNo"));
+					o.setCustomerID(rs.getString("CustomerID"));
+					o.setOrderTotal(new BigDecimal(rs.getShort("OrderTotal")));
+					productsOnOrder.add(pm.getProduct(rs.getString("ProductID")));
+					
+					o.setProducts(productsOnOrder);
+				} else {
+					productsOnOrder.add(pm.getProduct(rs.getString("ProductID")));
+					o.setProducts(productsOnOrder);
+				}
+				
+				previousRowOrderID = o.getId();
+				
+				if (previousRowOrderID != rs.getString("OrderID")) {
+					arOrd.add(o);
+				}
 			}
 			
 			return arOrd;
@@ -149,10 +170,10 @@ public class OrderDAO {
 	        rs.close();
 	        
 	        //add order and Products to product table -- for each product ID
-	        for (Pair p : productIDs) {
+	        for (Product p : productsOnOrder) {
 				
 				insertQuery = "INSERT INTO OrderList (OrderID,ProductID,Qty)"
-						+ "VALUES('" + resultKey + "', '" + pID + "', '" +  + "')";
+						+ "VALUES('" + resultKey + "', '" + p.getId() + "', '" + p.getQuantityOnOrder() + "')";
 				insertStatement.executeUpdate(insertQuery);
 	        }
 	        
