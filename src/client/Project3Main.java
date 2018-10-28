@@ -8,6 +8,7 @@ import javax.xml.ws.Response;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 
+import order.OrderedItem;
 import service.represntation.OrderRequest;
 import service.represntation.PartnerRequest;
 import service.represntation.ProductRequest;
@@ -157,20 +158,19 @@ public final class Project3Main {
         String pushOrderPutRequestHeaders = pushOrderPutClient.getHeaders().toString();
         System.out.println("Client POST METHOD Request Headers:  " + pushOrderPutRequestHeaders);
         
-        ProductRequest productReqForOrderReq = new ProductRequest();
-        productReqForOrderReq.setId("13");
-        productReqForOrderReq.setName("swim suit");
-        productReqForOrderReq.setDescription("mens racing suit");
-        productReqForOrderReq.setPrice(50.00);
-        productReqForOrderReq.setProductOwnerID("15");
+        OrderedItem productReqForOrderReq = new OrderedItem();
+        productReqForOrderReq.setProductID("13");
+        productReqForOrderReq.setProductPrice("50.00");
+        productReqForOrderReq.setQtyOnOrder("15");
         
-        ArrayList<ProductRequest> items = new ArrayList<>();
+        ArrayList<OrderedItem> items = new ArrayList<>();
         items.add(productReqForOrderReq);
         //items.add(productReqForOrderReq);
         
         OrderRequest orderReq = new OrderRequest();
-        orderReq.setId("4");
-        orderReq.setProducts(items);
+        orderReq.setCcNo("320121325155");
+        orderReq.setCustomerId("4");
+        orderReq.setItems(items);
         
      	String responsePushOrderPut =  pushOrderPutClient.put(orderReq, String.class); 
      	System.out.println("POST MEDTHOD Response ........." + responsePushOrderPut);
