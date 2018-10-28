@@ -6,6 +6,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -56,7 +57,7 @@ public class OrderResource implements OrderService {
 	
 	@GET
 	@Produces({"application/xml", "application/json"})
-	@Path("/order/status")
+	@Path("/status")
 	public String getOrderStatus(@QueryParam("orderID") String orderID) {
 		OrderRepresentation oR = oA.getOrder(orderID);
 		
@@ -78,5 +79,13 @@ public class OrderResource implements OrderService {
 	public OrderRepresentation placeOrder(OrderRequest oR) {
 		return oA.submitOrder(oR.getCustomerId(), oR.getItems(), oR.getCcNo());
 	}
+	
+	@PUT
+	@Produces({"application/json", "application/xml"})
+	@Consumes({"application/json", "application/xml"})
+	@Path("/shippedOrder")
+	public boolean shipOrder(String orderID) {
+		return oA.shipOrder(orderID);
+	} 
 	
 }

@@ -214,6 +214,7 @@ public class OrderDAO {
 	        order.setId(Integer.toString(resultKey));
 			order.setOrderStatus(status);
 			order.setCreditCardNo(ccNo);
+			order.setCustomerID(customerID);
 			
 			String query = "SELECT OrderList.OrderID as OrderID, Product.ProductID as ProductID, OrderList.Qty as qty, Product.Price as Price FROM eCommerceDB.OrderList JOIN Product on Product.ProductID = OrderList.ProductID where OrderList.OrderID=" + "'" + Integer.toString(resultKey) + "'";  
 
@@ -222,8 +223,8 @@ public class OrderDAO {
 			while(rs.next()) {
 				OrderedItem oI = new OrderedItem();
 				oI.setProductID(rs.getString("ProductID"));
-				oI.setProductPrice("Price");
-				oI.setQtyOnOrder("qty");
+				oI.setProductPrice(rs.getString("Price"));
+				oI.setQtyOnOrder(rs.getString("qty"));
 				itemsOnOrder.add(oI);
 			}
 			
