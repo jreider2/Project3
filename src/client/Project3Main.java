@@ -263,11 +263,13 @@ public final class Project3Main {
          * GET METHOD : Provide Order Status
          *****************************************************************************************/
      	WebClient statusClient = WebClient.create("http://localhost:8081", providers);
+        
+        // set Accept and ContentType headers
      	statusClient = statusClient.accept("application/json").type("application/json").path("/order/orderService/status?orderID=" + ordResponsePost.getOrderNo());
      	
      	String status = statusClient.get(String.class);
      	System.out.println("Order " + ordResponsePost.getOrderNo() + " status: " + status);
-     	
+     
      	
         /*getAcknowledgmentClient = getAcknowledgmentClient.accept("application/json").type("application/json").path("/order/orderService/order/status?orderID=10");
         acknowledgementResponse = getAcknowledgmentClient.get(String.class);
