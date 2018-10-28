@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import customer.CreditCard;
 import order.Order;
+import order.OrderedItem;
 import partner.Partner;
 import product.Product;
 import product.ProductManager;
@@ -158,38 +159,58 @@ public class OrderDAO {
 	
 	
 	/** Note to partner: this method is considered complete */
-	public Order placeOrder(String customerID, ArrayList<Product> productsOnOrder, String ccNo, BigDecimal orderTotal) {
+	public Order placeOrder(String customerID, ArrayList<OrderedItem> productsOnOrder, String ccNo, BigDecimal orderTotal) {
 		Integer resultKey = -1;
 		Connection connection = DBConnect.getDatabaseConnection();
 		String status = "ordered";
-
+		Statement queryStatement = connection.createStatement();
+		//Create new Order with appropriate attributes
+		Order order = new Order();
 		//add order to orders table
 		try {
-			Statement insertStatement = connection.createStatement();
+			
 			
 			String insertQuery = "INSERT INTO Orders VALUES (0,'"+ status +"','" + customerID + "', '" + ccNo + "', '" + orderTotal.toString() + "')";
-			insertStatement.executeUpdate(insertQuery, Statement.RETURN_GENERATED_KEYS);
+			queryStatement.executeUpdate(insertQuery, Statement.RETURN_GENERATED_KEYS);
 				
 			//Grab the generated key//get orderID
-			ResultSet rs = insertStatement.getGeneratedKeys();
+			ResultSet rs = queryStatement.getGeneratedKeys();
 	        if (rs.next()){
 	            resultKey = rs.getInt(1);
 	        }
 	        rs.close();
 	        
 	        //add order and Products to product table -- for each product ID
-	        for (Product p : productsOnOrder) {
+	        for (OrderedItem oI : productsOnOrder) {
 				
 				insertQuery = "INSERT INTO OrderList (OrderID,ProductID,Qty)"
-						+ "VALUES('" + resultKey + "', '" + p.getId() + "', '" + p.getQuantityOnOrder() + "')";
-				insertStatement.executeUpdate(insertQuery);
+						+ "VALUES('" + resultKey + "', '" + oI.getProductID() + "', '" + oI.getQtyOnOrder() + "')";
+				queryStatement.executeUpdate(insertQuery);
 	        }
 	        
 	        //add record to payment table to record that the order was paid for.
 	        insertQuery = "INSERT INTO Payment VALUES (0, '" + ccNo + "', '" + resultKey.toString() + "', '" + customerID + "')";
-	        insertStatement.executeUpdate(insertQuery);
+	        queryStatement.executeUpdate(insertQuery);
+	        
+	        order.setId(Integer.toString(resultKey));
+			order.setOrderStatus(status);
+			order.setCreditCardNo(ccNo);
 			
-	        insertStatement.close();
+			String query = "SELECT OrderList.OrderID as OrderID, Product.ProductID as ProductID, OrderList.Qty as qty, Product.Price as Price FROM eCommerceDB.OrderList JOIN Product on Product.ProductID = OrderList.ProductID where OrderList.OrderID=" + "'" + Integer.toString(resultKey) + "'";  
+
+			ArrayList<OrderedItem> itemsOnOrder = new ArrayList<>();
+			rs = queryStatement.executeQuery(query);
+			while(rs.next()) {
+				OrderedItem oI = new OrderedItem();
+				oI.setProductID(rs.getString("ProductID"));
+				oI.setProductPrice("Price");
+				oI.setQtyOnOrder("qty");
+				itemsOnOrder.add(oI);
+			}
+			
+			order.setProducts(itemsOnOrder);
+			
+	        queryStatement.close();
 		}catch(SQLException se) {
 			se.printStackTrace();
 		}finally {
@@ -199,17 +220,6 @@ public class OrderDAO {
 				} catch (SQLException e) {}
 			}
 		}
-		
-		//Create new Order with appropriate attributes
-		Order order = new Order();
-		order.setId(Integer.toString(resultKey));
-		order.setOrderStatus(status);
-		order.setCreditCardNo(ccNo);
-		
-		//for each product id, get product object from DB and add to new order object
-		for (Product p : productsOnOrder) {
-			order.addProduct(p);
-        }
 		
 		//return that new order object
 		return order;

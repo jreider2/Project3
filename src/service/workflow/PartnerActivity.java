@@ -96,12 +96,13 @@ public class PartnerActivity {
 		return partnerRepresentation;
 	}
 	
-	public OrderRepresentation pushOrderToPartner(OrderRequest oR) {
+	//NOTE TO JULIANA: I don't think we need this as the resource shouldn't need a push to partner functionality.
+	/*public OrderRepresentation pushOrderToPartner(OrderRequest oR) {
 		//the order needs orderId and products attributes filled
 		
 		//set order ID
 		Order o = new Order();
-		o.setId(oR.getId());
+		o.setId(oR.);
 		
 		//set the products in the order
 		for (ProductRequest p : oR.getProducts()) {
@@ -124,9 +125,10 @@ public class PartnerActivity {
 		//partnerManager pushes order and returns status of success or failure
 		partnerManager.pushOrderToPartner(o);
 		return createOrderRepresentation(oR);
-	}
+	}*/
 	
-	private OrderRepresentation createOrderRepresentation(OrderRequest oR) {
+	//NOTE TO JULIANA: This code is never referenced. Commented out as a result.
+	/*private OrderRepresentation createOrderRepresentation(OrderRequest oR) {
 		//set order ID
 		OrderRepresentation orderRep = new OrderRepresentation();
 		orderRep.setOrderNo(oR.getId());
@@ -164,7 +166,7 @@ public class PartnerActivity {
 		}
 		
 		return orderRep;
-	}
+	}*/
 	
 	
 	public String deletePartner(String id) {

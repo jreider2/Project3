@@ -13,6 +13,7 @@ import java.util.Random;
 import java.util.Set;
 
 import dao.DBConnect;
+import order.OrderedItem;
 import partner.Partner;
 import product.Product;
 
@@ -69,7 +70,7 @@ public class ProductDAO {
 	}
 	
 	public ArrayList<Product> getProductList(ArrayList<OrderedItem> productIDs) {
-		ArrayList<Product> queriedProducts = new ArrayList<Product>();
+		ArrayList<Product> queriedProducts = new ArrayList<>();
 		Connection connection = DBConnect.getDatabaseConnection();
 		
 		try {
@@ -89,19 +90,16 @@ public class ProductDAO {
 			
 			Product TempProd;
 			while(resultSet.next()) {
+				TempProd = new Product();
 				TempProd.setId(resultSet.getString("ProductID"));
 				TempProd.setName(resultSet.getString("Name"));
 				TempProd.setDescription(resultSet.getString("Description"));
 				TempProd.setPrice(Double.valueOf(resultSet.getString("Price")));
-				TempProd.setQuantityOnOrder(quantityOnOrder);
-				name = resultSet.getString("name");
-				description  = resultSet.getString("description");
-				price = resultSet.getString("price");
-				partnerID = resultSet.getString("PartnerID");
+				TempProd.setProductOwner(partnerDAO.getPartner(resultSet.getString("PartnerID")));
+				queriedProducts.add(TempProd);
 			}
 			
 			return queriedProducts;
-			
 			
 		}catch(SQLException se) {
 			se.printStackTrace();
@@ -112,6 +110,9 @@ public class ProductDAO {
 				} catch (SQLException e) {}
 			}
 		}
+		//return empty list if there is an error
+		return new ArrayList<Product>();
+		
 	}
 
 	/** Note to partner: this method is considered complete */

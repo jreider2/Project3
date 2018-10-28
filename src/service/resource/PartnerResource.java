@@ -97,9 +97,10 @@ public class PartnerResource implements PartnerService {
 		return partnerActivity.addProductToPartner(productRequest.getName(), productRequest.getDescription(), (int) productRequest.getPrice(), partnerID);
 	}
 	
+	//NOTE TO JULIANA: I don't think this should be exposed to the client. Just done behind the scene when an order is placed.
 	/**
 	 * Push new Order to Partner
-	 */
+	 *//*
 	@PUT
 	@Produces({"application/xml" , "application/json"})
 	@Path("/partners/orderNotification")
@@ -108,7 +109,7 @@ public class PartnerResource implements PartnerService {
 		PartnerActivity partnerActivity = new PartnerActivity();
 		return partnerActivity.pushOrderToPartner(orderRequest);
 	}//TODO add partner name to system output 
-	
+*/	
 	/**
 	 * Delete existing partner
 	 */

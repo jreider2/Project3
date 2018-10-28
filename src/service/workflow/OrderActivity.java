@@ -63,24 +63,15 @@ public class OrderActivity {
 	
 	public OrderRepresentation submitOrder(String customerID, ArrayList<OrderedItem> products, String CreditCardNo) {
 		OrderRepresentation oR = new OrderRepresentation();
-		ProductRepresentation pRep = new ProductRepresentation();
-		PartnerManager pm = new PartnerManager();
 		ProductManager prodMan = new ProductManager();
-		PartnerRepresentation partnerRep = new PartnerRepresentation();
-		ArrayList<ProductRepresentation> productsOnOrder = new ArrayList<>();
 		
 		Product pr;
 		for(OrderedItem oi : products) {
 			pr = prodMan.getProduct(oi.getProductID());
-			pRep.setId(pr.getId());
-			pRep.setPrice(pr.getPrice());
-			pRep.setQuantityOnOrder(oi.getQtyOnOrder());
-			//don't set all properties because we don't need them all
-			
-			productsOnOrder.add(pRep);
+			oi.setProductPrice(Double.toString(pr.getPrice()));			
 		}
 		
-		Order newOrder = oM.addOrder(customerID, productsOnOrder, CreditCardNo);
+		Order newOrder = oM.addOrder(customerID, products, CreditCardNo);
 		
 		oR.setOrderNo(newOrder.getId());
 		oR.setOrderStatus(newOrder.getOrderStatus());

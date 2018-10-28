@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Set;
 
 import dao.ProductDAO;
+import order.OrderedItem;
 import partner.Partner;
 
 /**
@@ -37,8 +38,8 @@ public class ProductManager {
 		return dao.getProduct(id);
 	}
 	
-	public ArrayList<Product> getProductList(ArrayList<String> productIDs){
-		return dao.getProductList(productIDs);
+	public ArrayList<Product> getProductList(ArrayList<OrderedItem> orderedProducts){
+		return dao.getProductList(orderedProducts);
 	}
 	
 	/**
