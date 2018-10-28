@@ -109,7 +109,7 @@ public class Partner implements Serializable {
 	}
 	
 	public boolean recieveOrder(Order o) {
-		System.out.println("Order recieved. Order is: " + o.getProducts().get(0).toString());
+		System.out.println("Order recieved. Order is: " + o.getId());
 		System.out.println("New Order status: " + "pushedToPartner");
 		return true;
 	}

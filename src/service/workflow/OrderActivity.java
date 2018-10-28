@@ -80,5 +80,9 @@ public class OrderActivity {
 		return oM.cancelOrder(orderID);
 	}
 	
+	public boolean shipOrder(String orderID) {
+		return oM.shipOrder(orderID);
+	}
+	
 	
 }
