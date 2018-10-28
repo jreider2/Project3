@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 import order.OrderedItem;
-import partner.Partner;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -34,7 +33,6 @@ public class OrderRequest {
 	public void setCustomerId(String customerId) {
 		this.customerId = customerId;
 	}
-
 	public String getCcNo() {
 		return ccNo;
 	}
