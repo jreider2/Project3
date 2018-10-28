@@ -67,6 +67,52 @@ public class ProductDAO {
 		
 		return null;
 	}
+	
+	public ArrayList<Product> getProductList(ArrayList<OrderedItem> productIDs) {
+		ArrayList<Product> queriedProducts = new ArrayList<Product>();
+		Connection connection = DBConnect.getDatabaseConnection();
+		
+		try {
+			Statement selectStatement = connection.createStatement();
+			
+			String selectQuery = "SELECT * from Product where ProductID in (";
+			
+			for (int i = 0; i < productIDs.size(); i++) {
+				if(i < productIDs.size() - 1) {
+					selectQuery += "'" + productIDs.get(i) + "',";
+				} else {
+					selectQuery += "'" + productIDs.get(i) + "')";
+				}
+			}
+			
+			ResultSet resultSet = selectStatement.executeQuery(selectQuery);
+			
+			Product TempProd;
+			while(resultSet.next()) {
+				TempProd.setId(resultSet.getString("ProductID"));
+				TempProd.setName(resultSet.getString("Name"));
+				TempProd.setDescription(resultSet.getString("Description"));
+				TempProd.setPrice(Double.valueOf(resultSet.getString("Price")));
+				TempProd.setQuantityOnOrder(quantityOnOrder);
+				name = resultSet.getString("name");
+				description  = resultSet.getString("description");
+				price = resultSet.getString("price");
+				partnerID = resultSet.getString("PartnerID");
+			}
+			
+			return queriedProducts;
+			
+			
+		}catch(SQLException se) {
+			se.printStackTrace();
+		}finally {
+			if(connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {}
+			}
+		}
+	}
 
 	/** Note to partner: this method is considered complete */
 	public Product getProduct(String id) {

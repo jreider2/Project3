@@ -4,9 +4,11 @@ import java.util.ArrayList;
 
 import order.Order;
 import order.OrderManager;
+import order.OrderedItem;
 import partner.Partner;
 import partner.PartnerManager;
 import product.Product;
+import product.ProductManager;
 import service.represntation.OrderRepresentation;
 import service.represntation.OrderRequest;
 import service.represntation.PartnerRepresentation;
@@ -59,28 +61,22 @@ public class OrderActivity {
 		return tempProducts;
 	}
 	
-	public OrderRepresentation submitOrder(String customerID, ArrayList<ProductRequest> products, String CreditCardNo) {
+	public OrderRepresentation submitOrder(String customerID, ArrayList<OrderedItem> products, String CreditCardNo) {
 		OrderRepresentation oR = new OrderRepresentation();
 		ProductRepresentation pRep = new ProductRepresentation();
 		PartnerManager pm = new PartnerManager();
+		ProductManager prodMan = new ProductManager();
 		PartnerRepresentation partnerRep = new PartnerRepresentation();
 		ArrayList<ProductRepresentation> productsOnOrder = new ArrayList<>();
 		
-		for(ProductRequest pr : products) {
+		Product pr;
+		for(OrderedItem oi : products) {
+			pr = prodMan.getProduct(oi.getProductID());
 			pRep.setId(pr.getId());
-			pRep.setDescription(pr.getDescription());
-			pRep.setName(pr.getName());
 			pRep.setPrice(pr.getPrice());
-			pRep.setQuantityOnOrder(pr.getQuantityOnOrder());
+			pRep.setQuantityOnOrder(oi.getQtyOnOrder());
+			//don't set all properties because we don't need them all
 			
-			//get partner information
-			Partner p = pm.getPartner(pr.getProductOwnerID());
-			partnerRep.setCompanyName(p.getCompanyName());
-			partnerRep.setId(p.getId());
-			partnerRep.setPassword(p.getPassword());
-			partnerRep.setUserName(p.getUserName());
-			
-			pRep.setPartnerRep(partnerRep);
 			productsOnOrder.add(pRep);
 		}
 		

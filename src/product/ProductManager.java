@@ -37,6 +37,10 @@ public class ProductManager {
 		return dao.getProduct(id);
 	}
 	
+	public ArrayList<Product> getProductList(ArrayList<String> productIDs){
+		return dao.getProductList(productIDs);
+	}
+	
 	/**
 	 * Returns null if no products match the search 
 	 */

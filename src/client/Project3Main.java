@@ -225,7 +225,9 @@ public final class Project3Main {
      	/*****************************************************************************************
          * POST METHOD : Accept credit card payment
          *****************************************************************************************/
-     	
+         getAcknowledgmentClient = getAcknowledgmentClient.accept("application/json").type("application/json").path("/order/orderService/order/neworder");
+         acknowledgementResponse = getAcknowledgmentClient.get(String.class);
+         System.out.println("POST (Place Order) Method response: .... " + acknowledgementResponse);
      	
      	/*****************************************************************************************
          * PUT METHOD : Ship Orders
@@ -236,14 +238,14 @@ public final class Project3Main {
          * GET METHOD : Provide Order Status
          *****************************************************************************************/
         getAcknowledgmentClient = getAcknowledgmentClient.accept("application/json").type("application/json").path("/order/orderService/order/status?orderID=10");
-//        acknowledgementResponse = getAcknowledgmentClient.get(String.class);
-//        System.out.println("GET Method response: ...." + acknowledgementResponse);
+        acknowledgementResponse = getAcknowledgmentClient.get(String.class);
+        System.out.println("GET (Order Status) Method response: .... " + acknowledgementResponse);
      	/*****************************************************************************************
          * DELETE METHOD : Cancel Order
          *****************************************************************************************/
         getAcknowledgmentClient = getAcknowledgmentClient.accept("application/json").type("application/json").path("/order/orderService/order/cancelledorder?orderID=10");
-//        acknowledgementResponse = getAcknowledgmentClient.get(String.class);
-//        System.out.println("DELETE Method response: ...." + acknowledgementResponse);
+        acknowledgementResponse = getAcknowledgmentClient.get(String.class);
+        System.out.println("DELETE (Cancel Order) Method response: .... " + acknowledgementResponse);
      	/*****************************************************************************************
          * ERROR Handling
          *****************************************************************************************/
