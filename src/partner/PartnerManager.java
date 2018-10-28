@@ -9,6 +9,7 @@ import dao.OrderDAO;
 import dao.PartnerDAO;
 import dao.ProductDAO;
 import order.Order;
+import order.OrderedItem;
 import product.Product;
 
 /**
@@ -65,7 +66,9 @@ public class PartnerManager {
 	
 	public boolean pushOrderToPartner(Order o) {
 		
-		for (Product p: o.getItems()) {
+		for (OrderedItem oI: o.getProducts()) {
+			Product p = new Product();
+			p = productDao.getProduct(oI.getProductID());
 			p.getProductOwner().recieveOrder(o);
 			p.getProductOwner().recievePayment();
 		}

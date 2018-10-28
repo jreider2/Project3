@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import order.OrderedItem;
 import product.Product;
 
 @XmlRootElement(name = "Order")
@@ -15,7 +16,7 @@ import product.Product;
 public class OrderRepresentation {
 	private String orderNo;
 	private String orderStatus;
-	private ArrayList<ProductRequest> productsOnOrder;
+	private ArrayList<OrderedItem> productsOnOrder;
 	private String customerID;
 	
 	public String getCustomerID() {
@@ -42,14 +43,11 @@ public class OrderRepresentation {
 	public void setOrderStatus(String orderStatus) {
 		this.orderStatus = orderStatus;
 	}
-	public ArrayList<ProductRequest> getProductsOnOrder() {
+	public ArrayList<OrderedItem> getProductsOnOrder() {
 		return productsOnOrder;
 	}
-	public void setProductsOnOrder(ArrayList<ProductRequest> productsOnOrder) {
+	public void setProductsOnOrder(ArrayList<OrderedItem> productsOnOrder) {
 		this.productsOnOrder = productsOnOrder;
-	}
-	public void addProduct(ProductRequest p) {
-		this.productsOnOrder.add(p);
 	}
 
 }

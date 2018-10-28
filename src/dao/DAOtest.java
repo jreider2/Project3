@@ -9,6 +9,7 @@ import customer.CreditCardManager;
 import customer.Customer;
 import order.Order;
 import order.OrderManager;
+import order.OrderedItem;
 import partner.Partner;
 import product.Product;
 import product.ProductManager;
@@ -55,14 +56,16 @@ public class DAOtest {
 		System.out.println(b1);
 		
 		Order o = new Order();
-		Product p = new Product();
-		ProductManager pm = new ProductManager();
-		p = pm.getProduct("6");
-		o.addProduct(p);
+		OrderedItem oi = new OrderedItem();
+		oi.setProductID("102");
+		oi.setProductPrice("5.00");
+		oi.setQtyOnOrder("3");
+		
+		o.addProduct(oi);
 		OrderManager om = new OrderManager();
 		ArrayList<String> ap = new ArrayList<>();
-		ap.add(p.getId());
-		om.addOrder("1", ap, "1111222233334444");
+		ap.add(oi.getProductID());
+		//om.addOrder("1", ap, "1111222233334444");
 		
 		/** Note to partner: This class is just for testing. Main functionalities are DOMOed in mainClient */
 		

@@ -15,6 +15,15 @@ public class ProductRequest {
 	private String description;
 	private double price;
 	private String productOwnerID;
+	private String quantityOnOrder;
+
+	public String getQuantityOnOrder() {
+		return quantityOnOrder;
+	}
+
+	public void setQuantityOnOrder(String quantityOnOrder) {
+		this.quantityOnOrder = quantityOnOrder;
+	}
 
 	public ProductRequest() {}
 

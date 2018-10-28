@@ -18,7 +18,8 @@ public interface PartnerService {
 	public PartnerRepresentation getPartner(String partnerId);
 	public PartnerRepresentation createPartner(PartnerRequest  partnerRequest);
 	public PartnerRepresentation addProductToPartner(String partnerID, ProductRequest productRequest);
-	public OrderRepresentation pushOrderToPartner(OrderRequest orderRequest);
+	//NOTE TO JULIANA: This is not needed in the partner resource.
+	//public OrderRepresentation pushOrderToPartner(OrderRequest orderRequest);
 	public Response deletePartner(String partnerId);
 	
 }

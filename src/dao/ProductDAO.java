@@ -13,6 +13,7 @@ import java.util.Random;
 import java.util.Set;
 
 import dao.DBConnect;
+import order.OrderedItem;
 import partner.Partner;
 import product.Product;
 
@@ -66,6 +67,52 @@ public class ProductDAO {
 		}
 		
 		return null;
+	}
+	
+	public ArrayList<Product> getProductList(ArrayList<OrderedItem> productIDs) {
+		ArrayList<Product> queriedProducts = new ArrayList<>();
+		Connection connection = DBConnect.getDatabaseConnection();
+		
+		try {
+			Statement selectStatement = connection.createStatement();
+			
+			String selectQuery = "SELECT * from Product where ProductID in (";
+			
+			for (int i = 0; i < productIDs.size(); i++) {
+				if(i < productIDs.size() - 1) {
+					selectQuery += "'" + productIDs.get(i) + "',";
+				} else {
+					selectQuery += "'" + productIDs.get(i) + "')";
+				}
+			}
+			
+			ResultSet resultSet = selectStatement.executeQuery(selectQuery);
+			
+			Product TempProd;
+			while(resultSet.next()) {
+				TempProd = new Product();
+				TempProd.setId(resultSet.getString("ProductID"));
+				TempProd.setName(resultSet.getString("Name"));
+				TempProd.setDescription(resultSet.getString("Description"));
+				TempProd.setPrice(Double.valueOf(resultSet.getString("Price")));
+				TempProd.setProductOwner(partnerDAO.getPartner(resultSet.getString("PartnerID")));
+				queriedProducts.add(TempProd);
+			}
+			
+			return queriedProducts;
+			
+		}catch(SQLException se) {
+			se.printStackTrace();
+		}finally {
+			if(connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {}
+			}
+		}
+		//return empty list if there is an error
+		return new ArrayList<Product>();
+		
 	}
 
 	/** Note to partner: this method is considered complete */

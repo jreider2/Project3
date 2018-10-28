@@ -6,6 +6,7 @@ package product;
 import java.io.Serializable;
 
 import partner.Partner;
+import service.represntation.ProductRepresentation;
 
 /**
  * @author julianareider
@@ -19,6 +20,15 @@ public class Product implements Serializable {
 	private String description;
 	private double price;
 	private Partner productOwner;
+
+	
+	public void initialize(ProductRepresentation pR) {
+		this.id = pR.getId();
+		this.name = pR.getName();
+		this.description = pR.getDescription();
+		this.price = pR.getPrice();
+	}
+
 
 	/**
 	 * Constructor

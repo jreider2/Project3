@@ -85,14 +85,14 @@ public class MainClient {
 		myProductIDs.add(googles.getId());
 		myProductIDs.add(googles.getId());
 		String tempCustomerID = "3";
-		Order myGoggleOrder = orderManager.addOrder(tempCustomerID, myProductIDs, "5555888822229999");
-		System.out.println("OrderID of the newly created Order: " + myGoggleOrder.getId());
-		System.out.println("Credit Card on order: " + myGoggleOrder.getCreditCardNo());
+		//Order myGoggleOrder = orderManager.addOrder(tempCustomerID, myProductIDs, "5555888822229999");
+		//System.out.println("OrderID of the newly created Order: " + myGoggleOrder.getId());
+		//System.out.println("Credit Card on order: " + myGoggleOrder.getCreditCardNo());
 		System.out.println("Customer Order successfully put in an order for: ");
 		
-		for (Product p : myGoggleOrder.getItems()) {
-			System.out.println(p);
-		}
+		//for (Product p : myGoggleOrder.getItems()) {
+		//	System.out.println(p);
+		//}
 		
 		//*****************Request Product /// Accept Credit Card payment //create order FUNCTIONALITY*********************************************
 			// request to buy product > credit card payment > create Order (Order status is "ordered" (not yet shipped, partner must explicitly ship it)

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import dao.OrderDAO;
 import product.Product;
+import java.math.BigDecimal;
 
 /**
  * @author julianareider
@@ -17,17 +18,34 @@ public class Order implements Serializable {
 	
 	//private static final long serialVersionUID = 1L;
 	private String id;
-	private ArrayList<Product> products;
+	private ArrayList<OrderedItem> products;
 	private String orderStatus;
 	private String customerID;
 	private String creditCardNo;
+	
+	public ArrayList<OrderedItem> getProducts() {
+		return products;
+	}
+
+	public void setProducts(ArrayList<OrderedItem> products) {
+		this.products = products;
+	}
+
+	public BigDecimal getOrderTotal() {
+		return orderTotal;
+	}
+
+	public void setOrderTotal(BigDecimal orderTotal) {
+		this.orderTotal = orderTotal;
+	}
+
+	private BigDecimal orderTotal;
 
 	/**
 	 * 
 	 */
 	public Order() {
-		// TODO Auto-generated constructor stub
-		this.products = new ArrayList<Product>(); //TODO does this need to be in database?
+		
 	}
 	
 	public String getCustomerID() {
@@ -61,25 +79,9 @@ public class Order implements Serializable {
 	public void setId(String id) {
 		this.id = id;
 	}
-
-
-	/**
-	 * @return the items
-	 */
-	public ArrayList<Product> getItems() {
-		return products;
-	}
-
-
-	/**
-	 * @param items the items to set
-	 */
-	public void setItems(ArrayList<Product> items) {
-		this.products = items;
-	}
 	
-	public void addProduct(Product p) {
-		this.products.add(p);
+	public void addProduct(OrderedItem oi) {
+		this.products.add(oi);
 	}
 
 

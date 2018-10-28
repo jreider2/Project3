@@ -7,8 +7,10 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import dao.OrderDAO;
+import partner.PartnerManager;
 import product.Product;
 import product.ProductManager;
+import service.represntation.ProductRepresentation;
 
 /**
  * @author julianareider
@@ -29,20 +31,18 @@ public class OrderManager {
 		return dao.getOrder(id);
 	}
 	
-	public Order addOrder(String customerID, ArrayList<String> productIDs, String CreditCardNo) {
+	public Order addOrder(String customerID, ArrayList<OrderedItem> products, String CreditCardNo) {
 	
 		BigDecimal orderTotal = new BigDecimal(0);
 		
-		ProductManager pm = new ProductManager();
-		Product p;
-		for (String pId : productIDs) {
-			p = pm.getProduct(pId);
-			BigDecimal itemPrice = new BigDecimal(p.getPrice());
-			orderTotal = orderTotal.add(itemPrice);
-			
+		for (OrderedItem oI : products) {
+			orderTotal.add(new BigDecimal(oI.getProductPrice()));
 		}
 		
-		Order order = dao.addOrder(customerID, productIDs, CreditCardNo, orderTotal);
+		Order order = dao.placeOrder(customerID, products, CreditCardNo, orderTotal);
+		//NOTE TO JULIANA: This is where the partners should be notified of the order.
+		PartnerManager pm = new PartnerManager();
+		pm.pushOrderToPartner(order);
 		
 		return order;
 	}
