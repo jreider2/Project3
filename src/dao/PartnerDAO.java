@@ -64,6 +64,7 @@ public class PartnerDAO {
 				} catch (SQLException e) {}
 			}
 		}
+
 		
 		Partner partner = new Partner();
 		partner.setId(id);
