@@ -80,8 +80,8 @@ public class Order implements Serializable {
 		this.id = id;
 	}
 	
-	public void addProduct(Product p) {
-		this.products.add(p);
+	public void addProduct(OrderedItem oi) {
+		this.products.add(oi);
 	}
 
 

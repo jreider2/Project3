@@ -28,7 +28,7 @@ public class OrderActivity {
 		
 		oR.setOrderNo(o.getId());
 		oR.setOrderStatus(o.getOrderStatus());
-		oR.setProductsOnOrder(getProductsOnOrder(o));
+		oR.setProductsOnOrder(o.getProducts());
 		return oR;
 	}
 	
@@ -40,25 +40,10 @@ public class OrderActivity {
 			orTemp.setOrderNo(o.getId());
 			orTemp.setOrderStatus(o.getOrderStatus());
 			
-			orTemp.setProductsOnOrder(getProductsOnOrder(o));
+			orTemp.setProductsOnOrder(o.getProducts());
 			arOr.add(orTemp);
 		}
 		return arOr;
-	}
-	
-	private ArrayList<ProductRequest> getProductsOnOrder(Order o){
-		ProductRequest prTemp;
-		ArrayList<ProductRequest> tempProducts = new ArrayList<ProductRequest>();
-		for (Product productOnOrder : o.getItems()) {
-			prTemp = new ProductRequest();
-			prTemp.setDescription(productOnOrder.getDescription());
-			prTemp.setPrice(productOnOrder.getPrice());
-			prTemp.setId(productOnOrder.getId());
-			prTemp.setName(productOnOrder.getName());
-			prTemp.setProductOwnerID(productOnOrder.getProductOwner().getId());
-			tempProducts.add(prTemp);
-		}
-		return tempProducts;
 	}
 	
 	public OrderRepresentation submitOrder(String customerID, ArrayList<OrderedItem> products, String CreditCardNo) {
@@ -75,7 +60,7 @@ public class OrderActivity {
 		
 		oR.setOrderNo(newOrder.getId());
 		oR.setOrderStatus(newOrder.getOrderStatus());
-		oR.setProductsOnOrder(getProductsOnOrder(newOrder));
+		oR.setProductsOnOrder(newOrder.getProducts());
 		oR.setCustomerID(newOrder.getCustomerID());
 		return oR;
 	}

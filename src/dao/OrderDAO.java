@@ -36,18 +36,20 @@ public class OrderDAO {
 		Connection conn = DBConnect.getDatabaseConnection();
 		
 		ArrayList<Order> arOrd = new ArrayList<>();
+		ArrayList<OrderedItem> prodsOnOrder = new ArrayList<>();
 		
 		try {
 			Statement select = conn.createStatement();
 			
-			String query = "SELECT * FROM Orders JOIN OrderList on Orders.OrderID = OrderList.OrderID Where Orders.customerID=" + "'" + customerNo + "'";  
+			String query = "SELECT * FROM Orders JOIN OrderList on Orders.OrderID = OrderList.OrderID JOIN Product on OrderList.ProductID = Product.ProductID Where Orders.customerID=" + "'" + customerNo + "'";  
 			ResultSet rs = select.executeQuery(query);
 			
-			ArrayList<Product> productsOnOrder = new ArrayList<>();
+			ArrayList<OrderedItem> productsOnOrder = new ArrayList<>();
 			String previousRowOrderID = "";
 			Order o = new Order();
+			OrderedItem oI;
 			while (rs.next()) {
-				
+				oI = new OrderedItem();
 				//only start a new order object if we have added all products on that order to the order object.
 				if (previousRowOrderID != rs.getString("OrderID")) {
 					o = new Order();
@@ -55,12 +57,20 @@ public class OrderDAO {
 					o.setCreditCardNo(rs.getString("CreditCardNo"));
 					o.setCustomerID(rs.getString("CustomerID"));
 					o.setOrderTotal(new BigDecimal(rs.getShort("OrderTotal")));
-					productsOnOrder.add(pm.getProduct(rs.getString("ProductID")));
+					oI.setProductID(rs.getString("ProductID"));
+					oI.setProductPrice(rs.getString("Price"));
+					oI.setQtyOnOrder(rs.getString("Qty"));
+					
+					productsOnOrder.add(oI);
 					
 					o.setProducts(productsOnOrder);
 				} else {
+					oI.setProductID(rs.getString("ProductID"));
+					oI.setProductPrice(rs.getString("Price"));
+					oI.setQtyOnOrder(rs.getString("Qty"));
+					
 					//there are still items on the order to be added to the order object. (one row is selected at a time)
-					productsOnOrder.add(pm.getProduct(rs.getString("ProductID")));
+					productsOnOrder.add(oI);
 					o.setProducts(productsOnOrder);
 				}
 				
@@ -123,7 +133,7 @@ public class OrderDAO {
 		try {
 			Statement select = conn.createStatement();
 			
-			String query = "SELECT * FROM Orders JOIN OrderList on Orders.OrderID = OrderList.OrderID Where Orders.Orderid=" + "'" + id + "'";  
+			String query = "SELECT * FROM Orders JOIN OrderList on Orders.OrderID = OrderList.OrderID JOIN Product on OrderList.ProductID = Product.ProductID Where Orders.Orderid=" + "'" + id + "'";  
 			ResultSet rs = select.executeQuery(query);
 			rs.next();
 
@@ -132,12 +142,21 @@ public class OrderDAO {
 			ord.setCustomerID(rs.getString("CustomerID"));
 			ord.setOrderTotal(new BigDecimal(rs.getString("OrderTotal")));
 			ord.setCreditCardNo(rs.getString("CreditCardNo"));
-			ArrayList<Product> prodsOnOrder = new ArrayList<>();
-			prodsOnOrder.add(pm.getProduct(rs.getString("ProductID")));
+			ArrayList<OrderedItem> prodsOnOrder = new ArrayList<>();
+			
+			OrderedItem oI = new OrderedItem();
+			oI.setProductID(rs.getString("ProductID"));
+			oI.setQtyOnOrder(rs.getString("Qty"));
+			oI.setProductPrice(rs.getString("Price"));
+			
+			prodsOnOrder.add(oI);
 			
 			//get all products if multiple rows are returned.
 			while(rs.next()) {
-				prodsOnOrder.add(pm.getProduct(rs.getString("ProductID")));
+				oI.setProductID(rs.getString("ProductID"));
+				oI.setQtyOnOrder(rs.getString("Qty"));
+				oI.setProductPrice(rs.getString("Price"));
+				prodsOnOrder.add(oI);
 			}
 			ord.setProducts(prodsOnOrder);
 			
@@ -152,7 +171,7 @@ public class OrderDAO {
 				} catch (SQLException e) {}
 			}
 		}
-		return null;
+		return new Order();
 		
 		
 	}
@@ -163,12 +182,12 @@ public class OrderDAO {
 		Integer resultKey = -1;
 		Connection connection = DBConnect.getDatabaseConnection();
 		String status = "ordered";
-		Statement queryStatement = connection.createStatement();
+		
 		//Create new Order with appropriate attributes
 		Order order = new Order();
 		//add order to orders table
 		try {
-			
+			Statement queryStatement = connection.createStatement();
 			
 			String insertQuery = "INSERT INTO Orders VALUES (0,'"+ status +"','" + customerID + "', '" + ccNo + "', '" + orderTotal.toString() + "')";
 			queryStatement.executeUpdate(insertQuery, Statement.RETURN_GENERATED_KEYS);
