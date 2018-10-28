@@ -55,18 +55,6 @@ public class PartnerResource implements PartnerService {
 		System.out.println("GET METHOD Request from Client with partnerRequest String ............." + id);
 		PartnerActivity pActivity = new PartnerActivity();
 		return pActivity.getPartner(id);
-//		try {
-//			return pActivity.getPartner(id);
-//		}catch(SQLException se){
-//		      //Handle errors for JDBC
-//		      se.printStackTrace();
-//		}catch(Exception e){
-//		      //Handle errors for Class.forName
-//		      e.printStackTrace();
-//		}finally{
-//			response.setStatus(Response.Status.BAD_REQUEST.getStatusCode());
-//			return new PartnerRepresentation();
-//		}
 		
 	}
 	

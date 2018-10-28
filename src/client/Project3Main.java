@@ -292,12 +292,7 @@ public final class Project3Main {
          		//such as item not available
          
      	
-     	/*****************************************************************************************
-         * EXCEPTION Handling
-         *****************************************************************************************/
-     	//handle java exceptions 
-         // java null pointer exceptions... 
-         
+     
      	/*****************************************************************************************
          * Remaining requirements on Project 3
          *****************************************************************************************/
@@ -309,15 +304,6 @@ public final class Project3Main {
          //Project Due Date:
          //- EOD Oct 28th, 2018 
      	
-     	
-     	/*****************************************************************************************
-         * Fix the two aspects of the domain layer TA mentioned in his email about our Project2
-         *****************************************************************************************/
-     	/**
-     	 * "Moving forward, make sure the domain layer of your project can handle things such as 
-     	 * 1) Order confirmations, -- when make an order, respond with confirmation object. 
-     	 * 2) checking availability of products before placing an order and so forth."
-     	 */
      	
 
 	}
