@@ -263,10 +263,10 @@ public final class Project3Main {
          * GET METHOD : Provide Order Status
          *****************************************************************************************/
      	WebClient statusClient = WebClient.create("http://localhost:8081", providers);
-     	statusClient = statusClient.accept("application/json").type("application/json").path("/order/orderService/status?orderID=" + ordResponsePost.getOrderNo());
+     	statusClient = statusClient.accept("application/json").type("application/json").path("/order/orderService/status/" + ordResponsePost.getOrderNo());
      	
-     	String status = statusClient.get(String.class);
-     	System.out.println("Order " + ordResponsePost.getOrderNo() + " status: " + status);
+     	OrderRepresentation ord = statusClient.get(OrderRepresentation.class);
+     	System.out.println("Order " + ordResponsePost.getOrderNo() + " status: " + ord.getOrderStatus());
      	
      	
         /*getAcknowledgmentClient = getAcknowledgmentClient.accept("application/json").type("application/json").path("/order/orderService/order/status?orderID=10");
@@ -279,7 +279,7 @@ public final class Project3Main {
      	WebClient cancelClient = WebClient.create("http://localhost:8081", providers);
      	cancelClient = cancelClient.accept("application/json").type("application/json").path("/order/orderService/order/cancelledorder?orderID=" + ordResponsePost.getOrderNo());
      	
-     	String cancelledorder = cancelClient.get(String.class);
+     	Response cancelledorder = cancelClient.delete();
      	System.out.println("Order " + ordResponsePost.getOrderNo() + " status: " + cancelledorder);
      	
         /*getAcknowledgmentClient = getAcknowledgmentClient.accept("application/json").type("application/json").path("/order/orderService/order/cancelledorder?orderID=10");
