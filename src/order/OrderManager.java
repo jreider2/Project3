@@ -73,6 +73,20 @@ public class OrderManager {
 		}
 	}
 	
+	public boolean fulfillOrder(String orderID) {
+		//update status 
+		dao.updateOrderStatus(orderID,"fulfilled");
+		//return the current status of the order
+		String status = dao.getOrderStatus(orderID);
+		if (status != "" && status != null) {
+			System.out.println("Order " + orderID + " fulfilled");
+			return true;
+		} else {
+			System.out.println("Order " + orderID + " not fulfilled ERROR!");
+			return false;
+		}
+	}
+	
 	/**
 	 * @return current Order status. Shipped if shipped, other status if failed to ship it
 	 */

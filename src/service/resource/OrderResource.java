@@ -89,4 +89,12 @@ public class OrderResource implements OrderService {
 		return oA.shipOrder(orderID);
 	} 
 	
+	@PUT
+	@Produces({"application/json", "application/xml"})
+	@Consumes({"application/json", "application/xml"})
+	@Path("/fulfilledOrder")
+	public boolean fulfillOrder(String orderID) {
+		return oA.fulfillOrder(orderID);
+	} 
+	
 }

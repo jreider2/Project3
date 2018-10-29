@@ -84,5 +84,9 @@ public class OrderActivity {
 		return oM.shipOrder(orderID);
 	}
 	
+	public boolean fulfillOrder(String orderID) {
+		return oM.fulfillOrder(orderID);
+	}
+	
 	
 }
