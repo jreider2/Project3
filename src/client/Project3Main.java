@@ -280,7 +280,15 @@ public final class Project3Main {
      	String isFulfilled = fulfillClient.put(ordResponsePost.getOrderNo(), String.class);
      	System.out.println("Order " + ordResponsePost.getOrderNo() + " is fulfilled true or false: " + isFulfilled);
         
-     			/*getAcknowledgmentClient = getAcknowledgmentClient.accept("application/json").type("application/json").path("/order/orderService/order/status?orderID=10");
+     	
+     	WebClient checkFulfillClient = WebClient.create("http://localhost:8081", providers);
+     	checkFulfillClient = checkFulfillClient.accept("application/json").type("application/json").path("order/orderService/order/fulfillmentAcknowledgement/" + ordResponsePost.getOrderNo());
+     			
+     	System.out.println("Get Acknowledgement notification:");
+     	//Response r = checkFulfillClient.get(Response.class);
+     	System.out.println("Order " + ordResponsePost.getOrderNo() + " status get test: " + ord.getOrderStatus());
+     	
+     	/*getAcknowledgmentClient = getAcknowledgmentClient.accept("application/json").type("application/json").path("/order/orderService/order/status?orderID=10");
         acknowledgementResponse = getAcknowledgmentClient.get(String.class);
         System.out.println("GET (Order Status) Method response: .... " + acknowledgementResponse);*/
      	/*****************************************************************************************
