@@ -45,14 +45,10 @@ public class OrderResource implements OrderService {
 	@GET
 	@Produces({"application/xml" , "application/json"})
 	@Path("/order/fulfillmentAcknowledgement/{orderId}")
-	public Response getAcknowledgeFulfillment(@PathParam("orderId") String orderId) { 
+	public OrderRepresentation getAcknowledgeFulfillment(@PathParam("orderId") String orderId) { 
 		System.out.println("GET METHOD Request Order ID: ............." + orderId);
-		OrderActivity orderActivity = new OrderActivity();
-		String res = orderActivity.getAcknowledgeFulfillment(orderId);
-		if (res.equals("OK")) {
-			return Response.status(Status.OK).build();
-		}
-		return null;
+		OrderRepresentation oR = oA.getOrder(orderId);
+		return oR;
 	}
 	
 	
@@ -69,8 +65,9 @@ public class OrderResource implements OrderService {
 	@DELETE
 	@Produces({"application/xml", "application/json"})
 	@Path("/order/cancelledorder/{orderID}")
-	public boolean cancelOrder(@PathParam("orderID") String orderID) {
-		return oA.cancelOrder(orderID);
+	public OrderRepresentation cancelOrder(@PathParam("orderID") String orderID) {
+		OrderRepresentation oR = oA.getOrder(orderID);
+		return oR;
 	}
 	
 	@POST

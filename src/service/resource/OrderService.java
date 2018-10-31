@@ -12,8 +12,8 @@ public interface OrderService {
 	
 	public ArrayList<OrderRepresentation> getOrders(String customerNumber);
 	public OrderRepresentation getOrder(String orderNo);
-	public Response getAcknowledgeFulfillment(String orderId);
+	public OrderRepresentation getAcknowledgeFulfillment(String orderId);
 	public OrderRepresentation getOrderStatus(String orderID);
-	public boolean cancelOrder(String orderID);
+	public OrderRepresentation cancelOrder(String orderID);
 
 }

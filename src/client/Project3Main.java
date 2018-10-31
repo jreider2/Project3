@@ -285,7 +285,7 @@ public final class Project3Main {
      	checkFulfillClient = checkFulfillClient.accept("application/json").type("application/json").path("order/orderService/order/fulfillmentAcknowledgement/" + ordResponsePost.getOrderNo());
      			
      	System.out.println("Get Acknowledgement notification:");
-     	//Response r = checkFulfillClient.get(Response.class);
+     	ordResponsePost = checkFulfillClient.get(OrderRepresentation.class);
      	System.out.println("Order " + ordResponsePost.getOrderNo() + " status get test: " + ord.getOrderStatus());
      	
      	/*getAcknowledgmentClient = getAcknowledgmentClient.accept("application/json").type("application/json").path("/order/orderService/order/status?orderID=10");
@@ -296,11 +296,12 @@ public final class Project3Main {
          *****************************************************************************************/
      	
      	WebClient cancelClient = WebClient.create("http://localhost:8081", providers);
-     	cancelClient = cancelClient.accept("application/json").type("application/json").path("/order/orderService/order/cancelledorder?orderID=" + ordResponsePost.getOrderNo());
+     	cancelClient = cancelClient.accept("application/json").type("application/json").path("/order/orderService/order/cancelledorder/" + ordResponsePost.getOrderNo());
      	
-     	/*Response cancelledorder = cancelClient.delete();
-     	System.out.println("Order " + ordResponsePost.getOrderNo() + " status: " + cancelledorder);
-     	*/
+     	cancelClient.delete();
+     	ord = statusClient.get(OrderRepresentation.class);
+     	System.out.println("Order " + ord.getOrderNo() + " status: " + ord.getOrderNo());
+     	
         /*getAcknowledgmentClient = getAcknowledgmentClient.accept("application/json").type("application/json").path("/order/orderService/order/cancelledorder?orderID=10");
         acknowledgementResponse = getAcknowledgmentClient.get(String.class);
         System.out.println("DELETE (Cancel Order) Method response: .... " + acknowledgementResponse);*/
