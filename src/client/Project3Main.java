@@ -248,6 +248,9 @@ public final class Project3Main {
          ordReq.setCustomerId("2");
          ordReq.setItems(oIList);
          
+         /*****************************************************************************************
+          * PUT METHOD   Push ORDER to Partner in order manager
+         *****************************************************************************************/
       	OrderRepresentation ordResponsePost =  orderClient.post(ordReq, OrderRepresentation.class);
       	System.out.println("POST METHOD Response ........." + ordResponsePost.getOrderNo() + " is placed!");
      	/*****************************************************************************************
@@ -284,6 +287,9 @@ public final class Project3Main {
      	WebClient checkFulfillClient = WebClient.create("http://localhost:8081", providers);
      	checkFulfillClient = checkFulfillClient.accept("application/json").type("application/json").path("order/orderService/order/fulfillmentAcknowledgement/" + ordResponsePost.getOrderNo());
      			
+     	/*****************************************************************************************
+         * GET METHOD : Get Acknowledgement of fulfillment  
+         *****************************************************************************************/
      	System.out.println("Get Acknowledgement notification:");
      	ordResponsePost = checkFulfillClient.get(OrderRepresentation.class);
      	System.out.println("Order " + ordResponsePost.getOrderNo() + " status get test: " + ord.getOrderStatus());
