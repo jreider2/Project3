@@ -13,7 +13,7 @@ import product.Product;
 @XmlRootElement(name = "Order")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
-public class OrderRepresentation extends ecommRepresentation{
+public class OrderRepresentation{
 	private String orderNo;
 	private String orderStatus;
 	private ArrayList<OrderedItem> productsOnOrder;
