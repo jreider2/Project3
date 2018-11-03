@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "CreditCard")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
-public class CreditCardRepresentation {
+public class CreditCardRepresentation extends ecommRepresentation {
 	private String ccNo;
 	private String nameOncc;
 	public String getCcNo() {
