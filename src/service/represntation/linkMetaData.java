@@ -3,8 +3,22 @@ package service.represntation;
 public class linkMetaData {
 	private String attribute;
 	private String attvalue;
+	private String mediaType;
 	
-	public linkMetaData() {}
+	//Constructor initializes the link data. This makes it easier to create an object in code, just one line.
+	public linkMetaData(String att, String attval, String medType) {
+		this.attribute = att;
+		this.attvalue = attval;
+		this.mediaType = medType;
+	}
+	
+	public String getMediaType() {
+		return mediaType;
+	}
+
+	public void setMediaType(String mediaType) {
+		this.mediaType = mediaType;
+	}
 	
 	public String getAttribute() {
 		return attribute;
@@ -15,7 +29,7 @@ public class linkMetaData {
 	public String getValue() {
 		return attvalue;
 	}
-	public void setValue(String value) {
+	public void setAttvalue(String value) {
 		this.attvalue = value;
 	}
 	
