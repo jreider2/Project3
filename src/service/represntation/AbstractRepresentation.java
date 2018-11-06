@@ -3,8 +3,8 @@ package service.represntation;
 import java.util.ArrayList;
 import service.represntation.linkMetaData;
 
-public abstract class ecommRepresentation {
-	public ecommRepresentation() {}
+public abstract class AbstractRepresentation {
+	public AbstractRepresentation() {}
 	
 	protected ArrayList<linkMetaData> metaDataLinkAttributes = new ArrayList<>();
 	
