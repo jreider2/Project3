@@ -9,6 +9,9 @@ import partner.Partner;
 import partner.PartnerManager;
 import product.Product;
 import product.ProductManager;
+import service.represntation.AbstractRepresentation;
+import service.represntation.CustomerRepresentation;
+import service.represntation.Link;
 import service.represntation.OrderRepresentation;
 import service.represntation.OrderRequest;
 import service.represntation.PartnerRepresentation;
@@ -86,6 +89,18 @@ public class OrderActivity {
 	
 	public boolean fulfillOrder(String orderID) {
 		return oM.fulfillOrder(orderID);
+	}
+	
+	/**
+	 * Sets all the links appropriately, for each kind of representation based on state
+	 */
+	private void addLink(OrderRepresentation orderRep, String rel, String url) {
+		// Set up the activities that can be performed on orders
+		Link link = new Link();
+		link.setRel(rel);
+		link.setUrl(url);
+		
+		orderRep.addLink(link);
 	}
 	
 	

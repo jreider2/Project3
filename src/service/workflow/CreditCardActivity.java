@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import customer.CreditCard;
 import customer.CreditCardManager;
 import service.represntation.CreditCardRepresentation;
+import service.represntation.CustomerRepresentation;
+import service.represntation.Link;
 
 public class CreditCardActivity {
 	
@@ -43,5 +45,17 @@ public class CreditCardActivity {
 	
 	public boolean addCreditCard(String ccNo, String expDate, String ccHolderName, String ccSecurityCode, String CustomerID) {
 		return ccManager.Save(ccNo, expDate, ccHolderName, ccSecurityCode, CustomerID);
+	}
+	
+	/**
+	 * Sets all the links appropriately, for each kind of representation based on state
+	 */
+	private void addLink(CreditCardRepresentation ccRep, String rel, String url) {
+		// Set up the activities that can be performed on orders
+		Link link = new Link();
+		link.setRel(rel);
+		link.setUrl(url);
+		
+		ccRep.addLink(link);
 	}
 }

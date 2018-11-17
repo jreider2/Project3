@@ -7,6 +7,8 @@ import java.util.Set;
 import customer.Customer;
 import customer.CustomerManager;
 import service.represntation.CustomerRepresentation;
+import service.represntation.Link;
+import service.represntation.ProductRepresentation;
 
 /**
  * This class' responsibility is to manage the workflow of accessing/creating/updating/deleting resources
@@ -69,5 +71,17 @@ public class CustomerActivity {
 		cmanager.deleteCustomer(id);
 		
 		return "OK";
+	}
+	
+	/**
+	 * Sets all the links appropriately, for each kind of representation based on state
+	 */
+	private void addLink(CustomerRepresentation customerRep, String rel, String url) {
+		// Set up the activities that can be performed on orders
+		Link link = new Link();
+		link.setRel(rel);
+		link.setUrl(url);
+		
+		customerRep.addLink(link);
 	}
 }
