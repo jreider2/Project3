@@ -248,6 +248,9 @@ public final class Project3Main {
          ordReq.setCustomerId("2");
          ordReq.setItems(oIList);
          
+         /*****************************************************************************************
+          * PUT METHOD   Push ORDER to Partner in order manager
+         *****************************************************************************************/
       	OrderRepresentation ordResponsePost =  orderClient.post(ordReq, OrderRepresentation.class);
       	System.out.println("POST METHOD Response ........." + ordResponsePost.getOrderNo() + " is placed!");
      	/*****************************************************************************************
@@ -271,7 +274,27 @@ public final class Project3Main {
      	System.out.println("Order " + ordResponsePost.getOrderNo() + " status get test: " + ord.getOrderStatus());
      	
      	
-        /*getAcknowledgmentClient = getAcknowledgmentClient.accept("application/json").type("application/json").path("/order/orderService/order/status?orderID=10");
+     	/*****************************************************************************************
+         * PUT METHOD : Fulfill Order
+         *****************************************************************************************/
+     	WebClient fulfillClient = WebClient.create("http://localhost:8081", providers);
+     	fulfillClient = fulfillClient.accept("application/json").type("application/json").path("order/orderService/fulfilledOrder");
+     	System.out.println("Partner now says that the order has been delivered (fulfilled)");
+     	String isFulfilled = fulfillClient.put(ordResponsePost.getOrderNo(), String.class);
+     	System.out.println("Order " + ordResponsePost.getOrderNo() + " is fulfilled true or false: " + isFulfilled);
+        
+     	
+     	WebClient checkFulfillClient = WebClient.create("http://localhost:8081", providers);
+     	checkFulfillClient = checkFulfillClient.accept("application/json").type("application/json").path("order/orderService/order/fulfillmentAcknowledgement/" + ordResponsePost.getOrderNo());
+     			
+     	/*****************************************************************************************
+         * GET METHOD : Get Acknowledgement of fulfillment  
+         *****************************************************************************************/
+     	System.out.println("Get Acknowledgement notification:");
+     	ordResponsePost = checkFulfillClient.get(OrderRepresentation.class);
+     	System.out.println("Order " + ordResponsePost.getOrderNo() + " status get test: " + ord.getOrderStatus());
+     	
+     	/*getAcknowledgmentClient = getAcknowledgmentClient.accept("application/json").type("application/json").path("/order/orderService/order/status?orderID=10");
         acknowledgementResponse = getAcknowledgmentClient.get(String.class);
         System.out.println("GET (Order Status) Method response: .... " + acknowledgementResponse);*/
      	/*****************************************************************************************
@@ -279,11 +302,12 @@ public final class Project3Main {
          *****************************************************************************************/
      	
      	WebClient cancelClient = WebClient.create("http://localhost:8081", providers);
-     	cancelClient = cancelClient.accept("application/json").type("application/json").path("/order/orderService/order/cancelledorder?orderID=" + ordResponsePost.getOrderNo());
+     	cancelClient = cancelClient.accept("application/json").type("application/json").path("/order/orderService/order/cancelledorder/" + ordResponsePost.getOrderNo());
      	
-     	/*Response cancelledorder = cancelClient.delete();
-     	System.out.println("Order " + ordResponsePost.getOrderNo() + " status: " + cancelledorder);
-     	*/
+     	cancelClient.delete();
+     	ord = statusClient.get(OrderRepresentation.class);
+     	System.out.println("Order " + ord.getOrderNo() + " status: " + ord.getOrderNo());
+     	
         /*getAcknowledgmentClient = getAcknowledgmentClient.accept("application/json").type("application/json").path("/order/orderService/order/cancelledorder?orderID=10");
         acknowledgementResponse = getAcknowledgmentClient.get(String.class);
         System.out.println("DELETE (Cancel Order) Method response: .... " + acknowledgementResponse);*/

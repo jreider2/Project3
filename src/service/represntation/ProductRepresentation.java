@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "Product")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
-public class ProductRepresentation {
+public class ProductRepresentation extends AbstractRepresentation{
 	
 	private String id;
 	private String name;
