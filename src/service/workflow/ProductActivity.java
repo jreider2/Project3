@@ -18,7 +18,7 @@ import service.represntation.Link;
  */
 public class ProductActivity {
 
-
+	private static String buyUrl = "http://localhost:8081/order/orderService/order/neworder";
 	private static ProductManager productManager = new ProductManager();
 	
 	public ProductActivity() {}
@@ -37,6 +37,7 @@ public class ProductActivity {
 			productRepresentation.setPrice(p.getPrice());
 			productRepresentation.setProductOwnerID(p.getProductOwner().getId()); //TODO make sure that product owner is guaranteed to have an ID!!
 			productRepresentations.add(productRepresentation);//now add this representation in the list
+			addLink(productRepresentation, "buy", buyUrl);
 		}
 		
 		return productRepresentations;
@@ -58,7 +59,8 @@ public class ProductActivity {
 			//Add this representation in the list
 			productRepresentations.add(productRepresentation);
 			//Add Link to representation:
-			addLink(productRepresentation, "relationship", "url data");
+			addLink(productRepresentation, "buy", buyUrl);
+			addLink(productRepresentation, "search", "productservice/products/searchresults/{searchterm}");//Note that this url is missing a search term! (we don't know the user wants)
 		}
 		
 		return productRepresentations;
@@ -77,6 +79,7 @@ public class ProductActivity {
 		
 		// Add the links
 		addLink(productRep, "buy", "URL");
+		addLink(productRep, "search", "productservice/products/searchresults/{searchterm}");//Note that this url is missing a search term! (we don't know the user wants)
 		
 		return productRep;
 	}
