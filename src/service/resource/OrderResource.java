@@ -55,20 +55,21 @@ public class OrderResource implements OrderService {
 		return null;
 	}
 	
+	
 	@GET
 	@Produces({"application/xml", "application/json"})
-	@Path("/status")
-	public String getOrderStatus(@QueryParam("orderID") String orderID) {
+	@Path("/status/{orderID}")
+	public OrderRepresentation getOrderStatus(@PathParam("orderID") String orderID) {
 		OrderRepresentation oR = oA.getOrder(orderID);
 		
 		System.out.println("GET Method for order status:.........." + oR.getOrderNo() + ": " + oR.getOrderStatus());
-		return oR.getOrderStatus();
+		return oR;
 	}
 	
 	@DELETE
 	@Produces({"application/xml", "application/json"})
-	@Path("/order/cancelledorder")
-	public boolean cancelOrder(@QueryParam("orderID") String orderID) {
+	@Path("/order/cancelledorder/{orderID}")
+	public boolean cancelOrder(@PathParam("orderID") String orderID) {
 		return oA.cancelOrder(orderID);
 	}
 	

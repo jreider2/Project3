@@ -78,7 +78,7 @@ public class OrderManager {
 	 */
 	public boolean cancelOrder(String orderID) {
 		//cancel by updating status
-		return dao.updateOrderStatus(orderID,"canceled");
+		return dao.updateOrderStatus(orderID,"cancelled");
 	}
 
 }
