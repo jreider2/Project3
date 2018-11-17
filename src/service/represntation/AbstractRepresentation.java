@@ -1,24 +1,23 @@
 package service.represntation;
 
 import java.util.ArrayList;
-import service.represntation.linkMetaData;
+
+import javax.xml.bind.annotation.XmlElement;
+
+import service.represntation.Link;
 
 public abstract class AbstractRepresentation {
+	
+	@XmlElement(name="link", namespace="")
+	protected ArrayList<Link> links = new ArrayList<>();
+	
 	public AbstractRepresentation() {}
 	
-	protected ArrayList<linkMetaData> metaDataLinkAttributes = new ArrayList<>();
-	
-	public ArrayList<String> getMetaDataLinks() {
-		ArrayList<String> resourceLinks = new ArrayList<>();
-		
-		for (linkMetaData lmd : metaDataLinkAttributes) {
-			resourceLinks.add(lmd.toString());
-		}
-		
-		return resourceLinks;
+	public ArrayList<Link> getLinks() {
+		return links;
 	}
 	
-	public void addMetaDataToLink(linkMetaData lMd) {
-		metaDataLinkAttributes.add(lMd);
+	public void addLink(Link lMd) {
+		links.add(lMd);
 	}
 }

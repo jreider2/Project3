@@ -10,7 +10,7 @@ import product.Product;
 import product.ProductManager;
 import service.represntation.PartnerRepresentation;
 import service.represntation.ProductRepresentation;
-import service.represntation.linkMetaData;
+import service.represntation.Link;
 
 /**
  * This class' responsibility is to manage the workflow of accessing/creating/updating/deleting resources 
@@ -54,9 +54,10 @@ public class ProductActivity {
 			productRepresentation.setDescription(p.getDescription()); 
 			productRepresentation.setPrice(p.getPrice());
 			productRepresentation.setProductOwnerID(p.getProductOwner().getId()); //TODO make sure that product owner is guaranteed to have an ID!!
-			productRepresentations.add(productRepresentation);//now add this representation in the list
-			linkMetaData lmt = new linkMetaData("rel", "/link/text/here" + p.getId().toString(), "metadatastuff");
-			productRepresentation.addMetaDataToLink(lmt);
+			//Add this representation in the list
+			productRepresentations.add(productRepresentation);
+			Link lmt = new Link("relationship", "url data", "metadatastuff"); //TODO update
+			productRepresentation.addLink(lmt);
 		}
 		
 		return productRepresentations;
