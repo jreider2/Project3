@@ -18,6 +18,7 @@ import service.represntation.Link;
  */
 public class ProductActivity {
 
+
 	private static ProductManager productManager = new ProductManager();
 	
 	public ProductActivity() {}
@@ -56,8 +57,8 @@ public class ProductActivity {
 			productRepresentation.setProductOwnerID(p.getProductOwner().getId()); //TODO make sure that product owner is guaranteed to have an ID!!
 			//Add this representation in the list
 			productRepresentations.add(productRepresentation);
-			Link lmt = new Link("relationship", "url data", "metadatastuff"); //TODO update
-			productRepresentation.addLink(lmt);
+			//Add Link to representation:
+			addLink(productRepresentation, "relationship", "url data");
 		}
 		
 		return productRepresentations;
@@ -73,6 +74,9 @@ public class ProductActivity {
 		productRep.setDescription(product.getDescription());
 		productRep.setPrice(product.getPrice());
 		productRep.setProductOwnerID(product.getProductOwner().getId());//TODO make sure that product owner is guaranteed to have an ID!!
+		
+		// Add the links
+		addLink(productRep, "buy", "URL");
 		
 		return productRep;
 	}
@@ -96,6 +100,18 @@ public class ProductActivity {
 		productManager.deleteProduct(id);
 		
 		return "OK";
+	}
+	
+	/**
+	 * Sets all the links appropriately, for each kind of representation based on state
+	 */
+	private void addLink(ProductRepresentation productRep, String rel, String url) {
+		// Set up the activities that can be performed on orders
+		Link link = new Link();
+		link.setRel(rel);
+		link.setUrl(url);
+		
+		productRep.addLink(link);
 	}
 	
 }

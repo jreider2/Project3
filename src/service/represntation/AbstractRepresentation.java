@@ -17,7 +17,7 @@ public abstract class AbstractRepresentation {
 		return links;
 	}
 	
-	public void addLink(Link lMd) {
-		links.add(lMd);
+	public void addLink(Link link) {
+		links.add(link);
 	}
 }
