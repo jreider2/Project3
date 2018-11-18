@@ -2,6 +2,7 @@ package service.workflow;
 
 import java.util.ArrayList;
 
+import common.Configurables;
 import order.Order;
 import order.OrderManager;
 import order.OrderedItem;
@@ -21,6 +22,7 @@ import service.represntation.ProductRequest;
 public class OrderActivity {
 	
 	private OrderManager oM;
+	private Configurables urls = new Configurables();
 	
 	public OrderActivity() {
 		oM = new OrderManager();
@@ -62,11 +64,17 @@ public class OrderActivity {
 		}
 		
 		Order newOrder = oM.addOrder(customerID, products, CreditCardNo);
+		String orderId = newOrder.getId();
 		
 		oR.setOrderNo(newOrder.getId());
 		oR.setOrderStatus(newOrder.getOrderStatus());
 		oR.setProductsOnOrder(newOrder.getProducts());
 		oR.setCustomerID(newOrder.getCustomerID());
+		//add the links
+		addLink(oR, "checkStatus", urls.STATUS_URL.replace("{orderID}", orderId));
+		addLink(oR, "cancel Order", urls.CANCEL_URL.replace("{orderID}", orderId));
+		addLink(oR, "search", urls.SEARCH_URL); //NOTE: this URL is missing the search tearm
+		
 		return oR;
 	}
 
