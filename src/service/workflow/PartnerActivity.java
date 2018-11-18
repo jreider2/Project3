@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import common.Configurables;
 import order.Order;
 import partner.Partner;
 import partner.PartnerManager;
@@ -23,6 +24,7 @@ public class PartnerActivity {
 
 	
 	private static PartnerManager partnerManager = new PartnerManager();
+	private Configurables urls = new Configurables();
 
 	public PartnerActivity() { }
 	

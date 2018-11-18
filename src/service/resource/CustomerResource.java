@@ -58,8 +58,6 @@ public class CustomerResource implements CustomerService {
 	@Path("/customers/{customerId}")
 	public Response deleteCustomer(@PathParam("customerId") String id) {
 		
-		//TODO Edit 
-		
 		System.out.println("Delete METHOD Request from Client with employeeRequest String ............." + id);
 		CustomerActivity empActivity = new CustomerActivity();
 		String res = empActivity.deleteCustomer(id);
