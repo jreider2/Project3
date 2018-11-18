@@ -252,6 +252,7 @@ public final class Project3Main {
           * PUT METHOD   Push ORDER to Partner in order manager
          *****************************************************************************************/
       	OrderRepresentation ordResponsePost =  orderClient.post(ordReq, OrderRepresentation.class);
+      
       	System.out.println("POST METHOD Response ........." + ordResponsePost.getOrderNo() + " is placed!");
      	/*****************************************************************************************
          * PUT METHOD : Ship Orders

@@ -19,7 +19,9 @@ import service.represntation.ProductRepresentation;
 import service.represntation.ProductRequest;
 
 public class OrderActivity {
+	
 	private OrderManager oM;
+	
 	public OrderActivity() {
 		oM = new OrderManager();
 	}
@@ -79,8 +81,9 @@ public class OrderActivity {
 		return "Not OK";
 	}
 	
-	public boolean cancelOrder(String orderID) {
-		return oM.cancelOrder(orderID);
+	public OrderRepresentation cancelOrder(String orderID) {
+		oM.cancelOrder(orderID);
+		return getOrder(orderID);
 	}
 	
 	public boolean shipOrder(String orderID) {
