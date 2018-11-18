@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import common.Configurables;
 import customer.Customer;
 import customer.CustomerManager;
 import service.represntation.CustomerRepresentation;
@@ -17,6 +18,7 @@ import service.represntation.ProductRepresentation;
 public class CustomerActivity {
 	
 	private static CustomerManager cmanager = new CustomerManager();
+	private Configurables urls = new Configurables();
 	
 	public CustomerActivity() {
 	}
@@ -35,6 +37,9 @@ public class CustomerActivity {
           customerRepresentation.setId(customer.getGid());
           customerRepresentation.setFirstName(customer.getFirstName());
           customerRepresentation.setLastName(customer.getLastName());
+          //now add links
+          addLink(customerRepresentation, "search", urls.SEARCH_URL); //NOTE: this URL is missing the search term
+          addLink(customerRepresentation, "deleteProfile", urls.DELETE_PROFILE.replaceAll("{customerId}", customer.getGid()));
           
           //now add this representation in the list
           employeeRepresentations.add(customerRepresentation);
@@ -51,6 +56,11 @@ public class CustomerActivity {
 		customerRep.setLastName(customer.getLastName());
 		customerRep.setId(customer.getGid());
 		
+		//add links
+		addLink(customerRep, "search", urls.SEARCH_URL); //NOTE: this URL is missing the search term
+		addLink(customerRep, "deleteProfile", urls.DELETE_PROFILE.replaceAll("{customerId}", id));
+		
+		
 		return customerRep;
 	}
 	
@@ -62,6 +72,10 @@ public class CustomerActivity {
 		cRep.setFirstName(customer.getFirstName());
 		cRep.setLastName(customer.getLastName());
 		cRep.setId(customer.getGid());
+		
+		//add links
+		addLink(cRep, "search", urls.SEARCH_URL); //NOTE: this URL is missing the search term
+		addLink(cRep, "deleteProfile", urls.DELETE_PROFILE.replaceAll("{customerId}", customer.getGid()));
 		
 		return cRep;
 	}
