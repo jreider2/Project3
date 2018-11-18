@@ -57,7 +57,6 @@ public class OrderResource implements OrderService {
 	@Path("/status/{orderID}")
 	public OrderRepresentation getOrderStatus(@PathParam("orderID") String orderID) {
 		OrderRepresentation oR = oA.getOrder(orderID);
-		
 		System.out.println("GET Method for order status:.........." + oR.getOrderNo() + ": " + oR.getOrderStatus());
 		return oR;
 	}
@@ -66,7 +65,7 @@ public class OrderResource implements OrderService {
 	@Produces({"application/xml", "application/json"})
 	@Path("/order/cancelledorder/{orderID}")
 	public OrderRepresentation cancelOrder(@PathParam("orderID") String orderID) {
-		OrderRepresentation oR = oA.getOrder(orderID);
+		OrderRepresentation oR = oA.cancelOrder(orderID);
 		return oR;
 	}
 	
