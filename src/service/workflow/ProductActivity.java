@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import common.Configurables;
 import partner.Partner;
 import product.Product;
 import product.ProductManager;
@@ -18,8 +19,8 @@ import service.represntation.Link;
  */
 public class ProductActivity {
 
-	private static String buyUrl = "http://localhost:8081/order/orderService/order/neworder";
 	private static ProductManager productManager = new ProductManager();
+	private Configurables configurables = new Configurables();
 	
 	public ProductActivity() {}
 
@@ -37,7 +38,7 @@ public class ProductActivity {
 			productRepresentation.setPrice(p.getPrice());
 			productRepresentation.setProductOwnerID(p.getProductOwner().getId()); //TODO make sure that product owner is guaranteed to have an ID!!
 			productRepresentations.add(productRepresentation);//now add this representation in the list
-			addLink(productRepresentation, "buy", buyUrl);
+			addLink(productRepresentation, "buy", configurables.BUY_URL);
 		}
 		
 		return productRepresentations;
@@ -59,8 +60,8 @@ public class ProductActivity {
 			//Add this representation in the list
 			productRepresentations.add(productRepresentation);
 			//Add Link to representation:
-			addLink(productRepresentation, "buy", buyUrl);
-			addLink(productRepresentation, "search", "productservice/products/searchresults/{searchterm}");//Note that this url is missing a search term! (we don't know the user wants)
+			addLink(productRepresentation, "buy", configurables.BUY_URL);
+			addLink(productRepresentation, "search", configurables.SEARCH_URL );//Note that this url is missing a search term! (we don't know the user wants)
 		}
 		
 		return productRepresentations;
@@ -78,8 +79,8 @@ public class ProductActivity {
 		productRep.setProductOwnerID(product.getProductOwner().getId());//TODO make sure that product owner is guaranteed to have an ID!!
 		
 		// Add the links
-		addLink(productRep, "buy", "URL");
-		addLink(productRep, "search", "productservice/products/searchresults/{searchterm}");//Note that this url is missing a search term! (we don't know the user wants)
+		addLink(productRep, "buy", configurables.BUY_URL);
+		addLink(productRep, "search", configurables.SEARCH_URL);//Note that this url is missing a search term! (we don't know the user wants)
 		
 		return productRep;
 	}
