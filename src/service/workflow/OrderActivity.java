@@ -36,6 +36,13 @@ public class OrderActivity {
 		oR.setOrderNo(o.getId());
 		oR.setOrderStatus(o.getOrderStatus());
 		oR.setProductsOnOrder(o.getProducts());
+		
+		String orderId = o.getId();
+		
+		addLink(oR, "cancel", urls.CANCEL_URL.replaceAll("{orderID}", orderId) );
+		addLink(oR, "checkStatus", urls.STATUS_URL.replaceAll("{orderID}", orderId));
+		addLink(oR, "search", urls.SEARCH_URL); //NOTE: this URL is missing the search term
+		
 		return oR;
 	}
 	
@@ -71,9 +78,9 @@ public class OrderActivity {
 		oR.setProductsOnOrder(newOrder.getProducts());
 		oR.setCustomerID(newOrder.getCustomerID());
 		//add the links
-		addLink(oR, "checkStatus", urls.STATUS_URL.replace("{orderID}", orderId));
-		addLink(oR, "cancel Order", urls.CANCEL_URL.replace("{orderID}", orderId));
-		addLink(oR, "search", urls.SEARCH_URL); //NOTE: this URL is missing the search tearm
+		addLink(oR, "checkStatus", urls.STATUS_URL.replaceAll("{orderID}", orderId));
+		addLink(oR, "cancel Order", urls.CANCEL_URL.replaceAll("{orderID}", orderId));
+		addLink(oR, "search", urls.SEARCH_URL); //NOTE: this URL is missing the search term
 		
 		return oR;
 	}
@@ -91,7 +98,11 @@ public class OrderActivity {
 	
 	public OrderRepresentation cancelOrder(String orderID) {
 		oM.cancelOrder(orderID);
-		return getOrder(orderID);
+		OrderRepresentation orderRep = getOrder(orderID);
+		addLink(orderRep, "search", urls.SEARCH_URL);//NOTE: this URL missing searchTerm!
+		addLink(orderRep, "checkStatus", urls.STATUS_URL.replaceAll("{orderID}", orderID));
+		
+		return orderRep;
 	}
 	
 	public boolean shipOrder(String orderID) {

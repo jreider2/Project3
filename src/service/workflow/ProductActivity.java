@@ -20,7 +20,7 @@ import service.represntation.Link;
 public class ProductActivity {
 
 	private static ProductManager productManager = new ProductManager();
-	private Configurables configurables = new Configurables();
+	private Configurables urls = new Configurables();
 	
 	public ProductActivity() {}
 
@@ -38,7 +38,7 @@ public class ProductActivity {
 			productRepresentation.setPrice(p.getPrice());
 			productRepresentation.setProductOwnerID(p.getProductOwner().getId()); //TODO make sure that product owner is guaranteed to have an ID!!
 			productRepresentations.add(productRepresentation);//now add this representation in the list
-			addLink(productRepresentation, "buy", configurables.BUY_URL);
+			addLink(productRepresentation, "buy", urls.BUY_URL);
 		}
 		
 		return productRepresentations;
@@ -60,8 +60,8 @@ public class ProductActivity {
 			//Add this representation in the list
 			productRepresentations.add(productRepresentation);
 			//Add Link to representation:
-			addLink(productRepresentation, "buy", configurables.BUY_URL);
-			addLink(productRepresentation, "search", configurables.SEARCH_URL );//Note that this url is missing a search term! (we don't know the user wants)
+			addLink(productRepresentation, "buy", urls.BUY_URL);
+			addLink(productRepresentation, "search", urls.SEARCH_URL );//Note that this url is missing a search term! (we don't know the user wants)
 		}
 		
 		return productRepresentations;
@@ -79,8 +79,8 @@ public class ProductActivity {
 		productRep.setProductOwnerID(product.getProductOwner().getId());//TODO make sure that product owner is guaranteed to have an ID!!
 		
 		// Add the links
-		addLink(productRep, "buy", configurables.BUY_URL);
-		addLink(productRep, "search", configurables.SEARCH_URL);//Note that this url is missing a search term! (we don't know the user wants)
+		addLink(productRep, "buy", urls.BUY_URL);
+		addLink(productRep, "search", urls.SEARCH_URL);//Note that this url is missing a search term! (we don't know the user wants)
 		
 		return productRep;
 	}
