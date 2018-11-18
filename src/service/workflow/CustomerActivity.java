@@ -39,7 +39,7 @@ public class CustomerActivity {
           customerRepresentation.setLastName(customer.getLastName());
           //now add links
           addLink(customerRepresentation, "search", urls.SEARCH_URL); //NOTE: this URL is missing the search term
-          addLink(customerRepresentation, "deleteProfile", urls.DELETE_PROFILE.replaceAll("{customerId}", customer.getGid()));
+          addLink(customerRepresentation, "deleteProfile", urls.DELETE_PROFILE.replace("{customerId}", customer.getGid()));
           
           //now add this representation in the list
           employeeRepresentations.add(customerRepresentation);
@@ -75,7 +75,7 @@ public class CustomerActivity {
 		
 		//add links
 		addLink(cRep, "search", urls.SEARCH_URL); //NOTE: this URL is missing the search term
-		addLink(cRep, "deleteProfile", urls.DELETE_PROFILE.replaceAll("{customerId}", customer.getGid()));
+		addLink(cRep, "deleteProfile", urls.DELETE_PROFILE.replace("{customerId}", customer.getGid()));
 		
 		return cRep;
 	}
