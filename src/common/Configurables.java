@@ -40,7 +40,7 @@ public class Configurables {
 	}
 
 	// We need these conditions because when this runs in AWS it needs to return the correct URL.
-	// this uses the ? conditional operator. It reads: (condition result, true or false) ? (if true) return expression 1 : (if false) return expression 2
+	// this uses the ? conditional operator. It reads: (condition result, generates true or false) ? (if true) return expression 1 : (if false) return expression 2
 	// http://www.cafeaulait.org/course/week2/43.html
 	public String getGetCustomerOrdersURL(String hostname) {
 		

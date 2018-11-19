@@ -65,7 +65,6 @@ public class OrderActivity {
 		ProductManager prodMan = new ProductManager();
 		
 		Product pr;
-		for(OrderedItem oi : products) {
 			pr = prodMan.getProduct(oi.getProductID());
 			oi.setProductPrice(Double.toString(pr.getPrice()));			
 		}
@@ -99,6 +98,9 @@ public class OrderActivity {
 	public OrderRepresentation cancelOrder(String orderID) {
 		oM.cancelOrder(orderID);
 		OrderRepresentation orderRep = getOrder(orderID);
+		//this is how I think we should do it. Rather than having a function to do it in each class.
+		orderRep.addLink(new Link("search", urls.SEARCH_URL, "href"));
+		
 		addLink(orderRep, "search", urls.SEARCH_URL);//NOTE: this URL missing searchTerm!
 		addLink(orderRep, "checkStatus", urls.STATUS_URL.replace("{orderID}", orderID));
 		
