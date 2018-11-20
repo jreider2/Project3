@@ -2,6 +2,7 @@ package service.resource;
 
 import java.util.ArrayList;
 
+
 import javax.websocket.server.PathParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -11,11 +12,14 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
+import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 import org.springframework.http.MediaType;
 
 import service.represntation.CreditCardRepresentation;
 import service.represntation.CreditCardRequest;
 import service.workflow.CreditCardActivity;
+
+@CrossOriginResourceSharing(allowAllOrigins = true)
 
 @Path("/")
 public class CreditCardResource implements CreditCardService {

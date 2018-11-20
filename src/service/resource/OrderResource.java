@@ -14,9 +14,13 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
+
 import service.represntation.OrderRepresentation;
 import service.represntation.OrderRequest;
 import service.workflow.OrderActivity;
+
+@CrossOriginResourceSharing(allowAllOrigins = true)
 
 @Path("/orderService/")
 public class OrderResource implements OrderService {

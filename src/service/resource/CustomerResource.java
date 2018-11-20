@@ -14,7 +14,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+
+import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
+
 import javax.ws.rs.core.CacheControl;
+
+@CrossOriginResourceSharing(allowAllOrigins = true)
 
 @Path("/")
 public class CustomerResource implements CustomerService {
