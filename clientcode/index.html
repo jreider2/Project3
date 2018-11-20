@@ -2,8 +2,10 @@
 <head>
     <meta charset="utf-8"/>
     <!-- Include jquery scripts from google for use.-->
+    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="scripts.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -25,14 +27,179 @@
             </div>
         </article>
     </section>
-    <section id="searchresults" class="ajr-container">
-        <!-- Input search results here in javascript -->
+
+    <!-- This section contains both the cart and the search results -->
+    <section id="ecommpanel" class="ajr-container">
+        <!-- This contains the search results-->
+        <article class="ajr-item-65">
+            <section id="searchresults" class="ajr-container">
+                <article class="ajr-item-100 container">
+                    <section class="ajr-container">
+
+                        <article class="ajr-item">
+                            <div>Item Name</div>
+                        </article>
+
+                        <article class="ajr-item">
+                            <div>Item Price</div>
+                        </article>
+
+                        <article class="ajr-item">
+                            <section class="ajr-container">
+                                <article class="ajr-inner-item">
+                                    <a type="button" href="#" data-toggle="collapse" data-target="#desc1">
+                                        More info
+                                        <span class="glyphicon glyphicon-plus-sign"></span>
+                                    </a>
+                                </article>
+                                <article class="ajr-inner-item">
+
+                                </article>
+                                <article class="ajr-inner-item">
+                                    <button type="button" class="ajr-green-btn ajr-right" id="btnadd1">Add to Cart >></button>
+                                </article>
+                            </section>
+                        </article>
+
+                    </section>
+                    <div id="desc1" class="collapse">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    </div>
+                </article>
+
+                <article class="ajr-item-100 container">
+                        <section class="ajr-container">
+    
+                            <article class="ajr-item">
+                                <div>Item Name</div>
+                            </article>
+    
+                            <article class="ajr-item">
+                                <div>Item Price</div>
+                            </article>
+    
+                            <article class="ajr-item">
+                                <section class="ajr-container">
+                                    <article class="ajr-inner-item">
+                                        <a type="button" href="#" data-toggle="collapse" data-target="#desc2">
+                                            More info
+                                            <span class="glyphicon glyphicon-plus-sign"></span>
+                                        </a>
+                                    </article>
+                                    <article class="ajr-inner-item">
+    
+                                    </article>
+                                    <article class="ajr-inner-item">
+                                        <button type="button" class="ajr-green-btn ajr-right">Add to Cart >></button>
+                                    </article>
+                                </section>
+                            </article>
+    
+                        </section>
+                        <div id="desc2" class="collapse">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        </div>
+                    </article>
+
+                    <article class="ajr-item-100 container">
+                            <section class="ajr-container">
+        
+                                <article class="ajr-item">
+                                    <div>Item Name</div>
+                                </article>
+        
+                                <article class="ajr-item">
+                                    <div>Item Price</div>
+                                </article>
+        
+                                <article class="ajr-item">
+                                    <section class="ajr-container">
+                                        <article class="ajr-inner-item">
+                                            <a type="button" href="#" data-toggle="collapse" data-target="#desc3">
+                                                More info
+                                                <span class="glyphicon glyphicon-plus-sign"></span>
+                                            </a>
+                                        </article>
+                                        <article class="ajr-inner-item">
+        
+                                        </article>
+                                        <article class="ajr-inner-item">
+                                            <button type="button" class="ajr-green-btn ajr-right">Add to Cart >></button>
+                                        </article>
+                                    </section>
+                                </article>
+        
+                            </section>
+                            <div id="desc3" class="collapse">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            </div>
+                        </article>
+
+                <!-- Input search results here in javascript -->
+            </section>
+        </article>
+
+        <!-- This contains the shopping cart -->
+        <article id="shoppingcart" class="ajr-item">
+            
+            <h2>Shopping Cart</h2>
+            <section id="cartItemsList" class="ajr-container">
+                <article class="ajr-item-100">
+                    <section class="ajr-container">
+                        <article class="ajr-inner-item">
+                            Item Number
+                        </article>
+                        <article class="ajr-inner-item">
+                            Item Price
+                        </article>
+                        <article class="ajr-inner-item">
+                            Qty Ordered
+                        </article>
+                    </section>
+                </article>
+
+                <article class="ajr-item-100">
+                    <section class="ajr-container">
+                        <article class="ajr-inner-item">
+                            Item Number
+                        </article>
+                        <article class="ajr-inner-item">
+                            Item Price
+                        </article>
+                        <article class="ajr-inner-item">
+                            Qty Ordered
+                        </article>
+                    </section>
+                </article>
+
+                <article class="ajr-item-100">
+                    <section class="ajr-container">
+                        <article class="ajr-inner-item">
+                            Item Number
+                        </article>
+                        <article class="ajr-inner-item">
+                            Item Price
+                        </article>
+                        <article class="ajr-inner-item">
+                            Qty Ordered
+                        </article>
+                    </section>
+                </article>
+
+            </section>
+
+            <section class="ajr-container">
+                <article class="ajr-item-100">
+                    <button class="ajr-green-btn" type="button">Place Order</button>
+                </article>
+            </section>
+        </article>
     </section>
-
-
-    <input type="text" id="creditcardno"/>
-    <button id="test">Make CreditCard Request</button>
-    <article id=creditcardinfo></article>
-
 </body>
 </html>
