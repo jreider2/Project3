@@ -64,6 +64,7 @@ input {
     background-color:green;
     color: white;
     border-radius: 5px;
+    width: 100%;
 }
 
 .ajr-right{
