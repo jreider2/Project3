@@ -10,10 +10,10 @@ package common;
 public class Configurables {
 	public static final String LOCALHOST = "http://localhost:8081/";
 	public static final String AWSHOST = "awshostURLhere";
-	public static final String STATUS_URL = "http://localhost:8081/order/orderService/status/{orderID}";
-	public static final String CANCEL_URL = "http://localhost:8081/order/orderService/order/cancelledorder/{orderID}";
+	public static final String STATUS_URL = "order/orderService/status/{orderID}";
+	public static final String CANCEL_URL = "order/orderService/order/cancelledorder/{orderID}";
 	public static final String SEARCH_URL = "http://localhost:8081/productservice/products/searchresults/{searchterm}";
-	public static final String BUY_URL = "http://localhost:8081/order/orderService/order/neworder";
+	public static final String BUY_URL = "order/orderService/order/neworder";
 	public static final String DELETE_PROFILE = "http://localhost:8081/customerservice//customers/{customerId}";
 	
 	//Order Resource
