@@ -63,7 +63,7 @@ public class CustomerResource implements CustomerService {
 	
 	/**
 	 * Login for Customer
-	 * Returns null if fails to login
+	 * @return Returns 204 No Content Status if user fails to login
 	 */
 	@POST
 	@Produces({"application/xml" , "application/json"})
