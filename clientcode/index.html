@@ -2,14 +2,34 @@
 <head>
     <meta charset="utf-8"/>
     <!-- Include jquery scripts from google for use.-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="scripts.js"></script>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <html>
 <body>
-    
 
-    <h1>Ecommerce Shop</h1>
+    <section class="ajr-container">
+        <article class="ajr-item">
+            <h1>Ecommerce Shop</h1>
+        </article>
+        <article class="ajr-item"></article>
+        <article class="ajr-item">
+            <div class="input-group">
+                <input class="form-control" type="text" placeholder="Search..." id="searchterm">
+                <div class="input-group-addon">
+                    <span class="searchicon glyphicon glyphicon-search" id="searchbtn"></span>
+                </div>
+
+            </div>
+        </article>
+    </section>
+    <section id="searchresults" class="ajr-container">
+        <!-- Input search results here in javascript -->
+    </section>
+
+
     <input type="text" id="creditcardno"/>
     <button id="test">Make CreditCard Request</button>
     <article id=creditcardinfo></article>

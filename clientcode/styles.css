@@ -1,0 +1,47 @@
+.ajr-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.ajr-item {
+    border-style: dotted;
+    flex-grow: 1;
+    width: 32%;
+    min-width: 250px;
+}
+
+.ajr-inner-item {
+    border-style: dotted;
+    flex-grow: 1;
+    width: 32%;
+    min-width: 50px;
+}
+
+input {
+    width: 100%;
+}
+
+.menudots {
+    color: blue;
+    margin-right: 5px;
+    font-size: 25px;
+}
+
+.menudots:hover{
+    cursor:pointer;
+    color: green;
+}
+
+.searchicon {
+    color: blue;
+    font-size: 15px;
+}
+
+.searchicon:hover{
+    cursor:pointer;
+    color:green;
+}
+
+.ajr-align-right {
+    text-align: right;
+}
