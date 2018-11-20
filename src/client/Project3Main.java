@@ -229,21 +229,21 @@ public final class Project3Main {
         /* getAcknowledgmentClient = getAcknowledgmentClient.accept("application/json").type("application/json").path("/order/orderService/order/neworder");
          acknowledgementResponse = getAcknowledgmentClient.get(String.class);
          System.out.println("POST (Place Order) Method response: .... " + acknowledgementResponse);*/
-        WebClient orderClient = WebClient.create("http://localhost:8081", providers);
+         WebClient orderClient = WebClient.create("http://localhost:8081", providers);
          orderClient = orderClient.accept("application/json").type("application/json").path("/order/orderService/order/neworder");
         
          System.out.println("Place Order here.......................");
          OrderRequest ordReq = new OrderRequest();
-         ArrayList<OrderedItem> oIList = new ArrayList<>();
-         OrderedItem oI = new OrderedItem();
-         oI.setProductID("10");
-         oI.setProductPrice("2.00");
-         oI.setQtyOnOrder("12");
+         ArrayList<ProductRequest> oIList = new ArrayList<>();
+         ProductRequest oI = new ProductRequest();
+         oI.setId("10");
+         oI.setPrice(2.00);
+         oI.setQuantityOnOrder("12");
          oIList.add(oI);
-         oI.setProductID("11");
-         oI.setProductPrice("5.00");
-         oI.setQtyOnOrder("7");
-         oIList.add(oI);
+//         oI.setProductID("11");
+//         oI.setProductPrice("5.00");
+//         oI.setQtyOnOrder("7");
+//         oIList.add(oI);
          ordReq.setCcNo("421365816651");
          ordReq.setCustomerId("2");
          ordReq.setItems(oIList);
@@ -251,9 +251,12 @@ public final class Project3Main {
          /*****************************************************************************************
           * PUT METHOD   Push ORDER to Partner in order manager
          *****************************************************************************************/
-      	OrderRepresentation ordResponsePost =  orderClient.post(ordReq, OrderRepresentation.class);
+         OrderRepresentation ordResponsePost;
+      	//ordResponsePost =  orderClient.post(ordReq, OrderRepresentation.class);//TODO FIXME!!
+         String tempOrderID = "10"; 
+         //tempOrderID = ordResponsePost.getOrderNo()
       
-      	System.out.println("POST METHOD Response ........." + ordResponsePost.getOrderNo() + " is placed!");
+      	System.out.println("POST METHOD Response ........." + tempOrderID + " is placed!");
      	/*****************************************************************************************
          * PUT METHOD : Ship Orders
          *****************************************************************************************/
@@ -261,19 +264,19 @@ public final class Project3Main {
      	shipClient = shipClient.accept("application/json").type("application/json").path("/order/orderService/shippedOrder");
      	
      	System.out.println("Partner now says that they shipped the order");
-     	String isShipped = shipClient.put(ordResponsePost.getOrderNo(), String.class);
+     	String isShipped = shipClient.put(tempOrderID, String.class);
      	
-     	System.out.println("Order " + ordResponsePost.getOrderNo() + " is shipped true or false: " + isShipped);
+     	System.out.println("Order " + tempOrderID + " is shipped true or false: " + isShipped);
      	
      	/*****************************************************************************************
          * GET METHOD : Provide Order Status
          *****************************************************************************************/
      	WebClient statusClient = WebClient.create("http://localhost:8081", providers);
-     	statusClient = statusClient.accept("application/json").type("application/json").path("/order/orderService/status/" + ordResponsePost.getOrderNo());
+     	statusClient = statusClient.accept("application/json").type("application/json").path("/order/orderService/status/" + tempOrderID);
      	
      	OrderRepresentation ord = statusClient.get(OrderRepresentation.class);
-     	System.out.println("Order " + ordResponsePost.getOrderNo() + " status get test: " + ord.getOrderStatus());
-     	
+     	//String ordStr = statusClient.get(String.class);
+     	System.out.println("Order " + tempOrderID + " status get test: " + ord.getOrderStatus());
      	
      	/*****************************************************************************************
          * PUT METHOD : Fulfill Order
@@ -281,19 +284,19 @@ public final class Project3Main {
      	WebClient fulfillClient = WebClient.create("http://localhost:8081", providers);
      	fulfillClient = fulfillClient.accept("application/json").type("application/json").path("order/orderService/fulfilledOrder");
      	System.out.println("Partner now says that the order has been delivered (fulfilled)");
-     	String isFulfilled = fulfillClient.put(ordResponsePost.getOrderNo(), String.class);
-     	System.out.println("Order " + ordResponsePost.getOrderNo() + " is fulfilled true or false: " + isFulfilled);
+     	String isFulfilled = fulfillClient.put(tempOrderID, String.class);
+     	System.out.println("Order " + tempOrderID + " is fulfilled true or false: " + isFulfilled);
         
      	
      	WebClient checkFulfillClient = WebClient.create("http://localhost:8081", providers);
-     	checkFulfillClient = checkFulfillClient.accept("application/json").type("application/json").path("order/orderService/order/fulfillmentAcknowledgement/" + ordResponsePost.getOrderNo());
+     	checkFulfillClient = checkFulfillClient.accept("application/json").type("application/json").path("order/orderService/order/fulfillmentAcknowledgement/" + tempOrderID);
      			
      	/*****************************************************************************************
          * GET METHOD : Get Acknowledgement of fulfillment  
          *****************************************************************************************/
      	System.out.println("Get Acknowledgement notification:");
      	ordResponsePost = checkFulfillClient.get(OrderRepresentation.class);
-     	System.out.println("Order " + ordResponsePost.getOrderNo() + " status get test: " + ord.getOrderStatus());
+     	System.out.println("Order " + tempOrderID + " status get test: " + ord.getOrderStatus());
      	
      	/*getAcknowledgmentClient = getAcknowledgmentClient.accept("application/json").type("application/json").path("/order/orderService/order/status?orderID=10");
         acknowledgementResponse = getAcknowledgmentClient.get(String.class);

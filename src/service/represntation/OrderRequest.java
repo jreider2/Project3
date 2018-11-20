@@ -14,15 +14,15 @@ import order.OrderedItem;
 @XmlType(name = "")
 public class OrderRequest {
 	
-	private ArrayList <OrderedItem> items;
+	private ArrayList <ProductRequest> items;
 	private String customerId;
 	private String ccNo;
 	
-	public ArrayList<OrderedItem> getItems() {
+	public ArrayList<ProductRequest> getItems() {
 		return items;
 	}
 
-	public void setItems(ArrayList<OrderedItem> items) {
+	public void setItems(ArrayList<ProductRequest> items) {
 		this.items = items;
 	}
 

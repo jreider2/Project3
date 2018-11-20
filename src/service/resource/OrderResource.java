@@ -70,8 +70,8 @@ public class OrderResource implements OrderService {
 	}
 	
 	@POST
-	@Produces({"application/json", "application/xml"})
-	@Consumes({"application/json", "application/xml"})
+	@Produces({"application/xml", "application/json"})
+	@Consumes({"application/xml", "application/json"})
 	@Path("/order/neworder")
 	public OrderRepresentation placeOrder(OrderRequest oR) {
 		return oA.submitOrder(oR.getCustomerId(), oR.getItems(), oR.getCcNo());

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -16,7 +17,8 @@ import product.Product;
 public class OrderRepresentation extends AbstractRepresentation{
 	private String orderNo;
 	private String orderStatus;
-	private ArrayList<OrderedItem> productsOnOrder;
+	@XmlElement(name="productrepresentation")
+	private ArrayList<ProductRepresentation> productsOnOrder;
 	private String customerID;
 	
 	public String getCustomerID() {
@@ -43,11 +45,14 @@ public class OrderRepresentation extends AbstractRepresentation{
 	public void setOrderStatus(String orderStatus) {
 		this.orderStatus = orderStatus;
 	}
-	public ArrayList<OrderedItem> getProductsOnOrder() {
+	public ArrayList<ProductRepresentation> getProductsOnOrder() {
 		return productsOnOrder;
 	}
-	public void setProductsOnOrder(ArrayList<OrderedItem> productsOnOrder) {
+	public void setProductsOnOrder(ArrayList<ProductRepresentation> productsOnOrder) {
 		this.productsOnOrder = productsOnOrder;
+	}
+	public void addProductRepresentation(ProductRepresentation productRepresentation) {
+		productsOnOrder.add(productRepresentation);
 	}
 
 }

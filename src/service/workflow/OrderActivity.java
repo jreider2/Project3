@@ -35,8 +35,15 @@ public class OrderActivity {
 		
 		oR.setOrderNo(o.getId());
 		oR.setOrderStatus(o.getOrderStatus());
-		oR.setProductsOnOrder(o.getProducts());
 		
+		for (OrderedItem orderedItem: o.getProducts()) {//oR.setProductsOnOrder(o.getProducts());
+			ProductRepresentation productRepresentation = new ProductRepresentation();
+			productRepresentation.setId(orderedItem.getProductID());
+			productRepresentation.setPrice(Double.parseDouble(orderedItem.getProductPrice()));
+			productRepresentation.setQuantityOnOrder(orderedItem.getQtyOnOrder());
+			oR.addProductRepresentation(productRepresentation);
+		}
+		 
 		String orderId = o.getId();
 		
 		addLink(oR, "cancel", urls.CANCEL_URL.replace("{orderID}", orderId) );
@@ -54,28 +61,51 @@ public class OrderActivity {
 			orTemp.setOrderNo(o.getId());
 			orTemp.setOrderStatus(o.getOrderStatus());
 			
-			orTemp.setProductsOnOrder(o.getProducts());
+			for (OrderedItem orderedItem: o.getProducts()) {
+				ProductRepresentation productRepresentation = new ProductRepresentation();
+				productRepresentation.setId(orderedItem.getProductID());
+				productRepresentation.setPrice(Double.parseDouble(orderedItem.getProductPrice()));
+				productRepresentation.setQuantityOnOrder(orderedItem.getQtyOnOrder());
+				orTemp.addProductRepresentation(productRepresentation);
+			}
+			//orTemp.setProductsOnOrder(o.getProducts());
 			arOr.add(orTemp);
 		}
 		return arOr;
 	}
 	
-	public OrderRepresentation submitOrder(String customerID, ArrayList<OrderedItem> products, String CreditCardNo) {
+	public OrderRepresentation submitOrder(String customerID, ArrayList<ProductRequest> products, String CreditCardNo) {
 		OrderRepresentation oR = new OrderRepresentation();
 		ProductManager prodMan = new ProductManager();
 		
+		ArrayList<OrderedItem> orderedItemList = new ArrayList<>();
+		
 		Product pr;
-		for(OrderedItem oi : products) {
+		for(ProductRequest p : products) {
+			OrderedItem oi = new OrderedItem();
+			oi.setProductID(p.getId());
+			oi.setQtyOnOrder(p.getQuantityOnOrder());
+			oi.setProductPrice(Double.toString(p.getPrice()));
 			pr = prodMan.getProduct(oi.getProductID());
-			oi.setProductPrice(Double.toString(pr.getPrice()));			
+			//oi.setProductPrice(Double.toString(pr.getPrice()));	
+			orderedItemList.add(oi);
 		}
 		
-		Order newOrder = oM.addOrder(customerID, products, CreditCardNo);
+		Order newOrder = oM.addOrder(customerID, orderedItemList, CreditCardNo);
 		String orderId = newOrder.getId();
 		
 		oR.setOrderNo(newOrder.getId());
 		oR.setOrderStatus(newOrder.getOrderStatus());
-		oR.setProductsOnOrder(newOrder.getProducts());
+		
+		
+		for (OrderedItem orderedItem: orderedItemList) {//oR.setProductsOnOrder(newOrder.getProducts()); 
+			ProductRepresentation productRepresentation = new ProductRepresentation();
+			productRepresentation.setId(orderedItem.getProductID());
+			productRepresentation.setPrice(Double.parseDouble(orderedItem.getProductPrice()));
+			productRepresentation.setQuantityOnOrder(orderedItem.getQtyOnOrder());
+			oR.addProductRepresentation(productRepresentation);
+		}
+		
 		oR.setCustomerID(newOrder.getCustomerID());
 		//add the links
 		addLink(oR, "checkStatus", urls.STATUS_URL.replace("{orderID}", orderId));

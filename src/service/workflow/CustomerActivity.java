@@ -58,7 +58,7 @@ public class CustomerActivity {
 		
 		//add links
 		addLink(customerRep, "search", urls.SEARCH_URL); //NOTE: this URL is missing the search term
-		addLink(customerRep, "deleteProfile", urls.DELETE_PROFILE.replaceAll("{customerId}", id));
+		addLink(customerRep, "deleteProfile", urls.DELETE_PROFILE.replace("{customerId}", id));
 		
 		
 		return customerRep;
@@ -75,7 +75,7 @@ public class CustomerActivity {
 		
 		//add links
 		addLink(cRep, "search", urls.SEARCH_URL); //NOTE: this URL is missing the search term
-		addLink(cRep, "deleteProfile", urls.DELETE_PROFILE.replace("{customerId}", customer.getGid()));
+		//addLink(cRep, "deleteProfile", urls.DELETE_PROFILE.replace("{customerId}", customer.getGid()));
 		
 		return cRep;
 	}
