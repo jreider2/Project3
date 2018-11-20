@@ -37,9 +37,19 @@ public class CustomerResource implements CustomerService {
 	@Path("/customers/{customerId}")
 	public CustomerRepresentation getCustomer(@PathParam("customerId") String id) { 
 		System.out.println("GET METHOD Request from Client with employeeRequest String ............." + id);
-		CustomerActivity empActivity = new CustomerActivity();
-		return empActivity.getCustomer(id);
+		CustomerActivity customerActivity = new CustomerActivity();
+		return customerActivity.getCustomer(id);
 	}
+	
+	@GET
+	@Produces({"application/xml" , "application/json"})
+	@Path("/customerAuthentication")
+	public CustomerRepresentation loginCustomer(CustomerRequest  customerRequest) { 
+		System.out.println("GET METHOD Request from Client for user Authentication .............");
+		CustomerActivity customerActivity = new CustomerActivity();
+		return customerActivity.loginCustomer(customerRequest.getUserName(), customerRequest.getPassword());
+	}
+	
 	
 	/**
 	 * Register & create customer profile. 
@@ -59,8 +69,8 @@ public class CustomerResource implements CustomerService {
 	public Response deleteCustomer(@PathParam("customerId") String id) {
 		
 		System.out.println("Delete METHOD Request from Client with employeeRequest String ............." + id);
-		CustomerActivity empActivity = new CustomerActivity();
-		String res = empActivity.deleteCustomer(id);
+		CustomerActivity customerActivity = new CustomerActivity();
+		String res = customerActivity.deleteCustomer(id);
 		if (res.equals("OK")) {
 			return Response.status(Status.OK).build();
 		}
