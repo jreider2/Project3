@@ -43,52 +43,55 @@ public class MainClient {
 		// 2) Quick Readme if time
 		// 3) Deploy on AWS
 		
-		//*****************ADD NEW ADDRESS FUNCTIONALITY*************************************************
-		AddressDAO adDao = new AddressDAO();
-		String newAddressID = adDao.addAddress("5", "Melrose", "Boystown", "Ohio", "20987");
+//		//*****************ADD NEW ADDRESS FUNCTIONALITY*************************************************
+//		AddressDAO adDao = new AddressDAO();
+//		String newAddressID = adDao.addAddress("5", "Melrose", "Boystown", "Ohio", "20987");
+//		
+//		//*****************REGISTER NEW PARTNER FUNCTIONALITY*********************************************
+//		PartnerManager partManager = new PartnerManager();
+//		Partner partner1 = partManager.registerNewPartner("Books a Million", "BAM username","BAM password", Integer.parseInt(newAddressID));
+//		System.out.println("Partner added to Database = " + partner1.toString());
+//		System.out.println(partner1.getCompanyName() + "'s ID = " + partner1.getId());
+//		
+//		//*****************Get PARTNER by ID FUNCTIONALITY*********************************************
+//		Partner partner1RetreivedFromDB = partManager.getPartner(partner1.getId());
+//		System.out.println("Partner retreieved from DB = " + partner1RetreivedFromDB.toString() );
+//		
+//		//*****************ADD Products to marketPlace FUNCTIONALITY****************************************
+//		ProductManager productManager = new ProductManager();
+//		Product googles = productManager.addProduct("goggles", "swim goggles", 5, partner1.getId());
+//		System.out.println(googles.getDescription() + " were added to the MarketPlace and the DB.");
+//		
+//		//*****************ADD Products to PARTNER FUNCTIONALITY*******************************************
+//		//partner1 = partManager.addProductToPartner("candle", "white candle", 2, partner1.getId());
+//		//System.out.println("Product white candle Added to BAM products: " + partner1.getProducts());
+//		
+//		//*****************Search item database by product FUNCTIONALITY*********************************************
+//		//ProductManager prodSearch = new ProductManager();
+//		//ArrayList<Product> searchResults = prodSearch.searchForProduct("candle");
+//		//System.out.println("Search results for 'candle'");
+//		//for (Product p : searchResults) {
+//		//	System.out.println(p.getName());
+//		//}
+//		
+//		//*****************REGISTER NEW CUSTOMER FUNCTIONALITY*********************************************
+//		//CustomerManager cm = new CustomerManager();
+//		//boolean custRegistered = cm.registerNewCustomer("Randy", "Johnson", "4562589499", "RJRJ", "randyspass", "RJRJ@gmail.com", "321 Test Loop", "Apt 432", "Denver", "45698", "Colorado");
+//		//System.out.println(custRegistered);
 		
-		//*****************REGISTER NEW PARTNER FUNCTIONALITY*********************************************
-		PartnerManager partManager = new PartnerManager();
-		Partner partner1 = partManager.registerNewPartner("Books a Million", "BAM username","BAM password", Integer.parseInt(newAddressID));
-		System.out.println("Partner added to Database = " + partner1.toString());
-		System.out.println(partner1.getCompanyName() + "'s ID = " + partner1.getId());
+	
 		
-		//*****************Get PARTNER by ID FUNCTIONALITY*********************************************
-		Partner partner1RetreivedFromDB = partManager.getPartner(partner1.getId());
-		System.out.println("Partner retreieved from DB = " + partner1RetreivedFromDB.toString() );
-		
-		//*****************ADD Products to marketPlace FUNCTIONALITY****************************************
-		ProductManager productManager = new ProductManager();
-		Product googles = productManager.addProduct("goggles", "swim goggles", 5, partner1.getId());
-		System.out.println(googles.getDescription() + " were added to the MarketPlace and the DB.");
-		
-		//*****************ADD Products to PARTNER FUNCTIONALITY*******************************************
-		//partner1 = partManager.addProductToPartner("candle", "white candle", 2, partner1.getId());
-		//System.out.println("Product white candle Added to BAM products: " + partner1.getProducts());
-		
-		//*****************Search item database by product FUNCTIONALITY*********************************************
-		//ProductManager prodSearch = new ProductManager();
-		//ArrayList<Product> searchResults = prodSearch.searchForProduct("candle");
-		//System.out.println("Search results for 'candle'");
-		//for (Product p : searchResults) {
-		//	System.out.println(p.getName());
-		//}
-		
-		//*****************REGISTER NEW CUSTOMER FUNCTIONALITY*********************************************
-		//CustomerManager cm = new CustomerManager();
-		//boolean custRegistered = cm.registerNewCustomer("Randy", "Johnson", "4562589499", "RJRJ", "randyspass", "RJRJ@gmail.com", "321 Test Loop", "Apt 432", "Denver", "45698", "Colorado");
-		//System.out.println(custRegistered);
-		
-		//*****************Create order FUNCTIONALITY*********************************************
-		OrderManager orderManager = new OrderManager();
-		ArrayList<String> myProductIDs = new ArrayList<>();
-		myProductIDs.add(googles.getId());
-		myProductIDs.add(googles.getId());
-		String tempCustomerID = "3";
-		//Order myGoggleOrder = orderManager.addOrder(tempCustomerID, myProductIDs, "5555888822229999");
-		//System.out.println("OrderID of the newly created Order: " + myGoggleOrder.getId());
-		//System.out.println("Credit Card on order: " + myGoggleOrder.getCreditCardNo());
-		System.out.println("Customer Order successfully put in an order for: ");
+//		
+//		//*****************Create order FUNCTIONALITY*********************************************
+//		OrderManager orderManager = new OrderManager();
+//		ArrayList<String> myProductIDs = new ArrayList<>();
+//		myProductIDs.add(googles.getId());
+//		myProductIDs.add(googles.getId());
+//		String tempCustomerID = "3";
+//		//Order myGoggleOrder = orderManager.addOrder(tempCustomerID, myProductIDs, "5555888822229999");
+//		//System.out.println("OrderID of the newly created Order: " + myGoggleOrder.getId());
+//		//System.out.println("Credit Card on order: " + myGoggleOrder.getCreditCardNo());
+//		System.out.println("Customer Order successfully put in an order for: ");
 		
 		//for (Product p : myGoggleOrder.getItems()) {
 		//	System.out.println(p);
@@ -143,9 +146,19 @@ public class MainClient {
 		//System.out.println("Now This is the status of your order: " + status);
 		
 		
+		//*****************TESING to see if the login is working : *********************************************
 		
+		//THis shoudl come back null
+		System.out.println("this should come out null: ");
+		CustomerDAO cDAO = new CustomerDAO();
+		Customer customer = cDAO.loginCustomer("JReiterk", "yourpassword6");
+		System.out.println("Customer ID: " + customer);
 		
-
+		//This should NOT come back null
+		System.out.println("this should NOT come out null: ");
+		customer = cDAO.loginCustomer("JReiter", "yourpassword6");
+		System.out.println("Customer ID: " + customer.getGid());
+		
 	}
 
 }

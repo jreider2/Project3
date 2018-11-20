@@ -122,20 +122,21 @@ public class CustomerDAO {
 			String selectQuery = "SELECT * FROM Customer where UserName ='" + userName + "'" + " AND Password ='" + password + "'" ;
 			ResultSet resultSet = selectStatement.executeQuery(selectQuery);
 			
-			if (resultSet == null) { //if there is nothing that matches return null
-				return null;
-			}
-			
-			resultSet.next();
-			resultSet.next();
-			
-			firstName = resultSet.getString("FName");
+			if (resultSet.next()) {
+				firstName = resultSet.getString("FName");
 			lastName = resultSet.getString("LName");
 			customerID = resultSet.getString("CustomerID");
+			} else {
+				return null;//if there is nothing that matches return null
+			}
+		
 			
 		}catch(SQLException se) {
 			se.printStackTrace();
-		}finally {
+		}catch(NullPointerException e) {
+			return null;
+		}
+		finally {
 			if(connection != null) {
 				try {
 					connection.close();

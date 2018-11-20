@@ -49,7 +49,7 @@ public class ProductDAO {
 			resultSet.next();
 			
 			while(resultSet.next()) {
-				String productID = resultSet.getString("ProductID"); //TODO check this value
+				String productID = resultSet.getString("ProductID"); 
 				Product prod = getProduct(productID);
 				if(prod != null) {
 					products.add(prod);
