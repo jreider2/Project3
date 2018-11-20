@@ -58,6 +58,10 @@ public class CustomerManager {
 				createAddressForNewCustomer(street, aptno, city, zipcode, state));
 		return c;
 	}
+	
+	public Customer loginCustomer(String userName, String password) {
+		return dao.loginCustomer(userName,password);
+	}
 
 	public void updateCustomer(String id) {
 		dao.updateCustomer(id);
@@ -66,6 +70,8 @@ public class CustomerManager {
 	public void deleteCustomer(String id) {
 		dao.deleteCustomer(id);
 	}
+
+	
 	
 	
 

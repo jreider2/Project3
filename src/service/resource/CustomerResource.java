@@ -41,15 +41,7 @@ public class CustomerResource implements CustomerService {
 		return customerActivity.getCustomer(id);
 	}
 	
-	@GET
-	@Produces({"application/xml" , "application/json"})
-	@Path("/customerAuthentication")
-	public CustomerRepresentation loginCustomer(CustomerRequest  customerRequest) { 
-		System.out.println("GET METHOD Request from Client for user Authentication .............");
-		CustomerActivity customerActivity = new CustomerActivity();
-		return customerActivity.loginCustomer(customerRequest.getUserName(), customerRequest.getPassword());
-	}
-	
+
 	
 	/**
 	 * Register & create customer profile. 
@@ -61,6 +53,20 @@ public class CustomerResource implements CustomerService {
 		System.out.println("POST METHOD Request from Client with ............." + customerRequest.getFirstName() + "  " + customerRequest.getLastName());
 		CustomerActivity customerActivity = new CustomerActivity();
 		return customerActivity.registerNewCustomer(customerRequest.getFirstName(), customerRequest.getLastName(), customerRequest.getStreet(), customerRequest.getAptno(), customerRequest.getCity(), customerRequest.getZipcode(), customerRequest.getState() );
+	}
+	
+	
+	/**
+	 * Login for Customer
+	 * Returns null if fails to login
+	 */
+	@GET
+	@Produces({"application/xml" , "application/json"})
+	@Path("/customerAuthentication")
+	public CustomerRepresentation loginCustomer(CustomerRequest  customerRequest) { 
+		System.out.println("GET METHOD Request from Client for user Authentication .............");
+		CustomerActivity customerActivity = new CustomerActivity();
+		return customerActivity.loginCustomer(customerRequest.getUserName(), customerRequest.getPassword()); //returns null if failed to login
 	}
 	
 	@DELETE
