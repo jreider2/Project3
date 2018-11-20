@@ -42,51 +42,55 @@ public class Configurables {
 	// http://www.cafeaulait.org/course/week2/43.html
 	public String getGetCustomerOrdersURL(String hostname) {
 		
-		return ((hostname.toLowerCase().contains("localhost")) ? LOCALHOST : AWSHOST) + getCustomerOrdersURL;
+		return getHostURL(hostname) + getCustomerOrdersURL;
 	}
 
 	public String getGetOrderURL(String hostname) {
-		return ((hostname.toLowerCase().contains("localhost")) ? LOCALHOST : AWSHOST) + getOrderURL;
+		return getHostURL(hostname) + getOrderURL;
 	}
 
 	public String getGetAcknowledgementURL(String hostname) {
-		return ((hostname.toLowerCase().contains("localhost")) ? LOCALHOST : AWSHOST) + getAcknowledgementURL;
+		return getHostURL(hostname) + getAcknowledgementURL;
 	}
 
 	public String getGetStatusURL(String hostname) {
-		return ((hostname.toLowerCase().contains("localhost")) ? LOCALHOST : AWSHOST) + STATUS_URL;
+		return getHostURL(hostname) + STATUS_URL;
 	}
 
 	public String getCancelOrderURL(String hostname) {
-		return ((hostname.toLowerCase().contains("localhost")) ? LOCALHOST : AWSHOST) + CANCEL_URL;
+		return getHostURL(hostname) + CANCEL_URL;
 	}
 
 	public String getPlaceOrderURL(String hostname) {
-		return ((hostname.toLowerCase().contains("localhost")) ? LOCALHOST  : AWSHOST) + BUY_URL;
+		return getHostURL(hostname) + BUY_URL;
 	}
 
 	public String getShipOrderURL(String hostname) {
-		return ((hostname.toLowerCase().contains("localhost")) ? LOCALHOST : AWSHOST) + shipOrderURL;
+		return getHostURL(hostname) + shipOrderURL;
 	}
 
 	public String getFulfillOrderURL(String hostname) {
-		return ((hostname.toLowerCase().contains("localhost")) ? LOCALHOST  : AWSHOST) +  fulfillOrderURL;
+		return getHostURL(hostname) +  fulfillOrderURL;
 	}
 
 	public String getGetCustomerCreditCardsURL(String hostname) {
-		return ((hostname.toLowerCase().contains("localhost")) ? LOCALHOST : AWSHOST) + getCustomerCreditCardsURL;
+		return getHostURL(hostname) + getCustomerCreditCardsURL;
 	}
 
 	public String getGetCustomerCardURL(String hostname) {
-		return ((hostname.toLowerCase().contains("localhost")) ? LOCALHOST : AWSHOST) + getCustomerCardURL;
+		return getHostURL(hostname) + getCustomerCardURL;
 	}
 
 
 	public String getDeleteCreditCardURL(String hostname) {
-		return ((hostname.toLowerCase().contains("localhost")) ? LOCALHOST : AWSHOST) + deleteCreditCardURL;
+		return getHostURL(hostname) + deleteCreditCardURL;
 	}
 
 	public String getNewCreditCardURL(String hostname) {
-		return ((hostname.toLowerCase().contains("localhost")) ? LOCALHOST : AWSHOST) + newCreditCardURL;
+		return getHostURL(hostname) + newCreditCardURL;
+	}
+	
+	public String getHostURL(String hostname) {
+		return ((hostname.toLowerCase().contains("localhost")) ? LOCALHOST : AWSHOST);
 	}
 }
