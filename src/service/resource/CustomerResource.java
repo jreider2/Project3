@@ -65,7 +65,7 @@ public class CustomerResource implements CustomerService {
 	 * Login for Customer
 	 * Returns null if fails to login
 	 */
-	@GET
+	@POST
 	@Produces({"application/xml" , "application/json"})
 	@Path("/customerAuthentication")
 	public CustomerRepresentation loginCustomer(CustomerRequest  customerRequest) { 

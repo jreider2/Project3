@@ -67,6 +67,9 @@ public class CustomerActivity {
 	public CustomerRepresentation loginCustomer(String userName, String password) {
 		
 		Customer c = cmanager.loginCustomer(userName,password);
+		if (c == null ) {
+			return null;
+		}
 		
 		CustomerRepresentation customerRep = new CustomerRepresentation() ;
 		customerRep.setFirstName(c.getFirstName());
