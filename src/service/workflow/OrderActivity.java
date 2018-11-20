@@ -75,30 +75,34 @@ public class OrderActivity {
 	}
 	
 	public OrderRepresentation submitOrder(String customerID, ArrayList<ProductRequest> products, String CreditCardNo) {
+		
 		OrderRepresentation oR = new OrderRepresentation();
 		ProductManager prodMan = new ProductManager();
-		
 		ArrayList<OrderedItem> orderedItemList = new ArrayList<>();
-		
 		Product pr;
+		
+		//for each product request create an ordered list item 
 		for(ProductRequest p : products) {
 			OrderedItem oi = new OrderedItem();
 			oi.setProductID(p.getId());
 			oi.setQtyOnOrder(p.getQuantityOnOrder());
 			oi.setProductPrice(Double.toString(p.getPrice()));
 			pr = prodMan.getProduct(oi.getProductID());
-			//oi.setProductPrice(Double.toString(pr.getPrice()));	
+			//add item to the collection
 			orderedItemList.add(oi);
 		}
 		
+		//create new order using ordered item list
 		Order newOrder = oM.addOrder(customerID, orderedItemList, CreditCardNo);
+		//add to database and get id back
 		String orderId = newOrder.getId();
 		
+		//begin to create representation of order
 		oR.setOrderNo(newOrder.getId());
 		oR.setOrderStatus(newOrder.getOrderStatus());
 		
-		
-		for (OrderedItem orderedItem: orderedItemList) {//oR.setProductsOnOrder(newOrder.getProducts()); 
+		//for each ordered item make a prod rep
+		for (OrderedItem orderedItem: orderedItemList) {
 			ProductRepresentation productRepresentation = new ProductRepresentation();
 			productRepresentation.setId(orderedItem.getProductID());
 			productRepresentation.setPrice(Double.parseDouble(orderedItem.getProductPrice()));
@@ -107,7 +111,8 @@ public class OrderActivity {
 		}
 		
 		oR.setCustomerID(newOrder.getCustomerID());
-		//add the links
+		
+		//add the links to representation
 		addLink(oR, "checkStatus", urls.STATUS_URL.replace("{orderID}", orderId));
 		addLink(oR, "cancel Order", urls.CANCEL_URL.replace("{orderID}", orderId));
 		addLink(oR, "search", urls.SEARCH_URL); //NOTE: this URL is missing the search term
@@ -127,10 +132,15 @@ public class OrderActivity {
 	}
 	
 	public OrderRepresentation cancelOrder(String orderID) {
+		
 		oM.cancelOrder(orderID);
 		OrderRepresentation orderRep = getOrder(orderID);
-		addLink(orderRep, "search", urls.SEARCH_URL);//NOTE: this URL missing searchTerm!
+		//this is how I think we should do it. Rather than having a function to do it in each class.
+		orderRep.addLink(new Link("search", urls.SEARCH_URL, "application/xml, application/json"));
+		
+		//addLink(orderRep, "search", urls.SEARCH_URL);//NOTE: this URL missing searchTerm!
 		addLink(orderRep, "checkStatus", urls.STATUS_URL.replace("{orderID}", orderID));
+		
 		
 		return orderRep;
 	}
@@ -151,6 +161,7 @@ public class OrderActivity {
 		Link link = new Link();
 		link.setRel(rel);
 		link.setUrl(url);
+		link.setMediaType("application/xml, application/json");
 		
 		orderRep.addLink(link);
 	}

@@ -15,6 +15,7 @@ import product.Product;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
 public class OrderRepresentation extends AbstractRepresentation{
+	
 	private String orderNo;
 	private String orderStatus;
 	@XmlElement(name="productrepresentation")

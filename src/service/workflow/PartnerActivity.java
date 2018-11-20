@@ -21,7 +21,6 @@ import service.represntation.ProductRequest;
  *
  */
 public class PartnerActivity {
-
 	
 	private static PartnerManager partnerManager = new PartnerManager();
 	private Configurables urls = new Configurables();
@@ -42,6 +41,9 @@ public class PartnerActivity {
 			partnerRepresentation.setPassword(p.getPassword());
 			partnerRepresentations.add(partnerRepresentation);//now add this representation in the list
 		}
+		
+		
+		
 		return partnerRepresentations;
 	}
 	
@@ -54,6 +56,8 @@ public class PartnerActivity {
 		partnerRepresentation.setCompanyName(p.getCompanyName());
 		partnerRepresentation.setUserName(p.getUserName());
 		partnerRepresentation.setPassword(p.getPassword());
+		partnerRepresentation.addLink(new Link());
+		
 		
 		return partnerRepresentation;
 	}
@@ -105,18 +109,6 @@ public class PartnerActivity {
 		partnerManager.deletePartner(id);
 		
 		return "OK";
-	}
-	
-	/**
-	 * Sets all the links appropriately, for each kind of representation based on state
-	 */
-	private void addLink(PartnerRepresentation partnerRep, String rel, String url) {
-		// Set up the activities that can be performed on orders
-		Link link = new Link();
-		link.setRel(rel);
-		link.setUrl(url);
-		
-		partnerRep.addLink(link);
 	}
 
 }
