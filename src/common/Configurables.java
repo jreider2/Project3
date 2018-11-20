@@ -8,7 +8,7 @@ package common;
  *
  */
 public class Configurables {
-	
+	public static final String LOCALHOST = "http://localhost:8081";
 	public static final String STATUS_URL = "http://localhost:8081/order/orderService/status/{orderID}";
 	public static final String CANCEL_URL = "http://localhost:8081/order/orderService/order/cancelledorder/{orderID}";
 	public static final String SEARCH_URL = "http://localhost:8081/productservice/products/searchresults/{searchterm}";
@@ -44,55 +44,51 @@ public class Configurables {
 	// http://www.cafeaulait.org/course/week2/43.html
 	public String getGetCustomerOrdersURL(String hostname) {
 		
-		return (hostname.toLowerCase().contains("localhost")) ? "http://localhost:8081/" + getCustomerOrdersURL : "awsServicehost" + getCustomerOrdersURL;
+		return (hostname.toLowerCase().contains("localhost")) ? LOCALHOST + getCustomerOrdersURL : "awsServicehost" + getCustomerOrdersURL;
 	}
 
 	public String getGetOrderURL(String hostname) {
-		return (hostname.toLowerCase().contains("localhost")) ? "http://localhost:8081/" + getOrderURL : "awsServicehost" + getOrderURL;
+		return (hostname.toLowerCase().contains("localhost")) ? LOCALHOST + getOrderURL : "awsServicehost" + getOrderURL;
 	}
 
 	public String getGetAcknowledgementURL(String hostname) {
-		return (hostname.toLowerCase().contains("localhost")) ? "http://localhost:8081/" + getAcknowledgementURL : "awsServiceHost" + getAcknowledgementURL;
+		return (hostname.toLowerCase().contains("localhost")) ? LOCALHOST + getAcknowledgementURL : "awsServiceHost" + getAcknowledgementURL;
 	}
 
 	public String getGetStatusURL(String hostname) {
-		return (hostname.toLowerCase().contains("localhost")) ? "http://localhost:8081/" + getStatusURL : "aws" + getStatusURL;
+		return (hostname.toLowerCase().contains("localhost")) ? LOCALHOST + getStatusURL : "aws" + getStatusURL;
 	}
 
 	public String getCancelOrderURL(String hostname) {
-		return (hostname.toLowerCase().contains("localhost")) ? "http://localhost:8081/" + cancelOrderURL : "aws" + cancelOrderURL;
+		return (hostname.toLowerCase().contains("localhost")) ? LOCALHOST + cancelOrderURL : "aws" + cancelOrderURL;
 	}
 
 	public String getPlaceOrderURL(String hostname) {
-		return (hostname.toLowerCase().contains("localhost")) ? "http://localhost:8081/" + placeOrderURL  : "aws" + placeOrderURL;
+		return (hostname.toLowerCase().contains("localhost")) ? LOCALHOST + placeOrderURL  : "aws" + placeOrderURL;
 	}
 
 	public String getShipOrderURL(String hostname) {
-		return (hostname.toLowerCase().contains("localhost")) ? "http://localhost:8081/" + shipOrderURL : "aws" + shipOrderURL;
+		return (hostname.toLowerCase().contains("localhost")) ? LOCALHOST + shipOrderURL : "aws" + shipOrderURL;
 	}
 
 	public String getFulfillOrderURL(String hostname) {
-		return (hostname.toLowerCase().contains("localhost")) ? "http://localhost:8081/" + fulfillOrderURL  : "aws" +  fulfillOrderURL;
+		return (hostname.toLowerCase().contains("localhost")) ? LOCALHOST + fulfillOrderURL  : "aws" +  fulfillOrderURL;
 	}
 
 	public String getGetCustomerCreditCardsURL(String hostname) {
-		return (hostname.toLowerCase().contains("localhost")) ? "http://localhost:8081/" + getCustomerCreditCardsURL : "aws" + getCustomerCreditCardsURL;
+		return (hostname.toLowerCase().contains("localhost")) ? LOCALHOST + getCustomerCreditCardsURL : "aws" + getCustomerCreditCardsURL;
 	}
 
 	public String getGetCustomerCardURL(String hostname) {
-		return (hostname.toLowerCase().contains("localhost")) ? "http://localhost:8081/" + getCustomerCardURL : "aws" + getCustomerCardURL;
+		return (hostname.toLowerCase().contains("localhost")) ? LOCALHOST + getCustomerCardURL : "aws" + getCustomerCardURL;
 	}
 
 
 	public String getDeleteCreditCardURL(String hostname) {
-		return (hostname.toLowerCase().contains("localhost")) ? "http://localhost:8081/" + deleteCreditCardURL : "aws" + deleteCreditCardURL;
+		return (hostname.toLowerCase().contains("localhost")) ? LOCALHOST + deleteCreditCardURL : "aws" + deleteCreditCardURL;
 	}
 
 	public String getNewCreditCardURL(String hostname) {
-		return (hostname.toLowerCase().contains("localhost")) ? "http://localhost:8081/" + newCreditCardURL : "aws" + newCreditCardURL;
+		return (hostname.toLowerCase().contains("localhost")) ? LOCALHOST + newCreditCardURL : "aws" + newCreditCardURL;
 	}
-
-
-	
-	
 }
