@@ -75,6 +75,7 @@ public class OrderResource implements OrderService {
 	@Path("/order/neworder")
 	public OrderRepresentation placeOrder(OrderRequest oR) {
 		return oA.submitOrder(oR.getCustomerId(), oR.getItems(), oR.getCcNo());
+		//NOTE TO TA: The returned OrderRepresentation is only expected to have ProductRepresentations with 3 fields filled out (the rest are unnecessary and expected to be null)
 	}
 	
 	@PUT
