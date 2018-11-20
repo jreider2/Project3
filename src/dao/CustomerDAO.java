@@ -43,10 +43,10 @@ public class CustomerDAO {
 			ResultSet resultSet = selectStatement.executeQuery(selectQuery);
 			
 			while(resultSet.next()) {
-				String employeeID = resultSet.getString("CustomerID");
-				Customer emp = getCustomer(employeeID);
-				if(emp != null) {
-					customers.add(emp);
+				String customerID = resultSet.getString("CustomerID");
+				Customer customer = getCustomer(customerID);
+				if(customer != null) {
+					customers.add(customer);
 				}
 			}
 			
@@ -71,8 +71,6 @@ public class CustomerDAO {
 //		String address = "";
 //		String creditCard = "";
 //		String phone = "";
-//		String userName = "";
-//		String password = "";
 //		ArrayList<Order> orders = new ArrayList<>();
 		Connection connection = DBConnect.getDatabaseConnection();
 		
@@ -87,9 +85,6 @@ public class CustomerDAO {
 //			lastName = resultSet.getString("lastName");
 //			address = resultSet.getString("lastName"); //TODO update this code: Address has it's own table . access AddressDAO object (use attribute line 21) 
 //			creditCard = resultSet.getString("creditCard"); //TODO same as Address. (attribute line 22) 
-//			phone = resultSet.getString("phone");
-//			userName = resultSet.getString("userName");
-//			password = resultSet.getString("password");
 
 //			orders = orderDAO.getAllOrders(); //TODO fix me (make sure function returns something).
 			
@@ -108,13 +103,52 @@ public class CustomerDAO {
 //		customer.setLastName(lastName);
 //		//TODO customer.setAddress(address); update
 //		//TODO customer.setCard(creditCard); update
-//		customer.setPhone(phone);
-//		customer.setUserName(userName);
-//		customer.setPassword(password);
 //		customer.setOrders(orders);
 		
 		return customer;
-//		return null;
+	}
+	
+	public Customer loginCustomer(String userName, String password) {
+		
+		String firstName = "";
+		String lastName = "";
+		String customerID = "";
+
+		Connection connection = DBConnect.getDatabaseConnection();
+		
+		try {
+			Statement selectStatement = connection.createStatement();
+			
+			String selectQuery = "SELECT * FROM Customer where UserName ='" + userName + "'" + " AND Password ='" + password + "'" ;
+			ResultSet resultSet = selectStatement.executeQuery(selectQuery);
+			
+			if (resultSet == null) { //if there is nothing that matches return null
+				return null;
+			}
+			
+			resultSet.next();
+			resultSet.next();
+			
+			firstName = resultSet.getString("FName");
+			lastName = resultSet.getString("LName");
+			customerID = resultSet.getString("CustomerID");
+			
+		}catch(SQLException se) {
+			se.printStackTrace();
+		}finally {
+			if(connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {}
+			}
+		}
+		
+		Customer customer = new Customer();
+		customer.setFirstName(firstName);
+		customer.setLastName(lastName);
+		customer.setGid(customerID);
+		
+		return customer;
 	}
 
 	public boolean addCustomer(String firstName, String lastName, String phone, String username, String password, String email, String addressID) {
@@ -164,5 +198,6 @@ public class CustomerDAO {
 		}
 	
 	}
+
 
 }
