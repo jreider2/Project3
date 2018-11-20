@@ -10,6 +10,20 @@
     min-width: 250px;
 }
 
+.ajr-item-65 {
+    border-style: dotted;
+    flex-grow:1;
+    width: 65%;
+    min-width: 250px;
+}
+
+.ajr-item-100 {
+    border-style: dotted;
+    flex-grow:1;
+    width: 98%;
+    min-width: 250px;
+}
+
 .ajr-inner-item {
     border-style: dotted;
     flex-grow: 1;
@@ -44,4 +58,14 @@ input {
 
 .ajr-align-right {
     text-align: right;
+}
+
+.ajr-green-btn{
+    background-color:green;
+    color: white;
+    border-radius: 5px;
+}
+
+.ajr-right{
+    float: right;
 }
