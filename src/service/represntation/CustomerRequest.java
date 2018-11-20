@@ -12,15 +12,15 @@ public class CustomerRequest {
 	
 	private String firstName;
 	private String lastName;
+	private String userName;
+	private String password;
 	private String street;
 	private String aptno;
 	private String city;
 	private String zipcode;
 	private String state;
 
-	public CustomerRequest() {
-		// TODO Auto-generated constructor stub
-	}
+	public CustomerRequest() {}
 
 	public String getFirstName() {
 		return firstName;
@@ -36,6 +36,22 @@ public class CustomerRequest {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getStreet() {
