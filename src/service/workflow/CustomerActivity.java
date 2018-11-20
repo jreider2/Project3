@@ -64,6 +64,18 @@ public class CustomerActivity {
 		return customerRep;
 	}
 	
+	public CustomerRepresentation loginCustomer(String userName, String password) {
+		
+		Customer c = cmanager.loginCustomer(userName,password);
+		
+		CustomerRepresentation customerRep = new CustomerRepresentation() ;
+		customerRep.setFirstName(c.getFirstName());
+		customerRep.setLastName(c.getLastName());
+		customerRep.setId(c.getGid());
+		
+		return customerRep;
+	}
+	
 	public CustomerRepresentation registerNewCustomer(String firstName, String lastName, String street, String aptno, String city, String zipcode, String state) {
 		
 		Customer customer = cmanager.registerNewCustomer(firstName, lastName, street, aptno, city, zipcode, state);
@@ -98,4 +110,5 @@ public class CustomerActivity {
 		
 		customerRep.addLink(link);
 	}
+
 }
