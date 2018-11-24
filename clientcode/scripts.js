@@ -21,18 +21,19 @@ $(document).ready(function(){
     });
 
     $(".ajr-green-btn").on("click", function(){
-        var btnitemnum = this.attributes[itemno];
-        var btnitemprice = this.attributes[itemprice];
+        var btnitemnum = this.attributes.itemno.value;
+        var btnitemprice = this.attributes.itemprice.value;
         var newitem = {number:btnitemnum, price:btnitemprice,qty:1};
-        addToCartArray(newitem);
-        $("#cartItemsList").append(addCartItem(newitem));
-        
+        if(addToCartArray(newitem)){
+            $("#cartitem" + newitem.number).text(calculateQty(newitem.number));
+        } else {
+            $("#cartItemsList").append(addCartItem(newitem));
+        }
     });
 });
 
 function addCartItem(newCartItem) {
     var htmlitem = "";
-    addToCartArray(newCartItem);
 
     htmlitem = `<article class="ajr-item-100">
                     <section class="ajr-container">
@@ -42,7 +43,7 @@ function addCartItem(newCartItem) {
                         <article class="ajr-inner-item">` +
                         newCartItem.price +
                         `</article>
-                        <article class="ajr-inner-item">` + 
+                        <article ` + `id="cartitem` + newCartItem.number + `" class="ajr-inner-item">` + 
                             calculateQty(newCartItem.number);
                         `</article>
                     </section>
@@ -53,24 +54,28 @@ function addCartItem(newCartItem) {
 
 function addToCartArray(item){
     var alreadyExists = false;
-    cartItems.forEach(function(ele){
-        if (ele.number == item.number){
-            alreadyExists = true;
-            ele.qty++;
-        }
-    });
+    if (Array.isArray(cartItems) && cartItems.length > 0){
+        cartItems.forEach(function(ele){
+            if (ele.number == item.number){
+                alreadyExists = true;
+                ele.qty++;
+            }
+        });
+    }
     if (alreadyExists == false){
         cartItems.push(item);
     }
+    return alreadyExists;
 }
 
 function calculateQty(itemNo){
+    var qty = 1;
     cartItems.forEach(function(ele){
         if (ele.number == itemNo){
-            return ele.qty;
+            qty = ele.qty;
         }
     });
-    return -1; //if the product wasn't found there is a problem.
+    return qty; //if the product wasn't found there is a problem.
 }
 
 function addToSearchResults(itemNumber, itemPrice){
