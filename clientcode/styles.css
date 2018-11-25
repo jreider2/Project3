@@ -3,10 +3,22 @@
     flex-wrap: wrap;
 }
 
+.ajr-container-column {
+    display: flex;
+    flex-direction: column;
+}
+
 .ajr-item {
     border-style: dotted;
     flex-grow: 1;
     width: 32%;
+    min-width: 250px;
+}
+
+.ajr-item-50 {
+    border-style: dotted;
+    flex-grow: 1;
+    width: 45%;
     min-width: 250px;
 }
 
@@ -20,9 +32,10 @@
 .ajr-item-100 {
     border-style: dotted;
     flex-grow:1;
-    width: 98%;
+    width: 100%;
     min-width: 250px;
 }
+
 
 .ajr-inner-item {
     border-style: dotted;
@@ -74,6 +87,32 @@ input {
     width: 100%;
 }
 
+.ajr-black-btn {
+    background-color:black;
+    color:white;
+    border-radius: 8px;
+    width: 100%;
+}
+
+.ajr-login-btn {
+    background-color:green;
+    color:white;
+    border-radius: 8px;
+}
+
 .ajr-right{
     float: right;
+}
+
+.ajr-center{
+    text-align: center;
+}
+
+.ajr-login-link{
+    color:black;
+}
+
+.ajr-login-link:hover{
+    color:blue;
+    cursor: pointer;
 }

@@ -3,6 +3,7 @@
     <meta charset="utf-8"/>
     <!-- Include jquery scripts from google for use.-->
     
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -11,12 +12,23 @@
 </head>
 <html>
 <body>
-
     <section class="ajr-container">
         <article class="ajr-item">
             <h1>Ecommerce Shop</h1>
         </article>
-        <article class="ajr-item"></article>
+        <article class="ajr-item">
+            <section class="ajr-container">
+                <article class="ajr-inner-item">
+                    <h2>My Orders</h2>
+                </article>
+                <article class="ajr-inner-item">
+                    <h2>Test</h2>
+                </article>
+                <article class="ajr-inner-item">
+                    <h2 id="loginheader"><span class="ajr-login-link">Login</span></h2>
+                </article>
+            </section>
+        </article>
         <article class="ajr-item">
             <div class="input-group">
                 <input class="form-control" type="text" placeholder="Search..." id="searchterm">
@@ -29,7 +41,23 @@
     </section>
 
     <!-- This section contains both the cart and the search results -->
-    <section id="ecommpanel" class="ajr-container">
+    <section id="ecommpanel" class="ajr-container w3-container">
+
+        <!-- Login modal, not visible on startup.-->
+        <article id="loginmodal" class="w3-modal ajr-center" style="display:none;">
+            <section class="ajr-container-column w3-modal-content">
+                <article class="ajr-item-100"><h2 class="ajr-center">Login</h2></article>
+                <article class="ajr-item-100"><input id="username" type="text" placeholder="Username..."/></article>
+                <article class="ajr-item-100"><input id="password" type="password" placeholder="Password..."/></article>
+                <article class="ajr-item-100">
+                    <section class="ajr-container">
+                        <button id="loginbtn" class="ajr-login-btn ajr-item-50">Login</button>
+                        <button id="cancelbtn" class="ajr-black-btn ajr-item-50">Cancel</button>
+                    </section>
+                </article>
+            </section>
+        </article>
+
         <!-- This contains the search results-->
         <article class="ajr-item-65">
             <section id="searchresults" class="ajr-container">

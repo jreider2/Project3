@@ -68,7 +68,10 @@ public class CustomerResource implements CustomerService {
 	@POST
 	@Produces({"application/xml" , "application/json"})
 	@Path("/customerAuthentication")
-	public CustomerRepresentation loginCustomer(CustomerRequest  customerRequest) { 
+	@CrossOriginResourceSharing(
+		allowOrigins = {"*"}
+	)
+	public CustomerRepresentation loginCustomer(CustomerRequest customerRequest) { 
 		System.out.println("GET METHOD Request from Client for user Authentication .............");
 		CustomerActivity customerActivity = new CustomerActivity();
 		return customerActivity.loginCustomer(customerRequest.getUserName(), customerRequest.getPassword()); //returns null if failed to login

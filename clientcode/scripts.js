@@ -3,15 +3,49 @@ var cartItems = new Array();
 
 $(document).ready(function(){
 
-    $("#test").on("click", function(){
-        $.ajax({url: "http://localhost:8081/creditcard/customercard/" + $("#creditcardno").val(), success: function(result){
-            $("#creditcardinfo").html(result);
-        }});
+    //Login Modal section START*******************************************************
+    $(".ajr-login-link").on("click", function(){
+        $("#loginmodal").css("display", "block");
     });
 
+    $("#loginbtn").on("click", function(){
+
+        $.ajax({
+            url:"http://localhost:8081/customerservice/customerAuthentication",
+            type:"POST",
+            data:
+                JSON.stringify({
+                firstName: "Andrew",
+                lastName: "Rohrer",
+                userName: $("#username").val(),
+                password: $("#userpassword").val(),
+                street: "",
+                aptno: "",
+                city: "",
+                zipcode: "",
+                state:""}),
+            contentType:"application/json; charset=utf-8",
+            dataType:"json",
+            success: function(data, status){
+                alert("Data: " + data + "\nStatus: " + status);
+            }
+        });
+        hideLoginModal();
+    });
+
+    $("#cancelbtn").on("click", function(){
+        hideLoginModal();
+    });
+
+    function hideLoginModal(){
+        $("#loginmodal").css("display","none");
+    };
+    //Login Modal section END*********************************************************
+
+    //Search section START************************************************************
     $("#searchbtn").on("click", function(){
         $.get({url: "http://localhost:8081/productservice/products/searchresults/" + $("#searchterm").val(), success: function(result){
-            $("#creditcardinfo").html(result);
+            $("#ecommpanel").html(result);
             for (var i = 0; i < result.length-1;i++){
                 var searchresult = result[i];
                 console.log(searchresult);
@@ -19,7 +53,9 @@ $(document).ready(function(){
         }});
         $("#searchresults").append(addToSearchResults(5, 5.00))
     });
+    //Search section END**************************************************************
 
+    //Page logic section START********************************************************
     $(".ajr-green-btn").on("click", function(){
         var btnitemnum = this.attributes.itemno.value;
         var btnitemprice = this.attributes.itemprice.value;
@@ -30,6 +66,7 @@ $(document).ready(function(){
             $("#cartItemsList").append(addCartItem(newitem));
         }
     });
+    //Page logic section END**********************************************************
 });
 
 function addCartItem(newCartItem) {

@@ -20,7 +20,7 @@ import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 
 import javax.ws.rs.core.CacheControl;
 
-@CrossOriginResourceSharing(allowAllOrigins = true)
+
 
 @Path("/")
 public class ProductResource implements ProductService {
@@ -48,6 +48,9 @@ public class ProductResource implements ProductService {
 	@GET
 	@Produces({"application/xml" , "application/json"})
 	@Path("/products/searchresults/{searchterm}")
+	@CrossOriginResourceSharing(
+			allowOrigins = {"*"}
+	)
 	public ArrayList<ProductRepresentation> searchProducts(@PathParam("searchterm") String searchTerm) {
 		System.out.println("GET METHOD Request for all products .............");
 		ProductActivity pActivity = new ProductActivity();
