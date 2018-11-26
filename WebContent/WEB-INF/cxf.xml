@@ -94,5 +94,24 @@
   	</jaxrs:schemaLocations>
   </jaxrs:server>
   <bean id="creditcardServiceRest" class="service.resource.CreditCardResource" />
+  
+  <bean id="cors-filter" class="org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter"/>
+ 
+    <jaxrs:server id="service" address="/rest">
+        <jaxrs:serviceBeans>
+            <ref bean="cors-server" />
+        </jaxrs:serviceBeans>
+        <jaxrs:providers>
+            <ref bean="cors-filter" />
+        </jaxrs:providers>
+    </jaxrs:server>
+    
+    <jaxrs:schemaLocations>
+    	<jaxrs:schemaLocation>service.represntation.CustomerResource</jaxrs:schemaLocation>
+    	<jaxrs:schemaLocation>service.represntation.CustomerRequest</jaxrs:schemaLocation>
+    </jaxrs:schemaLocations>
+ 
+    <bean id="cors-server" scope="prototype"
+          class="org.apache.cxf.systest.jaxrs.cors.AnnotatedCorsServer" /> 
 
 </beans>

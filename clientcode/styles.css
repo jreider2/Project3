@@ -116,3 +116,8 @@ input {
     color:blue;
     cursor: pointer;
 }
+
+h2:hover {
+    color:blue;
+    cursor:pointer;
+}

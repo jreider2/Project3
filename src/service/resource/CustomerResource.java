@@ -6,6 +6,7 @@ import service.represntation.CustomerRepresentation;
 import service.represntation.CustomerRequest;
 import service.workflow.CustomerActivity;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -18,12 +19,11 @@ import javax.ws.rs.core.Response.Status;
 import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 
 import javax.ws.rs.core.CacheControl;
-
-@CrossOriginResourceSharing(allowAllOrigins = true)
+import javax.ws.rs.core.Context;
 
 @Path("/")
 public class CustomerResource implements CustomerService {
-
+	
 	public CustomerResource() {
 	}
 	
@@ -68,9 +68,7 @@ public class CustomerResource implements CustomerService {
 	@POST
 	@Produces({"application/xml" , "application/json"})
 	@Path("/customerAuthentication")
-	@CrossOriginResourceSharing(
-		allowOrigins = {"*"}
-	)
+	@Consumes({"application/xml" , "application/json"})
 	public CustomerRepresentation loginCustomer(CustomerRequest customerRequest) { 
 		System.out.println("GET METHOD Request from Client for user Authentication .............");
 		CustomerActivity customerActivity = new CustomerActivity();

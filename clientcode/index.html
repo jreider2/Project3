@@ -19,7 +19,8 @@
         <article class="ajr-item">
             <section class="ajr-container">
                 <article class="ajr-inner-item">
-                    <h2>My Orders</h2>
+                    <!-- Insert customer number and orders here-->
+                    <h2 id="customerorders" custordurl="">My Orders</h2>
                 </article>
                 <article class="ajr-inner-item">
                     <h2>Test</h2>
@@ -41,14 +42,14 @@
     </section>
 
     <!-- This section contains both the cart and the search results -->
-    <section id="ecommpanel" class="ajr-container w3-container">
+    <section id="ecommpanel" class="ajr-container w3-container" style="overflow: hidden;">
 
         <!-- Login modal, not visible on startup.-->
         <article id="loginmodal" class="w3-modal ajr-center" style="display:none;">
             <section class="ajr-container-column w3-modal-content">
                 <article class="ajr-item-100"><h2 class="ajr-center">Login</h2></article>
                 <article class="ajr-item-100"><input id="username" type="text" placeholder="Username..."/></article>
-                <article class="ajr-item-100"><input id="password" type="password" placeholder="Password..."/></article>
+                <article class="ajr-item-100"><input id="userpassword" type="password" placeholder="Password..."/></article>
                 <article class="ajr-item-100">
                     <section class="ajr-container">
                         <button id="loginbtn" class="ajr-login-btn ajr-item-50">Login</button>
@@ -58,8 +59,32 @@
             </section>
         </article>
 
+        <article id="columnheadings" class="ajr-item-65">
+                <section id="columnheadingssection" class="ajr-container">
+                    <article class="ajr-item-65 container">
+                        <section class="ajr-container">
+    
+                            <article class="ajr-item">
+                                <div id="columnheading1">Item Name</div>
+                            </article>
+    
+                            <article class="ajr-item">
+                                <div id="columnheading2">Item Price</div>
+                            </article>
+
+                            <article class="ajr-item">
+                                <div id="columnheading3">More info</div>
+                            </article>
+                        </section>
+                    </article>
+                </section>
+        </article>
+
+        <article id="shoppingcart" class="ajr-item"></article>
+    
+
         <!-- This contains the search results-->
-        <article class="ajr-item-65">
+        <article id="searchResultsPanel" class="ajr-item-65" style="display:none;">
             <section id="searchresults" class="ajr-container">
                 <article class="ajr-item-100 container">
                     <section class="ajr-container">
@@ -173,8 +198,33 @@
             </section>
         </article>
 
+        <article id="myOrdersPanel" class="ajr-item-65" style="display:none">
+                <section id="myOrderResults" class="ajr-container">
+                        <article class="ajr-item-100 container">
+                            <section class="ajr-container">
+        
+                                <article class="ajr-item">
+                                    <div>Order Number</div>
+                                </article>
+        
+                                <article class="ajr-item">
+                                    <div>Order Status</div>
+                                </article>
+
+                                <article class="ajr-item">
+                                    <div>Order Date</div>
+                                </article>
+                            </section>
+                        </article>
+                </section>
+
+        </article>
+
+        <!-- This will be hidden when the search button or the My orders button is clicked. Just a placeholder.-->
+        <article id="resultsPlaceHolder" class="ajr-item-65"></article>
+
         <!-- This contains the shopping cart -->
-        <article id="shoppingcart" class="ajr-item">
+        <article id="shoppingcart" class="ajr-item" style="max-width: 38%; float: right;">
             
             <h2>Shopping Cart</h2>
             <section id="cartItemsList" class="ajr-container">

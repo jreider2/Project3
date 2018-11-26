@@ -1,5 +1,7 @@
 //create to keep track of cart items and how many we need to order. Globally declared.
 var cartItems = new Array();
+var isSignedIn = false;
+var host = "http://localhost:8081/";
 
 $(document).ready(function(){
 
@@ -11,7 +13,7 @@ $(document).ready(function(){
     $("#loginbtn").on("click", function(){
 
         $.ajax({
-            url:"http://localhost:8081/customerservice/customerAuthentication",
+            url: host + "customerservice/customerAuthentication",
             type:"POST",
             data:
                 JSON.stringify({
@@ -27,10 +29,19 @@ $(document).ready(function(){
             contentType:"application/json; charset=utf-8",
             dataType:"json",
             success: function(data, status){
-                alert("Data: " + data + "\nStatus: " + status);
+                if(data == null){
+                    alert("Incorrect username or password");
+                } else {
+                    isSignedIn = true;
+                    hideLoginModal();
+                    alert("Login Success!");
+                    var parsedResponse = JSON.parse(data);
+                    var test = parsedResponse.customerNumber;
+                    //insert myorder URL to the menu here.
+                }
             }
         });
-        hideLoginModal();
+        
     });
 
     $("#cancelbtn").on("click", function(){
@@ -42,17 +53,54 @@ $(document).ready(function(){
     };
     //Login Modal section END*********************************************************
 
-    //Search section START************************************************************
-    $("#searchbtn").on("click", function(){
-        $.get({url: "http://localhost:8081/productservice/products/searchresults/" + $("#searchterm").val(), success: function(result){
+    //Order section START*************************************************************
+    $("#customerorders").on("click", function(){
+        $.get({url: host + this.custordurl, success: function(result){
             $("#ecommpanel").html(result);
             for (var i = 0; i < result.length-1;i++){
                 var searchresult = result[i];
                 console.log(searchresult);
             }
         }});
+        setEcomPanel("order");
+        hideResultsPlaceHolder();
         $("#searchresults").append(addToSearchResults(5, 5.00))
     });
+    //Order section END***************************************************************
+
+    //Search section START************************************************************
+    $("#searchbtn").on("click", function(){
+        $.get({url: host + "productservice/products/searchresults/" + $("#searchterm").val(), success: function(result){
+            $("#ecommpanel").html(result);
+            for (var i = 0; i < result.length-1;i++){
+                var searchresult = result[i];
+                console.log(searchresult);
+            }
+        }});
+        setEcomPanel("search");
+        hideResultsPlaceHolder();
+        $("#searchresults").append(addToSearchResults(5, 5.00))
+    });
+
+    function setEcomPanel(orderOrSearch){
+        if (orderOrSearch == "search"){
+            $("#columnheading1").text("Item Name");
+            $("#columnheading2").text("Item Price");
+            $("#columnheading3").text("Other Information");
+            $("#myOrdersPanel").css("display", "none");
+            $("#searchResultsPanel").css("display", "flex");
+        } else {
+            $("#columnheading1").text("Order Number");
+            $("#columnheading2").text("Order Status");
+            $("#columnheading3").text("Order Date");
+            $("#searchResultsPanel").css("display", "none");
+            $("#myOrdersPanel").css("display", "flex");
+        }
+    }
+
+    function hideResultsPlaceHolder(){
+        $("#resultsPlaceHolder").css("display", "none");
+    }
     //Search section END**************************************************************
 
     //Page logic section START********************************************************
