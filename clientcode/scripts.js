@@ -5,6 +5,12 @@ var host = "http://localhost:8081/";
 
 $(document).ready(function(){
 
+    // $.getJSON(host + "productservice/products/searchresults/goggles", function (results) {
+    //     console.log(results);
+        
+    // });
+        
+
     //Login Modal section START*******************************************************
     $(".ajr-login-link").on("click", function(){
         $("#loginmodal").css("display", "block");
@@ -70,16 +76,20 @@ $(document).ready(function(){
 
     //Search section START************************************************************
     $("#searchbtn").on("click", function(){
-        $.get({url: host + "productservice/products/searchresults/" + $("#searchterm").val(), success: function(result){
-            $("#ecommpanel").html(result);
-            for (var i = 0; i < result.length-1;i++){
-                var searchresult = result[i];
-                console.log(searchresult);
-            }
-        }});
+        $.getJSON(host + "productservice/products/searchresults/" + $("#searchterm").val(), function (results) {
+            console.log(results);
+            event.preventDefault();
+            var i = 0;
+            results.forEach(element => {
+                $("#searchresults").append(addToSearchResults(element.description, element.price, element.name, element.id, i));
+                i++;
+            });
+            
+        });
+        console.log("test2");
         setEcomPanel("search");
         hideResultsPlaceHolder();
-        $("#searchresults").append(addToSearchResults(5, 5.00))
+        
     });
 
     function setEcomPanel(orderOrSearch){
@@ -163,24 +173,24 @@ function calculateQty(itemNo){
     return qty; //if the product wasn't found there is a problem.
 }
 
-function addToSearchResults(itemNumber, itemPrice){
+function addToSearchResults(itemDesc, itemPrice, itemName, itemNo, listNo){
     var htmlitem = "";
 
     htmlItem = `<article class="ajr-item-100 container">
                     <section class="ajr-container">
 
                         <article class="ajr-item">
-                            <div>Item Name</div>
+                            <div>` + itemName + `</div>
                         </article>
 
                         <article class="ajr-item">
-                            <div>Item Price</div>
+                            <div>` + itemPrice + `</div>
                         </article>
 
                         <article class="ajr-item">
                             <section class="ajr-container">
                                 <article class="ajr-inner-item">
-                                    <a type="button" href="#" data-toggle="collapse" data-target="#desc1">
+                                    <a type="button" href="#" data-toggle="collapse" data-target="#desc` + listNo + `">
                                         More info
                                         <span class="glyphicon glyphicon-plus-sign"></span>
                                     </a>
@@ -189,18 +199,14 @@ function addToSearchResults(itemNumber, itemPrice){
 
                                 </article>
                                 <article class="ajr-inner-item">
-                                    <button type="button" class="ajr-green-btn ajr-right" id="btnadd1">Add to Cart >></button>
+                                    <button itemno="`+ itemNo + `" itemprice="` + itemPrice + `" type="button" class="ajr-green-btn ajr-right" id="btnadd` + listNo +`">Add to Cart</button>
                                 </article>
                             </section>
                         </article>
 
                     </section>
-                    <div id="desc1" class="collapse">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    </div>
+                    <div id="desc` + listNo + `" class="collapse">` + itemDesc + `</div>
                 </article>`;
 
-    return htmlitem;
+    return htmlItem;
 }
