@@ -114,19 +114,23 @@ $(document).ready(function(){
     }
     //Search section END**************************************************************
 
-    //Page logic section START********************************************************
-    $(".ajr-green-btn").on("click", function(){
-        var btnitemnum = this.attributes.itemno.value;
-        var btnitemprice = this.attributes.itemprice.value;
-        var newitem = {number:btnitemnum, price:btnitemprice,qty:1};
-        if(addToCartArray(newitem)){
-            $("#cartitem" + newitem.number).text(calculateQty(newitem.number));
-        } else {
-            $("#cartItemsList").append(addCartItem(newitem));
-        }
-    });
-    //Page logic section END**********************************************************
+    
 });
+
+//Page logic section START********************************************************
+//This must be a function rather than using the "on.("click"...jquery function because the buttons using this function
+//were created after the document.ready event.
+function addToCartButtonClick(clickedbutton){
+    var btnitemnum = clickedbutton.attributes.itemno.value;
+    var btnitemprice = clickedbutton.attributes.itemprice.value;
+    var newitem = {number:btnitemnum, price:btnitemprice,qty:1};
+    if(addToCartArray(newitem)){
+        $("#cartitem" + newitem.number).text(calculateQty(newitem.number));
+    } else {
+        $("#cartItemsList").append(addCartItem(newitem));
+    }
+}
+//Page logic section END**********************************************************
 
 function addCartItem(newCartItem) {
     var htmlitem = "";
@@ -200,7 +204,7 @@ function addToSearchResults(itemDesc, itemPrice, itemName, itemNo, listNo){
 
                                 </article>
                                 <article class="ajr-inner-item">
-                                    <button itemno="`+ itemNo + `" itemprice="` + itemPrice + `" type="button" class="ajr-green-btn ajr-right" id="btnadd` + listNo +`">Add to Cart</button>
+                                    <button itemno="`+ itemNo + `" itemprice="` + itemPrice + `" type="button" class="ajr-green-btn ajr-right" id="btnadd` + listNo +`" onClick="addToCartButtonClick(this)">Add to Cart</button>
                                 </article>
                             </section>
                         </article>
