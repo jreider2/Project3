@@ -34,8 +34,8 @@ public class OrderResource implements OrderService {
 	@GET
 	@Produces({"application/xml" , "application/json"})
 	@Consumes({"application/xml", "application/json"})
-	@Path("/orders")
-	public ArrayList<OrderRepresentation> getOrders(@QueryParam("customerID") String customerNumber) {
+	@Path("/orders/{customerID}")
+	public ArrayList<OrderRepresentation> getOrders(@PathParam("customerID") String customerNumber) {
 		return oA.getOrders(customerNumber);
 	}
 		

@@ -76,6 +76,7 @@ $(document).ready(function(){
 
     //Search section START************************************************************
     $("#searchbtn").on("click", function(){
+        //$("#searchresults").empty(); -- add after debugging button press
         $.getJSON(host + "productservice/products/searchresults/" + $("#searchterm").val(), function (results) {
             console.log(results);
             event.preventDefault();
