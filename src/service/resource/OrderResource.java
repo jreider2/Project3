@@ -11,19 +11,33 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.apache.cxf.rs.security.cors.CorsHeaderConstants;
 import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
+import org.apache.cxf.rs.security.cors.LocalPreflight;
 
 import service.represntation.OrderRepresentation;
 import service.represntation.OrderRequest;
 import service.workflow.OrderActivity;
 
-@CrossOriginResourceSharing(allowAllOrigins = true)
-
+@CrossOriginResourceSharing(
+		allowAllOrigins = true,
+		allowCredentials = true,
+		allowHeaders = {
+				"'Accept': 'application/json'",
+				"'Accept': 'application/xml'",
+				"'Content-Type':'application/json'",
+				"'Content-Type':'application/xml'"
+		}
+)
 @Path("/orderService/")
 public class OrderResource implements OrderService {
+	@Context
+	private HttpHeaders headers;
 	
 	private OrderActivity oA;
 	
@@ -71,6 +85,20 @@ public class OrderResource implements OrderService {
 	public OrderRepresentation cancelOrder(@PathParam("orderID") String orderID) {
 		OrderRepresentation oR = oA.cancelOrder(orderID);
 		return oR;
+	}
+	
+	@POST
+	@Path("/order/neworder")
+	@LocalPreflight
+	public Response options(@PathParam("searchterm") String searchTerm) {
+		String origin = headers.getRequestHeader("Origin").get(0);
+		
+		return Response.ok()
+							.header(CorsHeaderConstants.HEADER_AC_ALLOW_METHODS, "POST")
+							.header(CorsHeaderConstants.HEADER_AC_ALLOW_CREDENTIALS, "true")
+							.header(CorsHeaderConstants.HEADER_AC_ALLOW_ORIGIN, "http://localhost:63342")
+							.header(CorsHeaderConstants.HEADER_AC_ALLOW_HEADERS, "Content-Type")
+							.build();
 	}
 	
 	@POST
