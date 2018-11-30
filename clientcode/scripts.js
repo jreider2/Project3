@@ -43,7 +43,8 @@ $(document).ready(function(){
                     alert("Login Success!");
                     var parsedResponse = JSON.parse(data);
                     var test = parsedResponse.customerNumber;
-                    //insert myorder URL to the menu here.
+                    // TODO: insert myorder URL to the menu here.
+                    // TODO: currently the "customerorders" tag has a test value in it.
                 }
             }
         });
@@ -64,13 +65,12 @@ $(document).ready(function(){
         $.get({url: host + this.custordurl, success: function(result){
             $("#ecommpanel").html(result);
             for (var i = 0; i < result.length-1;i++){
-                var searchresult = result[i];
-                console.log(searchresult);
+                // TODO: get more values returned so we can add the list item. addToOrderList(result[i].id, result[i].;
+        
             }
         }});
         setEcomPanel("order");
         hideResultsPlaceHolder();
-        $("#searchresults").append(addToSearchResults(5, 5.00))
     });
     //Order section END***************************************************************
 
@@ -214,4 +214,30 @@ function addToSearchResults(itemDesc, itemPrice, itemName, itemNo, listNo){
                 </article>`;
 
     return htmlItem;
+}
+
+function addToOrderList(orderNumber, orderStatus, orderDate, orderTotal){
+    var htmlitem = "";
+
+    htmlitem = `<article class="ajr-item-100 container">
+                    <section class="ajr-container">
+
+                        <article class="ajr-item-25">
+                            <div>` + orderNumber + `</div>
+                        </article>
+
+                        <article class="ajr-item-25">
+                            <div>` + orderStatus + `</div>
+                        </article>
+
+                        <article class="ajr-item-25">
+                            <div>` + orderDate + `</div>
+                        </article>
+                        <article class="ajr-item-25">
+                            <div>` + orderTotal + `</div>
+                        </article>
+                    </section>
+                </article>`;
+
+    return htmlitem;
 }

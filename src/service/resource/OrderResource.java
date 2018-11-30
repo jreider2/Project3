@@ -46,6 +46,19 @@ public class OrderResource implements OrderService {
 	}
 	
 	@GET
+	@Path("/orders/{customerID}")
+	@LocalPreflight
+	public Response options(@PathParam("customerID") String customerNumber) {
+		String origin = headers.getRequestHeader("Origin").get(0);
+		
+		return Response.ok()
+							.header(CorsHeaderConstants.HEADER_AC_ALLOW_METHODS, "GET")
+							.header(CorsHeaderConstants.HEADER_AC_ALLOW_CREDENTIALS, "true")
+							.header(CorsHeaderConstants.HEADER_AC_ALLOW_ORIGIN, "http://localhost:63342")
+							.header(CorsHeaderConstants.HEADER_AC_ALLOW_HEADERS, "Content-Type")
+							.build();
+	}
+	@GET
 	@Produces({"application/xml" , "application/json"})
 	@Consumes({"application/xml", "application/json"})
 	@Path("/orders/{customerID}")
@@ -90,7 +103,7 @@ public class OrderResource implements OrderService {
 	@POST
 	@Path("/order/neworder")
 	@LocalPreflight
-	public Response options(@PathParam("searchterm") String searchTerm) {
+	public Response options() {
 		String origin = headers.getRequestHeader("Origin").get(0);
 		
 		return Response.ok()
@@ -100,7 +113,6 @@ public class OrderResource implements OrderService {
 							.header(CorsHeaderConstants.HEADER_AC_ALLOW_HEADERS, "Content-Type")
 							.build();
 	}
-	
 	@POST
 	@Produces({"application/xml", "application/json"})
 	@Consumes({"application/xml", "application/json"})

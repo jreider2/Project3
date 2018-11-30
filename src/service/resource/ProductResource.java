@@ -73,7 +73,6 @@ public class ProductResource implements ProductService {
 							.header(CorsHeaderConstants.HEADER_AC_ALLOW_HEADERS, "Content-Type")
 							.build();
 	}
-	
 	@GET
 	@Produces({"application/xml" , "application/json"})
 	@Path("/products/searchresults/{searchterm}")
