@@ -8,7 +8,6 @@ $(document).ready(function(){
 
     // $.getJSON(host + "productservice/products/searchresults/goggles", function (results) {
     //     console.log(results);
-        
     // });
         
 
@@ -47,12 +46,14 @@ $(document).ready(function(){
                     alert("Login Success!");
                     var parsedResponse = data //JSON.parse(data);
                     var id = parsedResponse.id;
+                    signedInCustomerNo = id;// update signedInCustomerNo 
+                    var myOrderURL = data.link[0].url;
                     console.log("CustomerID: " + id);
+                    console.log("URI: " + myOrderURL);
                     
-                    //alert("test" + id);
                     // TODO: insert myorder URL to the menu here.
                     // TODO: currently the "customerorders" tag has a test value in it.
-                    // TODO: update the signedInCustomerNo javascript variable to have the correct customer number.
+                    
                 }
             }
         });
@@ -82,8 +83,6 @@ $(document).ready(function(){
     });
 
     $("#placeorder").on("click", function(){
-
-
         //Add cart items to a json string to pass to the server.
         var itemsJson = "";
         cartItems.forEach((element, key, cartItmes) => {
@@ -109,10 +108,7 @@ $(document).ready(function(){
             contentType:"application/json; charset=utf-8",
             accept: "application/json",
             dataType:"json",
-            success: function(data, status){
-                
-                }
-            }
+            success: function(data, status){}
         });
     });
     //Order section END***************************************************************
