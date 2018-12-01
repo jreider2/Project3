@@ -85,7 +85,7 @@ $(document).ready(function(){
             	arrayOfItems.forEach(item => {
             		orderTotal += item.price;
             	});
-                $("#myOrderResults").append(addToOrderList(element.orderNo, "fake status", "12/15/18", orderTotal));
+                $("#myOrderResults").append(addToOrderList(element.orderNo, element.orderStatus, "12/15/18", orderTotal));
                 orderTotal = 0; // reset to zero before moving onto next order
             });
         });

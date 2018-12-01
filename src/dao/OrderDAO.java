@@ -54,6 +54,7 @@ public class OrderDAO {
 				if (previousRowOrderID != rs.getString("OrderID")) {
 					o = new Order();
 					o.setId(rs.getString("OrderID"));
+					o.setOrderStatus(rs.getString("orderStatus"));
 					o.setCreditCardNo(rs.getString("CreditCardNo"));
 					o.setCustomerID(rs.getString("CustomerID"));
 					o.setOrderTotal(new BigDecimal(rs.getShort("OrderTotal")));
