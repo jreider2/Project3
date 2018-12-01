@@ -1,7 +1,7 @@
 //create to keep track of cart items and how many we need to order. Globally declared.
 var cartItems = new Array();
 var isSignedIn = false;
-var signedInCustomerNo = "1"; //TODO: update this when they log in.
+var signedInCustomerNo = "1";
 var host = "http://localhost:8081/";
 
 $(document).ready(function(){
@@ -50,8 +50,8 @@ $(document).ready(function(){
                     var myOrderURL = data.link[0].url;
                     console.log("CustomerID: " + id);
                     console.log("URI: " + myOrderURL);
+                    $("#customerorders").attr('custordurl', myOrderURL);// insert myorderURL into menu
                     
-                    // TODO: insert myorder URL to the menu here.
                     // TODO: currently the "customerorders" tag has a test value in it.
                     
                 }
