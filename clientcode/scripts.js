@@ -76,7 +76,9 @@ $(document).ready(function(){
             event.preventDefault();
             
             //empty myOrderResults and then append headings
-            //$("#columnheadings").remove();
+            $("#columnheading1").empty();
+            $("#columnheading2").empty();
+            $("#columnheading3").empty();
             $("#myOrderResults").empty();
             $("#myOrderResults").append(orderResultHeadingsHTML);
             
