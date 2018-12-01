@@ -1,6 +1,7 @@
 //create to keep track of cart items and how many we need to order. Globally declared.
 var cartItems = new Array();
 var isSignedIn = false;
+var signedInCustomerNo = "1"; //TODO: update this when they log in.
 var host = "http://localhost:8081/";
 
 $(document).ready(function(){
@@ -51,6 +52,7 @@ $(document).ready(function(){
                     //alert("test" + id);
                     // TODO: insert myorder URL to the menu here.
                     // TODO: currently the "customerorders" tag has a test value in it.
+                    // TODO: update the signedInCustomerNo javascript variable to have the correct customer number.
                 }
             }
         });
@@ -77,6 +79,41 @@ $(document).ready(function(){
         }});
         setEcomPanel("order");
         hideResultsPlaceHolder();
+    });
+
+    $("#placeorder").on("click", function(){
+
+
+        //Add cart items to a json string to pass to the server.
+        var itemsJson = "";
+        cartItems.forEach((element, key, cartItmes) => {
+            itemsJson += `{"id":"` + element.number + `",`
+                    + `"price":"` + element.price + `",`
+                    + `"quantityOnOrder":"` + element.qty + `",`
+                    + `"description:"",`
+                    + `"productOwnerID":""}`;
+            if (!Object.is(cartItems.length -1 , key)){
+                itemsJson += ",";
+            }
+        });
+
+        $.ajax({
+            url: host + "customerservice/customerAuthentication",
+            type:"POST",
+            data:
+                JSON.stringify({
+                    items: "[" + itemsJson + "]",
+                    customerId: signedInCustomerNo,
+                    ccNo: "6547984532156541"
+                }),
+            contentType:"application/json; charset=utf-8",
+            accept: "application/json",
+            dataType:"json",
+            success: function(data, status){
+                
+                }
+            }
+        });
     });
     //Order section END***************************************************************
 
