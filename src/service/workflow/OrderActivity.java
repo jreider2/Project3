@@ -79,7 +79,6 @@ public class OrderActivity {
 		OrderRepresentation oR = new OrderRepresentation();
 		ProductManager prodMan = new ProductManager();
 		ArrayList<OrderedItem> orderedItemList = new ArrayList<>();
-		Product pr;
 		
 		//for each product request create an ordered list item 
 		for(ProductRequest p : products) {
@@ -87,7 +86,6 @@ public class OrderActivity {
 			oi.setProductID(p.getId());
 			oi.setQtyOnOrder(p.getQuantityOnOrder());
 			oi.setProductPrice(Double.toString(p.getPrice()));
-			pr = prodMan.getProduct(oi.getProductID());
 			//add item to the collection
 			orderedItemList.add(oi);
 		}
