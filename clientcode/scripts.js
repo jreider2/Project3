@@ -52,8 +52,6 @@ $(document).ready(function(){
                     console.log("URI: " + myOrderURL);
                     $("#customerorders").attr('custordurl', myOrderURL);// insert myorderURL into menu
                     
-                    // TODO: currently the "customerorders" tag has a test value in it.
-                    
                 }
             }
         });
@@ -71,13 +69,15 @@ $(document).ready(function(){
 
     //Order section START*************************************************************
     $("#customerorders").on("click", function(){
-        $.get({url: host + this.custordurl, success: function(result){
-            $("#ecommpanel").html(result);
+    	$.getJSON(this.custordurl, function(result){
+            alert("success function triggered");
+            event.preventDefault();
+        	$("#ecommpanel").html(result);
             for (var i = 0; i < result.length-1;i++){
                 // TODO: get more values returned so we can add the list item. addToOrderList(result[i].id, result[i].;
-        
             }
-        }});
+        });
+    	event.preventDefault();
         setEcomPanel("order");
         hideResultsPlaceHolder();
     });
@@ -110,6 +110,7 @@ $(document).ready(function(){
             dataType:"json",
             success: function(data, status){}
         });
+       
     });
     //Order section END***************************************************************
 

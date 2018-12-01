@@ -58,6 +58,7 @@ public class OrderResource implements OrderService {
 							.header(CorsHeaderConstants.HEADER_AC_ALLOW_HEADERS, "Content-Type")
 							.build();
 	}
+	
 	@GET
 	@Produces({"application/xml" , "application/json"})
 	@Consumes({"application/xml", "application/json"})
