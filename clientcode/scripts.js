@@ -69,18 +69,36 @@ $(document).ready(function(){
 
     //Order section START*************************************************************
     $("#customerorders").on("click", function(){
-    	$.getJSON(this.custordurl, function(result){
-            alert("success function triggered");
+    	console.log("The URL " + $("#customerorders").attr("custordurl"));
+    	$.getJSON($("#customerorders").attr("custordurl"), function(result){
+    		console.log("result: ");
+    		console.log(result);
             event.preventDefault();
-        	$("#ecommpanel").html(result);
-            for (var i = 0; i < result.length-1;i++){
-                // TODO: get more values returned so we can add the list item. addToOrderList(result[i].id, result[i].;
-            }
+        	
+            //myOrdersPanel show
+            //myOrderResults append to
+        	
+            orderTotal = 0; //price of all the items on this order
+            result.forEach(element => {
+            	//get each item and add up their prices
+            	arrayOfItems = element.productrepresentation;
+            	arrayOfItems.forEach(item => {
+            		orderTotal += item.price;
+            	});
+                $("#myOrderResults").append(addToOrderList(element.orderNo, "fake status", "12/15/18", orderTotal));
+                orderTotal = 0; // reset to zero before moving onto next order
+            });
         });
     	event.preventDefault();
         setEcomPanel("order");
         hideResultsPlaceHolder();
     });
+    
+//  for (var i = 0; i < result.length-1;i++){
+//	
+//    // TODO: get more values returned so we can add the list item. addToOrderList(result[i].id, result[i].; 
+//	// addToOrderList(orderNumber, orderStatus, orderDate, orderTotal)
+//}
 
     $("#placeorder").on("click", function(){
         //Add cart items to a json string to pass to the server.
