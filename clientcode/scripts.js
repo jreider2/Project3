@@ -33,16 +33,22 @@ $(document).ready(function(){
                 zipcode: "",
                 state:""}),
             contentType:"application/json; charset=utf-8",
+            accept: "application/json",
             dataType:"json",
             success: function(data, status){
+            	console.log("hello. This is the status: " + status);
+            	console.log(data);
                 if(data == null){
                     alert("Incorrect username or password");
                 } else {
                     isSignedIn = true;
                     hideLoginModal();
                     alert("Login Success!");
-                    var parsedResponse = JSON.parse(data);
-                    var test = parsedResponse.customerNumber;
+                    var parsedResponse = data //JSON.parse(data);
+                    var id = parsedResponse.id;
+                    console.log("CustomerID: " + id);
+                    
+                    //alert("test" + id);
                     // TODO: insert myorder URL to the menu here.
                     // TODO: currently the "customerorders" tag has a test value in it.
                 }

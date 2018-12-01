@@ -17,7 +17,7 @@ public class Configurables {
 	public static final String DELETE_PROFILE = "http://localhost:8081/customerservice//customers/{customerId}";
 	
 	//Order Resource
-	private String getCustomerOrdersURL;
+	private String getCustomerOrdersURL = "order/orderService/orders/{customerID}";
 	private String getOrderURL;
 	private String getAcknowledgementURL;
 	private String shipOrderURL;
@@ -37,9 +37,7 @@ public class Configurables {
 		// TODO Auto-generated constructor stub
 	}
 
-	// We need these conditions because when this runs in AWS it needs to return the correct URL.
-	// this uses the ? conditional operator. It reads: (condition result, generates true or false) ? (if true) return expression 1 : (if false) return expression 2
-	// http://www.cafeaulait.org/course/week2/43.html
+	
 	public String getGetCustomerOrdersURL(String hostname) {
 		
 		return getHostURL(hostname) + getCustomerOrdersURL;
@@ -90,6 +88,9 @@ public class Configurables {
 		return getHostURL(hostname) + newCreditCardURL;
 	}
 	
+	// We need these conditions because when this runs in AWS it needs to return the correct URL.
+		// this uses the ? conditional operator. It reads: (condition result, generates true or false) ? (if true) return expression 1 : (if false) return expression 2
+		// http://www.cafeaulait.org/course/week2/43.html
 	public String getHostURL(String hostname) {
 		return ((hostname.toLowerCase().contains("localhost")) ? LOCALHOST : AWSHOST);
 	}

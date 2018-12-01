@@ -76,6 +76,10 @@ public class CustomerActivity {
 		customerRep.setLastName(c.getLastName());
 		customerRep.setId(c.getGid());
 		
+		String id = c.getGid();
+		
+		addLink(customerRep, "myOrders", urls.getGetCustomerOrdersURL("localhost").replace("{customerID}", id));
+		
 		return customerRep;
 	}
 	

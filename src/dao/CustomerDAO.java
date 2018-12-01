@@ -124,8 +124,8 @@ public class CustomerDAO {
 			
 			if (resultSet.next()) {
 				firstName = resultSet.getString("FName");
-			lastName = resultSet.getString("LName");
-			customerID = resultSet.getString("CustomerID");
+				lastName = resultSet.getString("LName");
+				customerID = resultSet.getString("CustomerID");
 			} else {
 				return null;//if there is nothing that matches return null
 			}
