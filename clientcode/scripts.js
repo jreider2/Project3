@@ -74,10 +74,13 @@ $(document).ready(function(){
     		console.log("result: ");
     		console.log(result);
             event.preventDefault();
-        	
-            //myOrdersPanel show
+            
+            //empty myOrderResults and then append headings
+            //$("#columnheadings").remove();
+            $("#myOrderResults").empty();
+            $("#myOrderResults").append(orderResultHeadingsHTML);
+            
             //myOrderResults append to
-        	
             orderTotal = 0; //price of all the items on this order
             result.forEach(element => {
             	//get each item and add up their prices
@@ -299,3 +302,24 @@ function addToOrderList(orderNumber, orderStatus, orderDate, orderTotal){
 
     return htmlitem;
 }
+
+var orderResultHeadingsHTML = `<article class="ajr-item-100 container">
+									<section class="ajr-container">
+									
+									    <article class="ajr-item-25">
+									        <div>Order Number</div>
+									    </article>
+									
+									    <article class="ajr-item-25">
+									        <div>Order Status</div>
+									    </article>
+									
+									    <article class="ajr-item-25">
+									        <div>Order Date</div>
+									    </article>
+									    <article class="ajr-item-25">
+									        <div>Order Total</div>
+									    </article>
+									</section>
+								</article>`;
+
