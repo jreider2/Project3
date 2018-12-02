@@ -48,7 +48,9 @@ public class OrderDAO {
 			String previousRowOrderID = "";
 			Order o = new Order();
 			OrderedItem oI;
+			boolean firstiteration = true;
 			while (rs.next()) {
+				
 				oI = new OrderedItem();
 				//only start a new order object if we have added all products on that order to the order object.
 				if (previousRowOrderID != rs.getString("OrderID")) {
@@ -75,12 +77,13 @@ public class OrderDAO {
 					o.setProducts(productsOnOrder);
 				}
 				
-				previousRowOrderID = o.getId();
-				
 				//only add the order to the orderlist returned when we know that we have added all products on the order to the object.
-				if (previousRowOrderID != rs.getString("OrderID")) {
+				if (previousRowOrderID != rs.getString("OrderID") && !firstiteration) {
 					arOrd.add(o);
 				}
+				
+				previousRowOrderID = o.getId();
+				firstiteration = false;
 			}
 			
 			return arOrd;
