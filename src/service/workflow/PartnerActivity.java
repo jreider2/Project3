@@ -42,8 +42,6 @@ public class PartnerActivity {
 			partnerRepresentations.add(partnerRepresentation);//now add this representation in the list
 		}
 		
-		
-		
 		return partnerRepresentations;
 	}
 	
@@ -57,7 +55,8 @@ public class PartnerActivity {
 		partnerRepresentation.setUserName(p.getUserName());
 		partnerRepresentation.setPassword(p.getPassword());
 		partnerRepresentation.addLink(new Link());
-		
+		//addLink(partnerRepresentation, "addProductToPartner", urls.getAddProductToPartnerURL(urls.LOCALHOST));
+		addLink(partnerRepresentation, "deletePartner", urls.getDeletePartnerURL(urls.LOCALHOST));
 		
 		return partnerRepresentation;
 	}
@@ -72,6 +71,8 @@ public class PartnerActivity {
 		partnerRepresentation.setCompanyName(p.getCompanyName());
 		partnerRepresentation.setUserName(p.getUserName());
 		partnerRepresentation.setPassword(p.getPassword());
+		//addLink(partnerRepresentation, "addProductToPartner", urls.getAddProductToPartnerURL(urls.LOCALHOST));
+		addLink(partnerRepresentation, "deletePartner", urls.getDeletePartnerURL(urls.LOCALHOST));
 		
 		return partnerRepresentation;
 	}
@@ -85,6 +86,8 @@ public class PartnerActivity {
 		partnerRepresentation.setCompanyName(p.getCompanyName());
 		partnerRepresentation.setUserName(p.getUserName());
 		partnerRepresentation.setPassword(p.getPassword());
+		//addLink(partnerRepresentation, "addProductToPartner", urls.getAddProductToPartnerURL(urls.LOCALHOST));
+		addLink(partnerRepresentation, "deletePartner", urls.getDeletePartnerURL(urls.LOCALHOST));
 	
 		
 		return partnerRepresentation;

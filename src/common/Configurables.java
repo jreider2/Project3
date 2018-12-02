@@ -29,6 +29,11 @@ public class Configurables {
 	private String deleteCreditCardURL;
 	private String newCreditCardURL;
 	
+	//partnerResource
+	private String addProductToPartnerURL = "";
+	private String deletePartnerURL = "/partners/{partnerId}";
+;
+	
 	/**
 	 * 
 	 */
@@ -88,10 +93,23 @@ public class Configurables {
 		return getHostURL(hostname) + newCreditCardURL;
 	}
 	
+	public String getAddProductToPartnerURL(String hostname) {
+		return getHostURL(hostname) + addProductToPartnerURL;
+	}
+	
+	public String getDeletePartnerURL(String localhost) {
+		// TODO Auto-generated method stub
+		return getHostURL(localhost) + deletePartnerURL;
+	}
+	
 	// We need these conditions because when this runs in AWS it needs to return the correct URL.
 		// this uses the ? conditional operator. It reads: (condition result, generates true or false) ? (if true) return expression 1 : (if false) return expression 2
 		// http://www.cafeaulait.org/course/week2/43.html
 	public String getHostURL(String hostname) {
 		return ((hostname.toLowerCase().contains("localhost")) ? LOCALHOST : AWSHOST);
 	}
+
+
+	
+	
 }
