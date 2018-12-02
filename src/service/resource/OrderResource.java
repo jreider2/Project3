@@ -24,7 +24,7 @@ import service.represntation.OrderRepresentation;
 import service.represntation.OrderRequest;
 import service.workflow.OrderActivity;
 
-@CrossOriginResourceSharing(
+/*@CrossOriginResourceSharing(
 		allowAllOrigins = true,
 		allowCredentials = true,
 		allowHeaders = {
@@ -33,7 +33,7 @@ import service.workflow.OrderActivity;
 				"'Content-Type':'application/json'",
 				"'Content-Type':'application/xml'"
 		}
-)
+)*/
 @Path("/orderService/")
 public class OrderResource implements OrderService {
 	@Context
@@ -101,7 +101,7 @@ public class OrderResource implements OrderService {
 		return oR;
 	}
 	
-	@POST
+	/*@POST
 	@Path("/order/neworder")
 	@LocalPreflight
 	public Response options() {
@@ -113,7 +113,7 @@ public class OrderResource implements OrderService {
 							.header(CorsHeaderConstants.HEADER_AC_ALLOW_ORIGIN, "http://localhost:63342")
 							.header(CorsHeaderConstants.HEADER_AC_ALLOW_HEADERS, "Content-Type")
 							.build();
-	}
+	}*/
 	@POST
 	@Produces({"application/xml", "application/json"})
 	@Consumes({"application/xml", "application/json"})

@@ -112,26 +112,28 @@ $(document).ready(function(){
             itemsJson += `{"id":"` + element.number + `",`
                     + `"price":"` + element.price + `",`
                     + `"quantityOnOrder":"` + element.qty + `",`
-                    + `"description:"",`
+                    + `"description":"",`
                     + `"productOwnerID":""}`;
             if (!Object.is(cartItems.length -1 , key)){
                 itemsJson += ",";
             }
         });
 
+        itemsJson = `{"items": [` + itemsJson + `], "customerId":"` + signedInCustomerNo + `",` +
+                    `"ccNo": "6547984532156541"}`;
+
+        console.log("This is the URL: " +  host + "order/orderService/order/neworder");
         $.ajax({
-            url: host + "customerservice/customerAuthentication",
+            url: host + "order/orderService/order/neworder",
             type:"POST",
-            data:
-                JSON.stringify({
-                    items: "[" + itemsJson + "]",
-                    customerId: signedInCustomerNo,
-                    ccNo: "6547984532156541"
-                }),
+            data: itemsJson,
+            
             contentType:"application/json; charset=utf-8",
             accept: "application/json",
             dataType:"json",
-            success: function(data, status){}
+            success: function(data, status){
+                alert("Order Placed!");
+            }
         });
        
     });
@@ -186,7 +188,7 @@ $(document).ready(function(){
 function addToCartButtonClick(clickedbutton){
     var btnitemnum = clickedbutton.attributes.itemno.value;
     var btnitemprice = clickedbutton.attributes.itemprice.value;
-    var newitem = {number:btnitemnum, price:btnitemprice,qty:1};
+    var newitem = {number:btnitemnum, price:btnitemprice,qty:1, description:"", productOwnerID:""};
     if(addToCartArray(newitem)){
         $("#cartitem" + newitem.number).text(calculateQty(newitem.number));
     } else {
