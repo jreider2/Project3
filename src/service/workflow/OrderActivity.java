@@ -69,6 +69,11 @@ public class OrderActivity {
 				orTemp.addProductRepresentation(productRepresentation);
 			}
 			//orTemp.setProductsOnOrder(o.getProducts());
+
+			addLink(orTemp, "cancel", urls.CANCEL_URL.replace("{orderID}", o.getId()));
+			addLink(orTemp, "checkStatus", urls.STATUS_URL.replace("{orderID}", o.getId()));
+			addLink(orTemp, "search", urls.SEARCH_URL); //NOTE: this URL is missing the search term
+			
 			arOr.add(orTemp);
 		}
 		return arOr;

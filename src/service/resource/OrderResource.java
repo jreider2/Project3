@@ -49,7 +49,7 @@ public class OrderResource implements OrderService {
 	@Path("/orders/{customerID}")
 	@LocalPreflight
 	public Response options(@PathParam("customerID") String customerNumber) {
-		String origin = headers.getRequestHeader("Origin").get(0);
+		//String origin = headers.getRequestHeader("Origin").get(0);
 		
 		return Response.ok()
 							.header(CorsHeaderConstants.HEADER_AC_ALLOW_METHODS, "GET")
