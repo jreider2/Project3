@@ -2,7 +2,7 @@
 var cartItems = new Array();
 var isSignedIn = false;
 var signedInCustomerNo = "1";
-var host = "http://localhost:8081/";
+var host = "http://jrarecommerce-env-1.7jfyzsipfs.us-east-2.elasticbeanstalk.com/";
 
 var today = new Date();
 var dd = today.getDate();
