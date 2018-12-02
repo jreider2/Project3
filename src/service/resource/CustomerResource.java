@@ -9,6 +9,7 @@ import service.workflow.CustomerActivity;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.OPTIONS;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -16,13 +17,28 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.apache.cxf.rs.security.cors.CorsHeaderConstants;
 import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
+import org.apache.cxf.rs.security.cors.LocalPreflight;
 
 import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 
+@CrossOriginResourceSharing(
+		allowAllOrigins = true,
+		allowCredentials = true,
+		allowHeaders = {
+				"'Accept': 'application/json'",
+				"'Accept': 'application/xml'",
+				"'Content-Type':'application/json'",
+				"'Content-Type':'application/xml'"
+		}
+)
 @Path("/")
 public class CustomerResource implements CustomerService {
+	@Context
+	private HttpHeaders headers;
 	
 	public CustomerResource() {
 	}
@@ -60,6 +76,20 @@ public class CustomerResource implements CustomerService {
 		return customerActivity.registerNewCustomer(customerRequest.getFirstName(), customerRequest.getLastName(), customerRequest.getStreet(), customerRequest.getAptno(), customerRequest.getCity(), customerRequest.getZipcode(), customerRequest.getState() );
 	}
 	
+	
+	@POST
+	@Path("/customerAuthentication")
+	@LocalPreflight
+	public Response options() {
+		String origin = headers.getRequestHeader("Origin").get(0);
+		
+		return Response.ok()
+							.header(CorsHeaderConstants.HEADER_AC_ALLOW_METHODS, "POST")
+							.header(CorsHeaderConstants.HEADER_AC_ALLOW_CREDENTIALS, "true")
+							.header(CorsHeaderConstants.HEADER_AC_ALLOW_ORIGIN, "http://localhost:63342")
+							.header(CorsHeaderConstants.HEADER_AC_ALLOW_HEADERS, "Content-Type")
+							.build();
+	}
 	
 	/**
 	 * Login for Customer
