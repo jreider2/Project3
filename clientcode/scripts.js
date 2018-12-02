@@ -217,8 +217,11 @@ function cancelOrderButtonClicked(clickedbutton){
         type:'DELETE',
         success: function(result){
             alert("Order " + btnOrderNumber + "has been cancelled");
+            clickedbutton.parentElement.parentElement.parentElement.parentElement.children[1].children[0].innerHTML = "cancelled"
+            //console.log(clickedbutton.parentElement.parentElement.parentElement.parentElement.children[1].children[0].innerHTML = "canceled");
         }
     });
+    
 }
 //Page logic section END**********************************************************
 
@@ -316,7 +319,7 @@ function addToOrderList(orderNumber, orderStatus, orderDate, orderTotal, cancelU
                             <div>` + orderNumber + `</div>
                         </article>
 
-                        <article class="ajr-item-25">
+                        <article id="orderStatusArticle" class="ajr-item-25">
                             <div>` + orderStatus + `</div>
                         </article>
 
