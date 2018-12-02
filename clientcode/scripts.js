@@ -3,7 +3,13 @@ var cartItems = new Array();
 var isSignedIn = false;
 var signedInCustomerNo = "1";
 var host = "http://localhost:8081/";
-var date = "12/15/18"
+
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1; //jan is 0
+var yyyy = today.getFullYear();
+
+var date = dd + "/" + mm + "/" + yyyy;
 
 $(document).ready(function(){
 
@@ -140,6 +146,10 @@ $(document).ready(function(){
         });
        
     });
+
+    $(".ajr-cancel-btn").on("click", function(){
+        
+    });
     //Order section END***************************************************************
 
     //Search section START************************************************************
@@ -197,6 +207,18 @@ function addToCartButtonClick(clickedbutton){
     } else {
         $("#cartItemsList").append(addCartItem(newitem));
     }
+}
+
+function cancelOrderButtonClicked(clickedbutton){
+    var btnOrderNumber = clickedbutton.attributes.orderid.value;
+
+    $.ajax({
+        url: clickedbutton.attributes.cancelUri.value,
+        type:'DELETE',
+        success: function(result){
+            alert("Order " + btnOrderNumber + "has been cancelled");
+        }
+    });
 }
 //Page logic section END**********************************************************
 
@@ -299,7 +321,15 @@ function addToOrderList(orderNumber, orderStatus, orderDate, orderTotal, cancelU
                         </article>
 
                         <article class="ajr-item-25">
-                            <div>` + orderDate + `</div>
+                        <section class="ajr-container">
+                            <article class="ajr-item-50">
+                                <div>` + orderDate + `</div>
+                            </article>
+                            <article class="ajr-item-50">
+                                <button onClick="cancelOrderButtonClicked(this)" cancelUri="` + cancelURI + `" class="ajr-cancel-btn" type="button" orderid="` + orderNumber + `">Cancel</button>
+                            </article>
+                        </section>
+                            
                         </article>
                         <article class="ajr-item-25">
                             <div>` + orderTotal + `</div>
