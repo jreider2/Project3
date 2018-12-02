@@ -25,21 +25,21 @@ import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 
-@CrossOriginResourceSharing(
-		allowAllOrigins = true,
-		allowCredentials = true,
-		allowHeaders = {
-				"'Accept': 'application/json'",
-				"'Accept': 'application/xml'",
-				"'Content-Type':'application/json'",
-				"'Content-Type':'application/xml'"
-		}
-)
+//@CrossOriginResourceSharing(
+//		allowAllOrigins = true,
+//		allowCredentials = true,
+//		allowHeaders = {
+//				"'Accept': 'application/json'",
+//				"'Accept': 'application/xml'",
+//				"'Content-Type':'application/json'",
+//				"'Content-Type':'application/xml'"
+//		}
+//)
 @Path("/")
 public class CustomerResource implements CustomerService {
-	@Context
-	private HttpHeaders headers;
-	
+//	@Context
+//	private HttpHeaders headers;
+//	
 	public CustomerResource() {
 	}
 	
@@ -77,19 +77,19 @@ public class CustomerResource implements CustomerService {
 	}
 	
 	
-	@POST
-	@Path("/customerAuthentication")
-	@LocalPreflight
-	public Response options() {
-		String origin = headers.getRequestHeader("Origin").get(0);
-		
-		return Response.ok()
-							.header(CorsHeaderConstants.HEADER_AC_ALLOW_METHODS, "POST")
-							.header(CorsHeaderConstants.HEADER_AC_ALLOW_CREDENTIALS, "true")
-							.header(CorsHeaderConstants.HEADER_AC_ALLOW_ORIGIN, "http://localhost:63342")
-							.header(CorsHeaderConstants.HEADER_AC_ALLOW_HEADERS, "Content-Type")
-							.build();
-	}
+//	@POST
+//	@Path("/customerAuthentication")
+//	@LocalPreflight
+//	public Response options() {
+//		String origin = headers.getRequestHeader("Origin").get(0);
+//		
+//		return Response.ok()
+//							.header(CorsHeaderConstants.HEADER_AC_ALLOW_METHODS, "POST")
+//							.header(CorsHeaderConstants.HEADER_AC_ALLOW_CREDENTIALS, "true")
+//							.header(CorsHeaderConstants.HEADER_AC_ALLOW_ORIGIN, "http://localhost:63342")
+//							.header(CorsHeaderConstants.HEADER_AC_ALLOW_HEADERS, "Content-Type")
+//							.build();
+//	}
 	
 	/**
 	 * Login for Customer
