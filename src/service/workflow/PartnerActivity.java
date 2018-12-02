@@ -85,6 +85,7 @@ public class PartnerActivity {
 		partnerRepresentation.setCompanyName(p.getCompanyName());
 		partnerRepresentation.setUserName(p.getUserName());
 		partnerRepresentation.setPassword(p.getPassword());
+	
 		
 		return partnerRepresentation;
 	}
@@ -109,6 +110,19 @@ public class PartnerActivity {
 		partnerManager.deletePartner(id);
 		
 		return "OK";
+	}
+	
+	/**
+	 * Sets all the links appropriately, for each kind of representation based on state
+	 */
+	private void addLink(PartnerRepresentation pRep, String rel, String url) {
+		// Set up the activities that can be performed on orders
+		Link link = new Link();
+		link.setRel(rel);
+		link.setUrl(url);
+		link.setMediaType("application/xml, application/json");
+		
+		pRep.addLink(link);
 	}
 
 }

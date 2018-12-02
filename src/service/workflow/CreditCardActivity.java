@@ -55,6 +55,7 @@ public class CreditCardActivity {
 		Link link = new Link();
 		link.setRel(rel);
 		link.setUrl(url);
+		link.setMediaType("application/xml, application/json");
 		
 		ccRep.addLink(link);
 	}

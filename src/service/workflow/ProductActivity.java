@@ -114,6 +114,7 @@ public class ProductActivity {
 		Link link = new Link();
 		link.setRel(rel);
 		link.setUrl(url);
+		link.setMediaType("application/xml, application/json");
 		
 		productRep.addLink(link);
 	}
