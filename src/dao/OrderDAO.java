@@ -48,12 +48,17 @@ public class OrderDAO {
 			String previousRowOrderID = "";
 			Order o = new Order();
 			OrderedItem oI;
-			boolean firstiteration = true;
+			boolean isFirstIteration = true;
 			while (rs.next()) {
+				
+				//only add the order to the orderlist returned when we know that we have added all products on the order to the object.
+				if (!previousRowOrderID.equals(rs.getString("OrderID")) && !isFirstIteration ) {
+					arOrd.add(o);
+				}
 				
 				oI = new OrderedItem();
 				//only start a new order object if we have added all products on that order to the order object.
-				if (previousRowOrderID != rs.getString("OrderID")) {
+				if (!previousRowOrderID.equals(rs.getString("OrderID"))) {
 					o = new Order();
 					o.setId(rs.getString("OrderID"));
 					o.setOrderStatus(rs.getString("orderStatus"));
@@ -77,13 +82,8 @@ public class OrderDAO {
 					o.setProducts(productsOnOrder);
 				}
 				
-				//only add the order to the orderlist returned when we know that we have added all products on the order to the object.
-				if (previousRowOrderID != rs.getString("OrderID") && !firstiteration) {
-					arOrd.add(o);
-				}
-				
 				previousRowOrderID = o.getId();
-				firstiteration = false;
+				isFirstIteration = false;
 			}
 			
 			return arOrd;
