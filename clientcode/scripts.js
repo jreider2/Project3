@@ -3,6 +3,7 @@ var cartItems = new Array();
 var isSignedIn = false;
 var signedInCustomerNo = "1";
 var host = "http://localhost:8081/";
+var date = "12/15/18"
 
 $(document).ready(function(){
 
@@ -90,7 +91,11 @@ $(document).ready(function(){
             	arrayOfItems.forEach(item => {
             		orderTotal += item.price;
             	});
-                $("#myOrderResults").append(addToOrderList(element.orderNo, element.orderStatus, "12/15/18", orderTotal));
+            	//grab cancel URI
+            	console.log("The cancel link for HATEOAS:");
+            	console.log(host + element.link[0].url);//cancel link
+            	// addToOrderList(orderNumber, orderStatus, orderDate, orderTotal, cancelURI)
+                $("#myOrderResults").append(addToOrderList(element.orderNo, element.orderStatus, date, orderTotal, host + element.link[0].url));
                 orderTotal = 0; // reset to zero before moving onto next order
             });
         });
@@ -98,12 +103,7 @@ $(document).ready(function(){
         setEcomPanel("order");
         hideResultsPlaceHolder();
     });
-    
-//  for (var i = 0; i < result.length-1;i++){
-//	
-//    // TODO: get more values returned so we can add the list item. addToOrderList(result[i].id, result[i].; 
-//	// addToOrderList(orderNumber, orderStatus, orderDate, orderTotal)
-//}
+
 
     $("#placeorder").on("click", function(){
         //Add cart items to a json string to pass to the server.
@@ -281,7 +281,7 @@ function addToSearchResults(itemDesc, itemPrice, itemName, itemNo, listNo){
     return htmlItem;
 }
 
-function addToOrderList(orderNumber, orderStatus, orderDate, orderTotal){
+function addToOrderList(orderNumber, orderStatus, orderDate, orderTotal, cancelURI){
     var htmlitem = "";
 
     htmlitem = `<article class="ajr-item-100 container">
