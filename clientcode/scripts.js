@@ -9,7 +9,7 @@ var dd = today.getDate();
 var mm = today.getMonth()+1; //jan is 0
 var yyyy = today.getFullYear();
 
-var date = mm + "/" + dd + "/" + yyyy;
+var date = dd + "/" + mm + "/" + yyyy;
 
 $(document).ready(function(){
 
@@ -24,7 +24,6 @@ $(document).ready(function(){
     });
 
     $("#loginbtn").on("click", function(){
-
         $.ajax({
             url: host + "customerservice/customerAuthentication",
             type:"POST",
@@ -59,11 +58,9 @@ $(document).ready(function(){
                     console.log("URI: " + myOrderURL);
                     // insert returned URL into menu (links user to their own orders)
                     $("#customerorders").attr('custordurl', myOrderURL);
-                    
                 }
             }
         });
-        
     });
 
     $("#cancelbtn").on("click", function(){
@@ -98,7 +95,7 @@ $(document).ready(function(){
             	console.log(orderTotal)
             	arrayOfItems = element.productrepresentation;
             	arrayOfItems.forEach(item => {
-            		orderTotal += item.price * item.quantityOnOrder;
+            		orderTotal += item.price;
             	});
             	//grab cancel URI
             	console.log("The cancel link for HATEOAS:");
@@ -335,7 +332,7 @@ function addToOrderList(orderNumber, orderStatus, orderDate, orderTotal, cancelU
                             
                         </article>
                         <article class="ajr-item-25">
-                            <div>$` + orderTotal + `.00</div>
+                            <div>` + orderTotal + `</div>
                         </article>
                     </section>
                 </article>`;
