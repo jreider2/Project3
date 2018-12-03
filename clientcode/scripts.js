@@ -141,7 +141,7 @@ $(document).ready(function(){
             accept: "application/json",
             dataType:"json",
             success: function(data, status){
-                alert("Order Placed!");
+                alert("Order " + data.orderNo + " was placed!");
             }
         });
        
@@ -216,7 +216,7 @@ function cancelOrderButtonClicked(clickedbutton){
         url: clickedbutton.attributes.cancelUri.value,
         type:'DELETE',
         success: function(result){
-            alert("Order " + btnOrderNumber + "has been cancelled");
+            alert("Order " + btnOrderNumber + " has been cancelled");
             clickedbutton.parentElement.parentElement.parentElement.parentElement.children[1].children[0].innerHTML = "cancelled"
             //console.log(clickedbutton.parentElement.parentElement.parentElement.parentElement.children[1].children[0].innerHTML = "canceled");
         }

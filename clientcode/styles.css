@@ -16,27 +16,27 @@
 }
 
 .ajr-item-25 {
-    border-style: dotted;
+    /*border-style: dotted;*/
     flex-grow: 1;
     width: 23%;
     min-width: 50px;
 }
 
 .ajr-item-50 {
-    border-style: dotted;
+    /*border-style: dotted;*/
     flex-grow: 1;
     width: 45%;
 }
 
 .ajr-item-65 {
-    border-style: dotted;
+    /*border-style: dotted;*/
     flex-grow:1;
     width: 65%;
     min-width: 250px;
 }
 
 .ajr-item-100 {
-    border-style: dotted;
+    /*border-style: dotted;*/
     flex-grow:1;
     width: 100%;
     min-width: 250px;
@@ -44,7 +44,7 @@
 
 
 .ajr-inner-item {
-    border-style: dotted;
+    /*border-style: dotted;*/
     flex-grow: 1;
     width: 32%;
     min-width: 50px;
