@@ -98,7 +98,7 @@ $(document).ready(function(){
             	console.log(orderTotal)
             	arrayOfItems = element.productrepresentation;
             	arrayOfItems.forEach(item => {
-            		orderTotal += item.price;
+            		orderTotal += item.price * item.quantityOnOrder;
             	});
             	//grab cancel URI
             	console.log("The cancel link for HATEOAS:");
