@@ -54,6 +54,7 @@ public class OrderDAO {
 				//only add the order to the orderlist returned when we know that we have added all products on the order to the object.
 				if (!previousRowOrderID.equals(rs.getString("OrderID")) && !isFirstIteration ) {
 					arOrd.add(o);
+					productsOnOrder = new ArrayList<>();
 				}
 				
 				oI = new OrderedItem();

@@ -9,7 +9,7 @@ var dd = today.getDate();
 var mm = today.getMonth()+1; //jan is 0
 var yyyy = today.getFullYear();
 
-var date = dd + "/" + mm + "/" + yyyy;
+var date = mm + "/" + dd + "/" + yyyy;
 
 $(document).ready(function(){
 
@@ -335,7 +335,7 @@ function addToOrderList(orderNumber, orderStatus, orderDate, orderTotal, cancelU
                             
                         </article>
                         <article class="ajr-item-25">
-                            <div>` + orderTotal + `</div>
+                            <div>$` + orderTotal + `.00</div>
                         </article>
                     </section>
                 </article>`;
