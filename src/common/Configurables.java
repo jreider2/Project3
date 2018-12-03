@@ -33,7 +33,7 @@ public class Configurables {
 	private String addProductToPartnerURL = "";
 	private String deletePartnerURL = "/partners/{partnerId}";
 ;
-	
+
 	/**
 	 * 
 	 */
@@ -41,7 +41,6 @@ public class Configurables {
 		
 		// TODO Auto-generated constructor stub
 	}
-
 	
 	public String getGetCustomerOrdersURL(String hostname) {
 		
