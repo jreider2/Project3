@@ -9,7 +9,7 @@ var dd = today.getDate();
 var mm = today.getMonth()+1; //jan is 0
 var yyyy = today.getFullYear();
 
-var date = dd + "/" + mm + "/" + yyyy;
+var date = mm + "/" + dd + "/" + yyyy;
 
 $(document).ready(function(){
 
@@ -95,7 +95,7 @@ $(document).ready(function(){
             	console.log(orderTotal)
             	arrayOfItems = element.productrepresentation;
             	arrayOfItems.forEach(item => {
-            		orderTotal += item.price;
+            		orderTotal += item.price * item.quantityOnOrder;
             	});
             	//grab cancel URI
             	console.log("The cancel link for HATEOAS:");
@@ -332,7 +332,7 @@ function addToOrderList(orderNumber, orderStatus, orderDate, orderTotal, cancelU
                             
                         </article>
                         <article class="ajr-item-25">
-                            <div>` + orderTotal + `</div>
+                            <div>$` + orderTotal + `.00</div>
                         </article>
                     </section>
                 </article>`;

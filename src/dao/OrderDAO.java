@@ -82,7 +82,9 @@ public class OrderDAO {
 					productsOnOrder.add(oI);
 					o.setProducts(productsOnOrder);
 				}
-				
+				if (rs.isLast()) {
+					arOrd.add(o);
+				}
 				previousRowOrderID = o.getId();
 				isFirstIteration = false;
 			}
